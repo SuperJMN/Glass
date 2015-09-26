@@ -1,35 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Glass.Design", "Design\Glass.Design.csproj", "{4946722F-CFFF-4FC6-B1C1-A6107316A58C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Glass.Design.Test", "Test\Glass.Design.Test.csproj", "{F131BA75-EBE7-4899-AFE6-5EA2FD433672}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{322F14AB-7E04-4476-BB98-41DB3059EEE7}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\NuGet.Config = .nuget\NuGet.Config
-		.nuget\NuGet.exe = .nuget\NuGet.exe
-		.nuget\NuGet.targets = .nuget\NuGet.targets
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Glass.Basics", "..\Glass.Basics\Basics\Glass.Basics.csproj", "{76C3D50B-CA51-480F-8FCD-40F0EA98F4C6}"
 EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 4
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs22
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = ..\\Glass.Basics\\Basics\\Glass.Basics.csproj
-		SccProjectName1 = ../Glass.Basics/Basics
-		SccLocalPath1 = ..\\Glass.Basics\\Basics
-		SccProjectUniqueName2 = Design\\Glass.Design.csproj
-		SccProjectName2 = Design
-		SccLocalPath2 = Design
-		SccProjectUniqueName3 = Test\\Glass.Design.Test.csproj
-		SccProjectName3 = Test
-		SccLocalPath3 = Test
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|x86 = Debug|x86

@@ -53,7 +53,7 @@
                 </Style>
             </glassDesigner:Designer.ItemContainerStyle>
             <i:Interaction.Behaviors>
-                <dragDrop:DragDropBehavior IsDragSource="True"  ExportItems="True"></dragDrop:DragDropBehavior>
+                <dragDrop:DragDropBehavior IsDragSource="False"  ExportItems="True"></dragDrop:DragDropBehavior>
             </i:Interaction.Behaviors>
         </glassDesigner:Designer>
     </DockPanel>
