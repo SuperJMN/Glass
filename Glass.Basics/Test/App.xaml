@@ -1,0 +1,11 @@
+﻿<Application x:Class="WPFBasics.Test.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:converters="clr-namespace:Glass.Basics.Converters;assembly=Glass.Basics"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+
+        <converters:FlaggedEnumConverter x:Key="MyConverter" OriginalValue="{Binding Source={x:Reference}, Path=MyFlag}" />
+        
+    </Application.Resources>
+</Application>
