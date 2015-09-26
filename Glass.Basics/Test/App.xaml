@@ -5,7 +5,15 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
 
-        <converters:FlaggedEnumConverter x:Key="MyConverter" OriginalValue="{Binding Source={x:Reference}, Path=MyFlag}" />
+        <ResourceDictionary>
+            
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Glass.Basics;component/Styles/Themes/Blue.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <converters:FlaggedEnumConverter x:Key="MyConverter" OriginalValue="{Binding Source={x:Reference}, Path=MyFlag}" />
+            
+        </ResourceDictionary>
+        
         
     </Application.Resources>
 </Application>

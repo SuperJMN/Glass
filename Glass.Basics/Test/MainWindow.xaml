@@ -10,6 +10,7 @@
         x:Class="WPFBasics.Test.MainWindow"
         mc:Ignorable="d"
         x:Name="Root"
+        Style="{StaticResource BlueWindowStyle}"
         viewModelLocator:ViewModelLocator.ViewModel="Main"
         WindowStartupLocation="CenterScreen"
         Title="Drag&amp;Drop Test" Height="412.667" Width="655.658" d:DataContext="{d:DesignInstance {x:Type test:MainViewModel}}">
