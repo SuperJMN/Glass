@@ -1,6 +1,5 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using Microsoft.Windows.Shell;
 
 namespace Glass.Basics.Styles
 {

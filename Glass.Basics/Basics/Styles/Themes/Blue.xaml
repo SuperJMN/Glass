@@ -153,7 +153,7 @@
     </Style>
 
     <Style TargetType="{x:Type themes:MaximizeButton}" BasedOn="{StaticResource ButtonStyle}">
-        <Setter Property="shell:WindowChrome.IsHitTestVisibleInChrome" Value="True" />
+        <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True" />
         <Setter Property="IsChecked" Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Path=WindowState, Converter={StaticResource IsEqualConverter}, ConverterParameter={x:Static WindowState.Maximized}}" />
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="Content">
@@ -173,7 +173,7 @@
     </Style>
 
     <Style TargetType="{x:Type themes:CloseButton}" BasedOn="{StaticResource ButtonStyle}">
-        <Setter Property="shell:WindowChrome.IsHitTestVisibleInChrome" Value="True" />
+        <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True" />
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="Content">
             <Setter.Value>
@@ -182,7 +182,7 @@
         </Setter>
     </Style>
     <Style TargetType="{x:Type themes:MinimizeButton}" BasedOn="{StaticResource ButtonStyle}">
-        <Setter Property="shell:WindowChrome.IsHitTestVisibleInChrome" Value="True" />
+        <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True" />
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="Content">
             <Setter.Value>
@@ -195,9 +195,9 @@
 
     <Style x:Key="BlueWindowStyle"  TargetType="Window">
         <Setter Property="UseLayoutRounding" Value="True" />
-        <Setter Property="shell:WindowChrome.WindowChrome">
+        <Setter Property="WindowChrome.WindowChrome">
             <Setter.Value>
-                <shell:WindowChrome GlassFrameThickness="0" CornerRadius="0" CaptionHeight="30" />
+                <WindowChrome GlassFrameThickness="0" CornerRadius="0" CaptionHeight="30" />
             </Setter.Value>
         </Setter>
         <Setter Property="Template">
@@ -211,7 +211,7 @@
 
                         <Border 
                                 Background="{TemplateBinding Background}" 
-                                Margin="{Binding shell:SystemParameters2.WindowNonClientFrameThickness}" Grid.RowSpan="2"
+                                Margin="{x:Static SystemParameters.WindowNonClientFrameThickness}" Grid.RowSpan="2"
                                 >
                             <AdornerDecorator>
                                 <ContentPresenter Content="{TemplateBinding Content}" />
@@ -221,15 +221,15 @@
                         <Border 
                                 BorderBrush="{TemplateBinding BorderBrush}"  
                                 BorderThickness="{TemplateBinding BorderThickness}" 
-                                Margin="{Binding Source={x:Static shell:SystemParameters2.Current}, Path=WindowNonClientFrameThickness}" 
+                                Margin="{x:Static SystemParameters.WindowNonClientFrameThickness}" 
                                 Grid.RowSpan="2" />
                         <!--CornerRadius="{Binding Source={x:Static SystemParameters.WindowCornerRadius}}"-->
                         <Border 
                                     BorderBrush="#3981C5" 
-                                    BorderThickness="{Binding Source={x:Static shell:SystemParameters2.Current}, Path=WindowResizeBorderThickness}" Grid.RowSpan="2">
+                                    BorderThickness="{x:Static SystemParameters.WindowResizeBorderThickness}" Grid.RowSpan="2">
                         </Border>
                         <Border Height="{x:Static SystemParameters.WindowCaptionHeight}" 
-                                    Margin="{Binding Source={x:Static shell:SystemParameters2.Current}, Path=WindowResizeBorderThickness}" 
+                                    Margin="{x:Static SystemParameters.WindowResizeBorderThickness}" 
                                     Grid.Row="0" Background="#6791F9" >
                             <!--<Border.CornerRadius>
                                     <Binding 
