@@ -123,6 +123,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="ChildProportions.cs" />
     <Compile Include="CloneUtils.cs" />
     <Compile Include="Designer\IDesignerItem.cs" />
@@ -146,9 +149,6 @@
     <Compile Include="Selection\RectangleSelectionBehavior.cs" />
     <Compile Include="Designer\DesignerItem.cs" />
     <Compile Include="Designer\DesignOptions.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

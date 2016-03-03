@@ -58,7 +58,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="SliderControl\SliderControl.cs" />
     <Compile Include="ThicknessEditor\ThicknessEditor.cs" />
   </ItemGroup>

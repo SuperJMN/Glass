@@ -227,13 +227,15 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="AutoColorStrategy.cs" />
     <Compile Include="ILeadToolsLicenseApplier.cs" />
     <Compile Include="IStrategy.cs" />
     <Compile Include="LeadToolsOpticalRecognizer.cs" />
     <Compile Include="LeadToolsLicenseApplier.cs" />
     <Compile Include="NoProcessStrategy.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Glass.Imaging\Glass.Imaging.csproj">

@@ -55,13 +55,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Validation\AndSpecification.cs" />
     <Compile Include="Validation\SpecificationRule.cs" />
     <Compile Include="Validation\ExtensionMethods.cs" />
     <Compile Include="Validation\ISpecification.cs" />
     <Compile Include="Validation\NotSpecification.cs" />
     <Compile Include="Validation\OrSpecification.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
