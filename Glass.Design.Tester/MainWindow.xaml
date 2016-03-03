@@ -1,0 +1,61 @@
+﻿<Window
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:test="clr-namespace:Test"
+    xmlns:converters="clr-namespace:Glass.Basics.Converters;assembly=Glass.Basics"
+    xmlns:glassDesigner="clr-namespace:Glass.Design.Designer;assembly=Glass.Design"
+    xmlns:viewModelLocator="http:\\www.codeplex.com\MEFedMVVM"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:dragDrop="clr-namespace:Glass.Basics.Behaviors.DragDrop;assembly=Glass.Basics"
+    x:Class="Test.MainWindow"
+    viewModelLocator:ViewModelLocator.ViewModel="Main"
+    d:DataContext="{d:DesignInstance test:MainViewModel}"
+    Title="MainWindow" Height="397" Width="605">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Glass.Design;component/Themes/Resize.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <converters:MenuIconConverter x:Key="MenuIconConv" />
+            <Style x:Key="ContextMenuItemStyle">
+                <Setter Property="MenuItem.Header" Value="{Binding Text}" />
+                <Setter Property="MenuItem.ItemsSource" Value="{Binding Children}" />
+                <Setter Property="MenuItem.Command" Value="{Binding Command}" />
+                <Setter Property="MenuItem.Icon" Value="{Binding IconUrl, Converter={StaticResource MenuIconConv}}" />
+            </Style>
+        </ResourceDictionary>
+    </Window.Resources>
+    <DockPanel>
+        <Menu ItemsSource="{Binding MenuItems}"
+              ItemContainerStyle="{StaticResource ContextMenuItemStyle}"
+              DockPanel.Dock="Top" />
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+            <TextBlock>Left</TextBlock>
+            <TextBlock Text="{Binding ElementName=Designer, Path=Selection.Left}" />
+            <TextBlock Margin="10,0,0,0">Top</TextBlock>
+            <TextBlock Text="{Binding ElementName=Designer, Path=Selection.Top}" />
+            <TextBlock Margin="20,0,0,0">Width</TextBlock>
+            <TextBlock Text="{Binding ElementName=Designer, Path=Selection.Width}" />
+            <TextBlock Margin="10,0,0,0">Top</TextBlock>
+            <TextBlock Text="{Binding ElementName=Designer, Path=Selection.Height}" />
+        </StackPanel>
+        <glassDesigner:Designer x:Name="Designer" Background="Green" ItemsSource="{Binding Designables}">
+            <glassDesigner:Designer.ItemContainerStyle>
+                <Style TargetType="{x:Type glassDesigner:DesignerItem}">
+                    <Setter Property="Left" Value="{Binding Left}"></Setter>
+                    <Setter Property="Top" Value="{Binding Top}"></Setter>
+                    <Setter Property="Width" Value="80"></Setter>
+                    <Setter Property="Height" Value="80"></Setter>
+                </Style>
+            </glassDesigner:Designer.ItemContainerStyle>
+            <i:Interaction.Behaviors>
+                <dragDrop:DragDropBehavior IsDragSource="False"  ExportItems="True"></dragDrop:DragDropBehavior>
+            </i:Interaction.Behaviors>
+        </glassDesigner:Designer>
+    </DockPanel>
+
+</Window>

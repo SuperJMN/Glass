@@ -1,0 +1,78 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:design="clr-namespace:Glass.Design"
+                    xmlns:Designer="clr-namespace:Glass.Design.Designer">
+    <Style x:Key="ThumbStyle" TargetType="{x:Type Thumb}">
+        <Setter Property="Background" Value="Red" />
+        <Setter Property="Width" Value="5"/>
+        <Setter Property="Height" Value="5"/>
+        <Setter Property="Stylus.IsPressAndHoldEnabled" Value="false"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Thumb}">
+                    <Grid>
+                        <Border 
+    							BorderThickness="1"
+    							BorderBrush="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"
+    							Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" SnapsToDevicePixels="True"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type design:DesignableResizeChrome}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type design:DesignableResizeChrome}">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderThickness="1" BorderBrush="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}">
+                        <Grid>                            
+                            <Grid Margin="-3">
+                                <Thumb HorizontalAlignment="Left" Cursor="SizeNWSE" VerticalAlignment="Top"
+                                       Style="{StaticResource ThumbStyle}" />
+                                <Thumb HorizontalAlignment="Center" Cursor="SizeNS" VerticalAlignment="Top"
+                                       Style="{StaticResource ThumbStyle}" />
+                                <Thumb HorizontalAlignment="Right" Cursor="SizeNESW" VerticalAlignment="Top"
+                                       Style="{StaticResource ThumbStyle}" />
+                                <Thumb HorizontalAlignment="Left" Cursor="SizeWE" VerticalAlignment="Center"
+                                       Style="{StaticResource ThumbStyle}" />
+                                <Thumb HorizontalAlignment="Right" Cursor="SizeWE" VerticalAlignment="Center"
+                                       Style="{StaticResource ThumbStyle}" />
+                                <Thumb HorizontalAlignment="Left" Cursor="SizeNESW" VerticalAlignment="Bottom"
+                                       Style="{StaticResource ThumbStyle}" />
+                                <Thumb HorizontalAlignment="Center" Cursor="SizeNS" VerticalAlignment="Bottom"
+                                       Style="{StaticResource ThumbStyle}" />
+                                <Thumb HorizontalAlignment="Right" Cursor="SizeNWSE" VerticalAlignment="Bottom"
+                                       Style="{StaticResource ThumbStyle}" />
+                            </Grid>
+                            <Grid x:Name="MeasuresGrid" Visibility="Collapsed">
+                                <Designer:SizeInfoControl
+                                    Height="12"                                            
+                                            VerticalAlignment="Bottom"
+                                            Margin="0,0,0,-20" />
+                                <Designer:SizeInfoControl
+                                    Height="12"                                            
+                                            HorizontalAlignment="Right"
+                                            Margin="0,0,-20,0">
+                                    <Designer:SizeInfoControl.LayoutTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform ScaleY="-1" />
+                                            <SkewTransform />
+                                            <RotateTransform Angle="90" />
+                                            <TranslateTransform />
+                                        </TransformGroup>
+                                    </Designer:SizeInfoControl.LayoutTransform>
+                                </Designer:SizeInfoControl>
+                            </Grid>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsResizing" Value="True">
+                            <Setter TargetName="MeasuresGrid" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>
