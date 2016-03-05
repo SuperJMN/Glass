@@ -140,6 +140,7 @@
     <Compile Include="Styles\SystemButton.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Glass.Basics.nuspec" />
     <None Include="Styles\app.config" />
   </ItemGroup>
   <ItemGroup>
