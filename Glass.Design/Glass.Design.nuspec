@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
-    <metadata>
-        <id>Glass.Design</id>
-        <version>1.5.0</version>
-        <authors>super</authors>
-        <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <description>Glass.Design.</description>
-    </metadata>
-    <files />
+  <metadata>
+    <id>Glass.Design</id>
+    <version>$version$</version>
+    <authors>SuperJMN</authors>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Glass.Design.</description>
+  </metadata>
+  <files />
 </package>
