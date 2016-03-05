@@ -1,11 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
-    <id>Glass.LeadTools.ImagingExtensions</id>
+
+    <id>$id$</id>
+    <description>$id$</description>
+
     <version>$version$</version>
-    <authors>SuperJMN</authors>
+    <authors>José Manuel Nieto (SuperJMN)</authors>
+    <owners>José Manuel Nieto (SuperJMN)</owners>
+    <licenseUrl>http://opensource.org/licenses/Apache-2.0</licenseUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Glass.LeadTools.ImagingExtensions</description>
+    <projectUrl>https://github.com/SuperJMN/Glass-Legacy</projectUrl>
+    <iconUrl>http://aventuraspuntonet.files.wordpress.com/2013/03/glass.png?w=128</iconUrl>
+
   </metadata>
   <files />
 </package>
