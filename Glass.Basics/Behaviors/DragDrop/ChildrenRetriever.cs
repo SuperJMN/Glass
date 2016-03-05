@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Windows;
-using System.Windows.Controls;
-using Glass.Basics.Extensions;
-
-namespace Glass.Basics.Behaviors.DragDrop
+﻿namespace Glass.Basics.Behaviors.DragDrop
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Windows;
+    using System.Windows.Controls;
+    using Extensions;
+
     public static class ChildrenRetriever
     {
         public static IEnumerable<UIElement> GetChildrenFromPanel(Panel panel)
