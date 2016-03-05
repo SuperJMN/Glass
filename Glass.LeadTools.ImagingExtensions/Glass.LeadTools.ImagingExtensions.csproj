@@ -232,6 +232,7 @@
     <Compile Include="ImageUtils.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Glass.LeadTools.ImagingExtensions.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
