@@ -76,14 +76,12 @@
     <Compile Include="Core\StringExtensions.cs" />
     <Compile Include="Core\ITaggedImageSource.cs" />
     <Compile Include="Core\IZoneBasedRecognitionService.cs" />
-    <Compile Include="MaskLength.cs" />
     <Compile Include="PostProcessing\IOcrPostProcessor.cs" />
     <Compile Include="PostProcessing\ISingleLinePolicy.cs" />
-    <Compile Include="PostProcessing\ISmartZoneOcrProcessor.cs" />
     <Compile Include="PostProcessing\OcrPostProcessor.cs" />
     <Compile Include="PostProcessing\RecognitionConfiguration.cs" />
     <Compile Include="PostProcessing\ZoneConfiguration.cs" />
-    <Compile Include="PostProcessing\SmartZoneType.cs" />
+    <Compile Include="PostProcessing\ZoneType.cs" />
     <Compile Include="Core\RecognizedPage.cs" />
     <Compile Include="Core\RecognizedZone.cs" />
     <Compile Include="Core\TaggedImage.cs" />

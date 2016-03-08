@@ -1,7 +1,6 @@
 namespace Glass.Imaging
 {
     using System.Linq;
-    using Core;
     using PostProcessing;
 
     public class SingleLinePolicy : ISingleLinePolicy
@@ -17,18 +16,18 @@ namespace Glass.Imaging
             }
 
             int validCharsCount;
-            switch (fieldConfiguration.SmartZoneType)
+            switch (fieldConfiguration.ZoneType)
             {
-                case SmartZoneType.Number:
+                case ZoneType.Number:
                     validCharsCount = s.Count(char.IsNumber);
                     break;
 
-                case SmartZoneType.AlphaOnly:
+                case ZoneType.AlphaOnly:
                     validCharsCount = s.Count(char.IsLetter);
                     break;
 
-                case SmartZoneType.Alpha:
-                case SmartZoneType.Barcode:
+                case ZoneType.Alpha:
+                case ZoneType.Barcode:
                     validCharsCount = s.Count(c => char.IsLetter(c) || char.IsNumber(c) || char.IsPunctuation(c));
                     break;
 
@@ -49,57 +48,15 @@ namespace Glass.Imaging
 
         private static double GetLengthScore(string str, ZoneConfiguration fieldConfiguration)
         {
-            var maskLen = GetMaskLength(fieldConfiguration);
-            if (maskLen == null)
+            if (fieldConfiguration.MaxLenght == int.MaxValue)
             {
                 return 0;
             }
-
-            double average;
-
-            if (maskLen.FixedLength != 0)
-            {
-                average = maskLen.FixedLength;
-            }
-            else
-            {
-                average = new[] { maskLen.Min, maskLen.Max }.Average();
-            }
-
+            
+            var  average = new[] { fieldConfiguration.MinLength, fieldConfiguration.MaxLenght }.Average();
             var total = str.Length;
 
             return ScorePolicy.GetScore(total, average);
-        }
-
-        private static MaskLength GetMaskLength(ZoneConfiguration fieldConfiguration)
-        {
-            var mask = fieldConfiguration.Mask;
-            if (mask == null)
-            {
-                return null;
-            }
-
-            var match = Regexes.MaskLength.Match(mask);
-
-            if (!match.Success)
-            {
-                return null;
-            }
-
-            if (match.Groups[1].Success || match.Groups[1].Success)
-            {
-                var min = match.Groups[1].Value;
-                var max = match.Groups[2].Value;
-
-                return new MaskLength(min.ToInt32(), max.ToInt32());
-            }
-
-            if (match.Groups[2].Success)
-            {
-                return new MaskLength(match.Captures[2].Value.ToInt32());
-            }
-
-            return null;
         }
     }
 }

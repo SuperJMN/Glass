@@ -65,7 +65,7 @@
 
         private IEnumerable<RecognizedZone> PerformOcr(BitmapSource image, RecognitionConfiguration configuration)
         {
-            var ocrZones = configuration.Zones.Where(z => z.SmartZoneType != SmartZoneType.Barcode);
+            var ocrZones = configuration.Zones.Where(z => z.ZoneType != ZoneType.Barcode);
 
             if (!ocrZones.Any())
             {
@@ -105,7 +105,7 @@
 
         private static OcrZone CreateOcrZoneForField(Rect rectCrop, ZoneConfiguration zoneConfiguration)
         {
-            var zt = zoneConfiguration.SmartZoneType;
+            var zt = zoneConfiguration.ZoneType;
 
             var readZone = new OcrZone
             {
@@ -123,9 +123,9 @@
             return readZone;
         }
 
-        private static string GetLanguage(SmartZoneType fieldType)
+        private static string GetLanguage(ZoneType fieldType)
         {
-            //if (fieldType == SmartZoneType.Alpha || fieldType == SmartZoneType.AlphaOnly)
+            //if (fieldType == ZoneType.Alpha || fieldType == ZoneType.AlphaOnly)
             //{
             //    return "ES";
             //}
@@ -133,35 +133,35 @@
             return null;
         }
 
-        private static OcrZoneCharacterFilters GetCharacterFilters(SmartZoneType fieldType)
+        private static OcrZoneCharacterFilters GetCharacterFilters(ZoneType fieldType)
         {
             switch (fieldType)
             {
-                case SmartZoneType.Digits:
+                case ZoneType.Digits:
                     return OcrZoneCharacterFilters.Digit;
-                case SmartZoneType.AlphaOnly:
+                case ZoneType.AlphaOnly:
                     return OcrZoneCharacterFilters.Uppercase | OcrZoneCharacterFilters.Lowercase;
-                case SmartZoneType.Alpha:
+                case ZoneType.Alpha:
                     return OcrZoneCharacterFilters.All;
-                case SmartZoneType.Number:
+                case ZoneType.Number:
                     return OcrZoneCharacterFilters.Numbers | OcrZoneCharacterFilters.Punctuation;
                 default:
                     return OcrZoneCharacterFilters.All;
             }
         }
 
-        private static OcrZoneType GetZoneType(SmartZoneType fieldType)
+        private static OcrZoneType GetZoneType(ZoneType fieldType)
         {
             switch (fieldType)
             {
-                case SmartZoneType.Digits:
-                case SmartZoneType.Alpha:
-                case SmartZoneType.AlphaOnly:
-                case SmartZoneType.Number:
+                case ZoneType.Digits:
+                case ZoneType.Alpha:
+                case ZoneType.AlphaOnly:
+                case ZoneType.Number:
 
                     return OcrZoneType.Text;
 
-                case SmartZoneType.Barcode:
+                case ZoneType.Barcode:
 
                     return OcrZoneType.Barcode;
 
@@ -172,7 +172,7 @@
 
         private IEnumerable<RecognizedZone> RecognizeBarcodes(BitmapSource image, RecognitionConfiguration configuration)
         {
-            var barcodeZones = configuration.Zones.Where(z => z.SmartZoneType == SmartZoneType.Barcode);
+            var barcodeZones = configuration.Zones.Where(z => z.ZoneType == ZoneType.Barcode);
             return from barcodeConfig in barcodeZones
                    let rect = barcodeConfig.Bounds
                    let text = GetStringFromBarcode(image, rect, barcodeConfig)

@@ -1,6 +1,6 @@
 ﻿namespace Glass.Imaging.PostProcessing
 {
-    public enum SmartZoneType
+    public enum ZoneType
     {
         Barcode,
         AlphaOnly,

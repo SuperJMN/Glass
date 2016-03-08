@@ -5,17 +5,11 @@
     public class ZoneConfiguration
     {
         public bool IsSingleLine { get; set; }
-
-        public SmartZoneType SmartZoneType { get; set; } 
-
-        public bool ReplaceLinesBySpaces { get; set; }
-
-        public string Mask { get; set; }
-
+        public ZoneType ZoneType { get; set; }
+        public string Regex { get; set; }
         public Rect Bounds { get; set; }
-        public int? Max { get; set; }
-        public int? Min { get; set; }
-        public bool IsRequired { get; set; }
+        public int MaxLenght { get; set; } = int.MaxValue;
+        public int MinLength { get; set; } = 0;
         public string Id { get; set; }
     }
 }

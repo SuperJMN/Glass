@@ -18,12 +18,12 @@ namespace Glass.Imaging.PostProcessing
         {
             var str = input.TrimEnd();
             
-            if (fieldConfiguration.SmartZoneType == SmartZoneType.Number)
+            if (fieldConfiguration.ZoneType == ZoneType.Number)
             {
                 return ProcessNumeric(fieldConfiguration, str);
             }
 
-            if (fieldConfiguration.SmartZoneType == SmartZoneType.AlphaOnly || fieldConfiguration.SmartZoneType == SmartZoneType.Alpha)
+            if (fieldConfiguration.ZoneType == ZoneType.AlphaOnly || fieldConfiguration.ZoneType == ZoneType.Alpha)
             {
                 str = ProcessAlpha(fieldConfiguration, str);
             }
@@ -33,7 +33,7 @@ namespace Glass.Imaging.PostProcessing
 
         private static string ProcessAlpha(ZoneConfiguration fieldConfiguration, string str)
         {
-            str = ApplyWhitespacePolicy(fieldConfiguration, str);
+            str = ApplyWhitespacePolicy(str);
             return str;
         }
 
@@ -41,7 +41,7 @@ namespace Glass.Imaging.PostProcessing
         {
             if (fieldConfiguration.IsSingleLine)
             {
-                if (fieldConfiguration.SmartZoneType == SmartZoneType.Number)
+                if (fieldConfiguration.ZoneType == ZoneType.Number)
                 {
                     str = Chunkify(str);
                 }
@@ -65,9 +65,8 @@ namespace Glass.Imaging.PostProcessing
             return regex.Replace(str, " <BARCODE> ");
         }
 
-        private static string ApplyWhitespacePolicy(ZoneConfiguration fieldConfiguration, string str)
+        private static string ApplyWhitespacePolicy(string str)
         {
-            str = ApplyReplaceLinesBySpaces(fieldConfiguration, str);
             str = str.CollapseSpaces();
             return str;
         }
@@ -79,15 +78,6 @@ namespace Glass.Imaging.PostProcessing
 
             var sortedByScore = recognitionUnits.OrderByDescending(g => g.Score).Select(g => g.Line);
             return !recognitionUnits.Any() ? str : sortedByScore.FirstOrDefault();
-        }
-
-        private static string ApplyReplaceLinesBySpaces(ZoneConfiguration fieldConfiguration, string str)
-        {
-            if (fieldConfiguration.ReplaceLinesBySpaces)
-            {
-                str = str.Replace(Environment.NewLine, " ");
-            }
-            return str;
         }
 
         private static string WipeCarriageReturns(string input)
