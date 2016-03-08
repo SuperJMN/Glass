@@ -6,7 +6,7 @@
     xmlns:sliderControl="clr-namespace:Glass.Basics.Ewt.SliderControl">
     
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="pack://application:,,,/Glass.Basics.ExtendedWPFToolkit;component/Themes/Resources.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Glass.Basics.Xceed.Wpf.Toolkit;component/Themes/Resources.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <Style TargetType="{x:Type thicknessEditor:ThicknessEditor}">

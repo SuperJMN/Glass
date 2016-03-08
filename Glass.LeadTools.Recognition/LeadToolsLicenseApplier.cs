@@ -24,7 +24,7 @@ namespace Glass.LeadTools.Recognition
 
             if (RasterSupport.KernelExpired)
             {
-                var exMessage = "La licencia es inválida o ha experado. El componente de LeadTools se ha deshabilitado. Por favor, contacte con el soporte técnico de LeadTools para conseguir una licencia válida.";
+                var exMessage = "La licencia es inválida o ha expirado. El componente de LeadTools se ha deshabilitado. Por favor, contacte con el soporte técnico de LeadTools para conseguir una licencia válida.";
                 throw new LicenseException(typeof(RasterSupport), null, exMessage);
             }
         }

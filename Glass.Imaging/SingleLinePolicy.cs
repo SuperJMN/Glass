@@ -1,22 +1,25 @@
 namespace Glass.Imaging
 {
-    using System.Collections.Generic;
     using System.Linq;
     using Core;
     using PostProcessing;
 
     public class SingleLinePolicy : ISingleLinePolicy
     {
-        private const double MistakenBarcodeFactor = -2;
-        private const double ValidCharFactor = 1;
-        private const double InvalidCharFactor = -2;
+        private const double ValidCharFactor = 5;
+        private const double InvalidCharFactor = 3;
 
-        public double GetScore(string s, ZoneConfiguration field)
+        public double GetScore(string s, ZoneConfiguration fieldConfiguration)
         {
-            int validCharsCount;
-            switch (field.SmartZoneType)
+            if (s.Equals("<BARCODE>"))
             {
-                case SmartZoneType.Digits:
+                return double.MinValue;
+            }
+
+            int validCharsCount;
+            switch (fieldConfiguration.SmartZoneType)
+            {
+                case SmartZoneType.Number:
                     validCharsCount = s.Count(char.IsNumber);
                     break;
 
@@ -38,54 +41,15 @@ namespace Glass.Imaging
 
             var validScore = validCharsCount * ValidCharFactor;
             var invalidScore = invalidChars * InvalidCharFactor;
-            var mistakenBarcodeScore = GetMistakenBarcodeScore(s, field) * MistakenBarcodeFactor;
-            var lengthScore = GetLengthScore(s, field);
+            var lengthScore = GetLengthScore(s, fieldConfiguration);
 
-            var score = validScore + invalidScore + lengthScore + mistakenBarcodeScore;
+            var score = validScore + invalidScore + lengthScore;
             return score;
         }
 
-        private static double GetMistakenBarcodeScore(string str, ZoneConfiguration field)
+        private static double GetLengthScore(string str, ZoneConfiguration fieldConfiguration)
         {
-            // THIS SHOULD NOT HAPPEN!
-            if (field.SmartZoneType == SmartZoneType.Barcode)
-            {
-                return 0;
-            }
-
-            var numeric = new[] { ' ', '1' };
-            var alpha = new[] { 'l', 'I', 'L', '|' };
-            var alphaNumeric = new HashSet<char>(numeric.Concat(alpha)).ToArray();
-
-            if (field.SmartZoneType == SmartZoneType.Digits)
-            {                
-                return GetBarcodeScoreFormula(str, numeric);
-            }
-            
-            if (field.SmartZoneType == SmartZoneType.AlphaOnly)
-            {
-                return GetBarcodeScoreFormula(str, alpha);
-            }
-
-            if (field.SmartZoneType == SmartZoneType.Alpha)
-            {
-                return GetBarcodeScoreFormula(str, alphaNumeric);
-            }
-
-            return 0;
-        }
-
-        private static double GetBarcodeScoreFormula(string str, char[] possibleBarcodeChars)
-        {
-            var barcodeChars = str.Count(possibleBarcodeChars.Contains);
-            var total = (double) str.Length;
-
-            return barcodeChars/total;
-        }
-
-        private static double GetLengthScore(string str, ZoneConfiguration field)
-        {
-            var maskLen = GetMaskLength(field);
+            var maskLen = GetMaskLength(fieldConfiguration);
             if (maskLen == null)
             {
                 return 0;
@@ -107,9 +71,9 @@ namespace Glass.Imaging
             return ScorePolicy.GetScore(total, average);
         }
 
-        private static MaskLength GetMaskLength(ZoneConfiguration field)
+        private static MaskLength GetMaskLength(ZoneConfiguration fieldConfiguration)
         {
-            var mask = field.Mask;
+            var mask = fieldConfiguration.Mask;
             if (mask == null)
             {
                 return null;
