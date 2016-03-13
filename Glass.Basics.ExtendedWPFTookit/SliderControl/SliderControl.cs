@@ -1,4 +1,4 @@
-namespace Glass.Basics.Ewt.SliderControl
+namespace Glass.Basics.Xceed.Wpf.Toolkit.SliderControl
 {
     using System.Windows;
     using System.Windows.Controls;

@@ -1,4 +1,4 @@
-namespace Glass.Basics.Ewt.ThicknessEditor
+namespace Glass.Basics.Xceed.Wpf.Toolkit.ThicknessEditor
 {
     using System.Windows;
     using System.Windows.Controls;

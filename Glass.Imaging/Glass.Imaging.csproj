@@ -76,23 +76,35 @@
     <Compile Include="Core\StringExtensions.cs" />
     <Compile Include="Core\ITaggedImageSource.cs" />
     <Compile Include="Core\IZoneBasedRecognitionService.cs" />
+    <Compile Include="IScorePolicy.cs" />
+    <Compile Include="NumberScorePolicy.cs" />
+    <Compile Include="ZoneConfigurations\Alphanumeric\AlphanumericEvaluator.cs" />
+    <Compile Include="ZoneConfigurations\Alpha\AlphaOnlyEvaluator.cs" />
+    <Compile Include="ZoneConfigurations\Alpha\AlphaOnlyStringFilter.cs" />
+    <Compile Include="ZoneConfigurations\Alphanumeric\AlphanumericStringFilter.cs" />
+    <Compile Include="ZoneConfigurations\Numeric\NumericEvaluator.cs" />
+    <Compile Include="ZoneConfigurations\Evaluator.cs" />
+    <Compile Include="ZoneConfigurations\IEvaluator.cs" />
+    <Compile Include="ZoneConfigurations\ITextualDataFilter.cs" />
+    <Compile Include="ZoneConfigurations\Numeric\NumericStringFilter.cs" />
     <Compile Include="PostProcessing\IOcrPostProcessor.cs" />
-    <Compile Include="PostProcessing\ISingleLinePolicy.cs" />
-    <Compile Include="PostProcessing\OcrPostProcessor.cs" />
     <Compile Include="PostProcessing\RecognitionConfiguration.cs" />
-    <Compile Include="PostProcessing\ZoneConfiguration.cs" />
-    <Compile Include="PostProcessing\ZoneType.cs" />
+    <Compile Include="ZoneConfiguration.cs" />
+    <Compile Include="PostProcessing\FilterType.cs" />
     <Compile Include="Core\RecognizedPage.cs" />
     <Compile Include="Core\RecognizedZone.cs" />
     <Compile Include="Core\TaggedImage.cs" />
     <Compile Include="Core\Transform.cs" />
     <Compile Include="Regexes.cs" />
     <Compile Include="ScorePolicy.cs" />
-    <Compile Include="SingleLinePolicy.cs" />
+    <Compile Include="ZoneConfigurations\StringFilter.cs" />
+    <Compile Include="ZoneConfigurations\Symbology.cs" />
+    <Compile Include="ZoneConfigurations\ZeroEvaluator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Glass.Imaging.nuspec" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

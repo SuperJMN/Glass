@@ -7,8 +7,8 @@ namespace Glass.LeadTools.Recognition
     {
         public void ApplyLicense()
         {
-            string licenseFilePath = System.IO.Path.GetFullPath(@"LeadToolsLicense\Bravent-REC19.lic");
-            string keyFilePath = System.IO.Path.GetFullPath(@"LeadToolsLicense\Bravent-REC19.lic.key");
+            string licenseFilePath = System.IO.Path.GetFullPath(@"LeadToolsLicense\License.lic");
+            string keyFilePath = System.IO.Path.GetFullPath(@"LeadToolsLicense\License.lic.key");
             if (System.IO.File.Exists(licenseFilePath) && System.IO.File.Exists(keyFilePath))
             {
                 string developerKey = System.IO.File.ReadAllText(keyFilePath);
@@ -19,7 +19,7 @@ namespace Glass.LeadTools.Recognition
                 throw new LicenseException(
                     typeof(RasterSupport),
                     null,
-                    string.Format("No se han encontrado los archivos de licencia necesarios:\n{0}\n{1}", licenseFilePath, keyFilePath));
+                    $"No se han encontrado los archivos de licencia necesarios:\n{licenseFilePath}\n{keyFilePath}");
             }
 
             if (RasterSupport.KernelExpired)

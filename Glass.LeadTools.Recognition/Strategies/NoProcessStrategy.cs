@@ -1,4 +1,4 @@
-namespace Glass.LeadTools.Recognition
+namespace Glass.LeadTools.Recognition.Strategies
 {
     using System.Windows.Media;
 

@@ -1,8 +1,7 @@
 ﻿namespace Glass.Imaging.PostProcessing
 {
-    public enum ZoneType
+    public enum FilterType
     {
-        Barcode,
         AlphaOnly,
         Alpha,
         Digits, 

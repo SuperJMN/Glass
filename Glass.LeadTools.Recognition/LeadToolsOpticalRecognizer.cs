@@ -6,47 +6,51 @@
     using System.Windows;
     using System.Windows.Media;
     using System.Windows.Media.Imaging;
+    using Imaging;
     using Imaging.Core;
     using Imaging.PostProcessing;
+    using Imaging.ZoneConfigurations;
     using ImagingExtensions;
-    using Leadtools;
     using Leadtools.Barcode;
     using Leadtools.Codecs;
     using Leadtools.Forms;
     using Leadtools.Forms.Ocr;
     using Leadtools.Forms.Ocr.Advantage;
+    using Leadtools.ImageProcessing.Core;
+    using Strategies;
 
     public class LeadToolsOpticalRecognizer : IZoneBasedRecognitionService
     {
-        private readonly IOcrPostProcessor postProcessor;
-        private readonly ISingleLinePolicy barcodeScorePolicy;
-        private readonly RasterCodecs codecs = new RasterCodecs();
         private const string OcrEngineFolder = @"OcrAdvantageRuntime";
 
-        public LeadToolsOpticalRecognizer(ILeadToolsLicenseApplier licenseApplier, IOcrPostProcessor postProcessor, ISingleLinePolicy barcodeScorePolicy)
+        private readonly List<IStrategy> barcodeCorrectionStrategies = new List<IStrategy>
         {
-            this.postProcessor = postProcessor;
-            this.barcodeScorePolicy = barcodeScorePolicy;
+            new AutoColorStrategy(),
+            new NoProcessStrategy(),
+            new AutoBinarizeStrategy(),
+            new IncreaseContrastStrategy(),
+            new DeskewStrategy()
+        };
+
+        private readonly RasterCodecs codecs = new RasterCodecs();
+        public RecognizeOptions Options { get; set; }
+
+        public LeadToolsOpticalRecognizer(ILeadToolsLicenseApplier licenseApplier)
+        {
             licenseApplier.ApplyLicense();
-            OcrEngine = (OcrEngine)OcrEngineManager.CreateEngine(OcrEngineType.Advantage, false);
+            OcrEngine = (OcrEngine) OcrEngineManager.CreateEngine(OcrEngineType.Advantage, false);
             OcrEngine.Startup(codecs, null, null, OcrEngineFolder);
+            Options = new RecognizeOptions();
         }
 
-        private BarcodeEngine BarcodeEngine { get; } = new BarcodeEngine();
+        private BarcodeEngine BarcodeEngine { get; } = new BarcodeEngine {Reader = {ImageType = BarcodeImageType.Picture}};
 
-        private BarcodeSymbology[] BarcodesTypes { get; } =
-            {
-                BarcodeSymbology.Code3Of9, BarcodeSymbology.Code93, BarcodeSymbology.QR,
-                BarcodeSymbology.Datamatrix
-            };
-
-        public OcrEngine OcrEngine { get; set; }
+        private OcrEngine OcrEngine { get; }
 
         public RecognizedPage Recognize(BitmapSource image, RecognitionConfiguration configuration)
         {
             var barcodeRecognitions = RecognizeBarcodes(image, configuration);
             var ocrRecognitions = PerformOcr(image, configuration);
-
             var recognizedZones = barcodeRecognitions.Concat(ocrRecognitions).ToList();
 
             PostProcess(recognizedZones);
@@ -54,18 +58,18 @@
             return new RecognizedPage(image, recognizedZones);
         }
 
-        private void PostProcess(IEnumerable<RecognizedZone> recognizedZones)
+        private static void PostProcess(IEnumerable<RecognizedZone> recognizedZones)
         {
             foreach (var recognizedZone in recognizedZones)
             {
-                var processed = postProcessor.Process(recognizedZone.RecognizedText, recognizedZone.ZoneConfig);
+                var processed = recognizedZone.ZoneConfig.TextualDataFilter.Filter(recognizedZone.RecognizedText);
                 recognizedZone.RecognizedText = processed;
             }
         }
 
         private IEnumerable<RecognizedZone> PerformOcr(BitmapSource image, RecognitionConfiguration configuration)
         {
-            var ocrZones = configuration.Zones.Where(z => z.ZoneType != ZoneType.Barcode);
+            var ocrZones = configuration.Zones.Where(z => z.Symbology == Symbology.Text).ToList();
 
             if (!ocrZones.Any())
             {
@@ -80,88 +84,105 @@
         private static IEnumerable<RecognizedZone> GetRecognitionResults(BitmapSource image, IEnumerable<ZoneConfiguration> ocrZones, IOcrPage ocrPage)
         {
             return from zone in ocrPage.Zones.Where(zone => !zone.IsEngineZone)
-                   let configuration = ocrZones.Single(f => string.Equals(f.Id, zone.Name))
-                   let text = ocrPage.GetText(zone.Id)
-                   select new RecognizedZone(image, configuration, text);
+                let configuration = ocrZones.Single(f => string.Equals(f.Id, zone.Name))
+                let text = ocrPage.GetText(zone.Id)
+                select new RecognizedZone(image, configuration, text);
         }
 
-        private IOcrPage CreateOcrPage(BitmapSource image, IEnumerable<ZoneConfiguration> zones)
+        private IOcrPage CreateOcrPage(BitmapSource image, IEnumerable<ZoneConfiguration> configs)
         {
-            var optimizeImageForOcr = image.ToRasterImage().OptimizeImageForOcr();
+            var source = GetImageToOcr(image);
+            var zones = GetZones(image.DpiX, image.DpiY, configs).ToList();
 
-            var ocrPage = OcrEngine.CreatePage(optimizeImageForOcr, OcrImageSharingMode.None);
+            var ocrPage = OcrEngine.CreatePage(source.ToRasterImage(), OcrImageSharingMode.None);
 
-            foreach (var field in zones)
+            foreach (var ocrZone in zones)
             {
-                var bounds = field.Bounds;
-                var cropRect = bounds.ConverToRawPixels(optimizeImageForOcr.XResolution, optimizeImageForOcr.YResolution);
-                var ocrZone = CreateOcrZoneForField(cropRect, field);
-
                 ocrPage.Zones.Add(ocrZone);
             }
 
             return ocrPage;
         }
 
+        private ImageSource GetImageToOcr(BitmapSource image)
+        {
+            var scaled = new TransformedBitmap(image, new ScaleTransform(Options.PreprocessScale, Options.PreprocessScale));
+            using (var raster = scaled.ToRasterImage())
+            {
+                return raster.OptimizeImageForOcr().ToBitmapSource();
+            }
+        }
+
+        private IEnumerable<OcrZone> GetZones(double dpiX, double dpiY, IEnumerable<ZoneConfiguration> zones)
+        {
+            foreach (var field in zones)
+            {
+                var bounds = field.Bounds;
+
+                var cropRect = bounds;
+                var scaledZone = cropRect.ConvertFrom96pppToBitmapDpi(dpiX, dpiY);
+                scaledZone.Scale(Options.PreprocessScale, Options.PreprocessScale);
+
+                var ocrZone = CreateOcrZoneForField(scaledZone, field);
+
+                yield return ocrZone;
+            }
+        }
+
         private static OcrZone CreateOcrZoneForField(Rect rectCrop, ZoneConfiguration zoneConfiguration)
         {
-            var zt = zoneConfiguration.ZoneType;
+            var zoneConfig = zoneConfiguration;
 
             var readZone = new OcrZone
             {
                 Name = zoneConfiguration.Id,
                 Bounds = new LogicalRectangle(rectCrop.ToLeadRectRect()),
-                CharacterFilters = GetCharacterFilters(zt),
-                Language = GetLanguage(zt),
-                ZoneType = GetZoneType(zt),
-                IsEngineZone = false,
-                ForeColor = new RasterColor(0, 0, 0),
-                BackColor = new RasterColor(255, 255, 255),
-                TextStyle = OcrTextStyle.Heading,
+                CharacterFilters = GetCharacterFilters(zoneConfig),
+                Language = GetLanguage(zoneConfig),
+                ZoneType = GetZoneType(zoneConfig),
+                IsEngineZone = false
             };
 
             return readZone;
         }
 
-        private static string GetLanguage(ZoneType fieldType)
+        private static string GetLanguage(ZoneConfiguration zoneConfiguration)
         {
-            //if (fieldType == ZoneType.Alpha || fieldType == ZoneType.AlphaOnly)
-            //{
-            //    return "ES";
-            //}
+            var filterType = zoneConfiguration.TextualDataFilter.FilterType;
+            if (filterType == FilterType.Alpha || filterType == FilterType.AlphaOnly)
+            {
+                return "ES";
+            }
 
             return null;
         }
 
-        private static OcrZoneCharacterFilters GetCharacterFilters(ZoneType fieldType)
+        private static OcrZoneCharacterFilters GetCharacterFilters(ZoneConfiguration filterType)
         {
-            switch (fieldType)
+            switch (filterType.TextualDataFilter.FilterType)
             {
-                case ZoneType.Digits:
+                case FilterType.Digits:
                     return OcrZoneCharacterFilters.Digit;
-                case ZoneType.AlphaOnly:
+                case FilterType.AlphaOnly:
                     return OcrZoneCharacterFilters.Uppercase | OcrZoneCharacterFilters.Lowercase;
-                case ZoneType.Alpha:
+                case FilterType.Alpha:
                     return OcrZoneCharacterFilters.All;
-                case ZoneType.Number:
+                case FilterType.Number:
                     return OcrZoneCharacterFilters.Numbers | OcrZoneCharacterFilters.Punctuation;
                 default:
                     return OcrZoneCharacterFilters.All;
             }
         }
 
-        private static OcrZoneType GetZoneType(ZoneType fieldType)
+        private static OcrZoneType GetZoneType(ZoneConfiguration fieldType)
         {
-            switch (fieldType)
+            switch (fieldType.Symbology)
             {
-                case ZoneType.Digits:
-                case ZoneType.Alpha:
-                case ZoneType.AlphaOnly:
-                case ZoneType.Number:
+                case Symbology.Text:
 
                     return OcrZoneType.Text;
 
-                case ZoneType.Barcode:
+                case Symbology.Barcode:
 
                     return OcrZoneType.Barcode;
 
@@ -172,35 +193,43 @@
 
         private IEnumerable<RecognizedZone> RecognizeBarcodes(BitmapSource image, RecognitionConfiguration configuration)
         {
-            var barcodeZones = configuration.Zones.Where(z => z.ZoneType == ZoneType.Barcode);
+            var barcodeZones = configuration.Zones.Where(z => z.Symbology == Symbology.Barcode);
             return from barcodeConfig in barcodeZones
-                   let rect = barcodeConfig.Bounds
-                   let text = GetStringFromBarcode(image, rect, barcodeConfig)
-                   select new RecognizedZone(image, barcodeConfig, text);
+                let rect = barcodeConfig.Bounds
+                let text = GetStringFromBarcode(image, rect, barcodeConfig)
+                select new RecognizedZone(image, barcodeConfig, text);
         }
 
         private string GetStringFromBarcode(ImageSource image, Rect rect, ZoneConfiguration barcodeConfig)
         {
             var leadRect = new LogicalRectangle(rect.X, rect.Y, rect.Width, rect.Height, LogicalUnit.Pixel);
 
-            var strategies = new List<IStrategy> { new NoProcessStrategy(), new AutoColorStrategy() };
-
-            return GetBestBarcodeMatch(image, barcodeConfig, strategies, leadRect);
+            return GetBestBarcodeMatch(image, barcodeConfig, barcodeCorrectionStrategies, leadRect);
         }
 
         private string GetBestBarcodeMatch(ImageSource image, ZoneConfiguration barcodeConfig, IEnumerable<IStrategy> strategies, LogicalRectangle leadRect)
         {
-            var query = from str in strategies
-                        let img = str.Apply(image)
-                        let barcodeData = BarcodeEngine.Reader.ReadBarcode(img.ToRasterImage(), leadRect, BarcodesTypes)
-                        let barcodeText = barcodeData?.Value
-                        let score = barcodeScorePolicy.GetScore(barcodeText, barcodeConfig)
-                        select new { Score = score, Text = barcodeText };
+            var evaluator = barcodeConfig.TextualDataFilter.Evaluator;
 
-            var top = query.OrderBy(arg => arg.Score).First();
+            var query = from str in strategies
+                let img = str.Apply(image)
+                let barcodeData = BarcodeEngine.Reader.ReadBarcode(img.ToRasterImage(), leadRect, Options.BarcodesTypes)
+                let barcodeText = barcodeData?.Value
+                let score = evaluator.GetScore(barcodeText)
+                select new {Score = score, Text = barcodeText};
+
+            var ordered = query.OrderByDescending(arg => arg.Score);
+            var top = ordered.First();
             return top.Text;
         }
+
+        private static ImageSource DeSkew(ImageSource image)
+        {
+            using (var r = image.ToRasterImage())
+            {
+                new DeskewCommand().Run(r);
+                return r.ToBitmapSource();
+            }
+        }
     }
-
-
 }
