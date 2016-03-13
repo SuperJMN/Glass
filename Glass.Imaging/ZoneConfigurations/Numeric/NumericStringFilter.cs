@@ -10,6 +10,8 @@ namespace Glass.Imaging.ZoneConfigurations.Numeric
         }     
 
         public override FilterType FilterType => FilterType.Digits;
-        public override IEvaluator Evaluator { get; } 
+        public override IEvaluator Evaluator { get; }
+        public decimal Maximum { get; set; } = decimal.MaxValue;
+        public decimal Minimum { get; set; } = decimal.MinValue;
     }
 }

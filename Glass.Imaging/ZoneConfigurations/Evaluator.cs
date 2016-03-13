@@ -6,19 +6,19 @@ namespace Glass.Imaging.ZoneConfigurations
 
     public abstract class Evaluator : IEvaluator
     {
-        private readonly StringFilter stringFilter;
+        protected StringFilter Filter { get; }
 
         private const double ValidCharFactor = 5;
         private const double InvalidCharFactor = 3;
-        private const double LengthScore = 17;
-        private const double RegexScore = 200;
+        private const double LengthScore = 20;
+        private const double RegexScore = 50;
 
         protected Evaluator(StringFilter stringFilter)
         {
-            this.stringFilter = stringFilter;
+            this.Filter = stringFilter;
         }
 
-        public double GetScore(string s)
+        public virtual double GetScore(string s)
         {
             if (s == null)
             {
@@ -36,14 +36,14 @@ namespace Glass.Imaging.ZoneConfigurations
             var validScore = validCharsCount * ValidCharFactor;
             var invalidScore = invalidChars * InvalidCharFactor;
 
-            var lengthScore = GetLengthScore(s, stringFilter.MinLength, stringFilter.MaxLength);
+            var lengthScore = GetLengthScore(s, Filter.MinLength, Filter.MaxLength);
 
             double regexScore;
-            if (stringFilter.Regex != null)
+            if (Filter.Regex != null)
             {
-                var regex = new Regex(stringFilter.Regex);
+                var regex = new Regex(Filter.Regex);
                 var match = regex.Match(s);
-                regexScore = stringFilter.Regex == null ? 0 : match.Length == s.Length ? RegexScore : 0;
+                regexScore = Filter.Regex == null ? 0 : match.Length == s.Length ? RegexScore : 0;
             }
             else
             {

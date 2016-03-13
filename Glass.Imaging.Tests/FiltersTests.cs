@@ -61,5 +61,14 @@
             var actual = sut.Filter(str);
             Assert.Equal(expected, actual);
         }
+
+        [Theory]
+        [InlineData("500\r\n2000\r\n4000", "2000")]
+        public void IntervalTest(string str, string expected)
+        {
+            var sut = new NumericStringFilter { Minimum = 1000, Maximum = 3000 };
+            var actual = sut.Filter(str);
+            Assert.Equal(expected, actual);
+        }
     }
 }

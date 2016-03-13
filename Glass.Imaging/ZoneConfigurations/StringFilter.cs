@@ -8,7 +8,7 @@ namespace Glass.Imaging.ZoneConfigurations
     public abstract class StringFilter : ITextualDataFilter
     {
         public int MinLength { get; set; }
-        public int MaxLength { get; set; }
+        public int MaxLength { get; set; } = int.MaxValue;
         public bool IsSingleLine { get; set; }
         public string Regex { get; set; }
         public abstract FilterType FilterType { get; }
