@@ -213,7 +213,7 @@
 
             var query = from str in strategies
                 let img = str.Apply(image)
-                let barcodeData = BarcodeEngine.Reader.ReadBarcode(img.ToRasterImage(), leadRect, Options.BarcodesTypes)
+                let barcodeData = BarcodeEngine.Reader.ReadBarcode(img.ToRasterImage(), leadRect, Options.BarcodesTypes.ToArray())
                 let barcodeText = barcodeData?.Value
                 let score = evaluator.GetScore(barcodeText)
                 select new {Score = score, Text = barcodeText};
