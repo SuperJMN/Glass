@@ -16,6 +16,11 @@ namespace Glass.Imaging.ZoneConfigurations
 
         public string Filter(string input)
         {
+            if (input == null)
+            {
+                return null;
+            }
+
             string str = input;
             str = Chunkify(str);
             return GetBestMatchFromChunkifiedString(str);
