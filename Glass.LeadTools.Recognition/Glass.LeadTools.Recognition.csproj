@@ -231,6 +231,8 @@
     <Compile Include="..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="BarcodeRecognitionOptions.cs" />
+    <Compile Include="OcrOptions.cs" />
     <Compile Include="RecognizeOptions.cs" />
     <Compile Include="Strategies\AutoBinarizeStrategy.cs" />
     <Compile Include="Strategies\AutoColorStrategy.cs" />

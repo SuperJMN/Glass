@@ -28,6 +28,7 @@
         [InlineData(" 123456 ", 0, int.MaxValue, "123456")]
         [InlineData(" 12345556 \r\n  2121", 4, 5, "2121")]
         [InlineData("18 8\r\n1101118110 988 5085\r\n11", 4, 5, "5085")]
+        [InlineData(null, 0, int.MaxValue, null)]
         public void NumericTest(string str, int min, int max, string expected)
         {
             var sut = new NumericStringFilter { MinLength = min, MaxLength = max };

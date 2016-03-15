@@ -33,8 +33,7 @@
             var recognizedPage = sut.Recognize(
                 bitmapSource,
                 RecognitionConfiguration.FromSingleImage(bitmapSource, numericStringFilter, Symbology.Text));
-            var uniqueZone = recognizedPage.RecognizedZones.First();
-            Assert.Equal("825075", uniqueZone.RecognizedText);
+
 
             dotMemory.Check(
                 memory =>

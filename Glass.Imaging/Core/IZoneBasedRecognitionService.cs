@@ -5,6 +5,6 @@
 
     public interface IZoneBasedRecognitionService
     {
-        RecognizedPage Recognize(BitmapSource image, RecognitionConfiguration configuration);
-    }
+        RecognizedPage Recognize(BitmapSource image, RecognitionConfiguration configuration);        
+    }    
 }

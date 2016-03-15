@@ -30,6 +30,15 @@
         [InlineData("6", "825672")]
         [InlineData("7", "825545")]
         [InlineData("8", "825475")]
+        [InlineData("9", "826744")]
+        [InlineData("10", "826274")]
+        [InlineData("11", "825941")]
+        //[InlineData("12", "857797")]
+        [InlineData("13", "828645")]
+        [InlineData("14", "828964")]
+        [InlineData("15", "828744")]
+        [InlineData("16", "828745")]
+        [InlineData("17", "829270")]
         public void TestUniqueBarcode(string fileName, string expected)
         {
             var sut = new LeadToolsOpticalRecognizer(licenseApplier);
@@ -51,6 +60,15 @@
         [InlineData("6", "825672")]
         [InlineData("7", "825545")]
         [InlineData("8", "825475")]
+        [InlineData("9", "826744")]
+        [InlineData("10", "826274")]
+        [InlineData("11", "825941")]
+        //[InlineData("12", "857797")]
+        [InlineData("13", "828645")]
+        [InlineData("14", "828964")]
+        [InlineData("15", "828744")]
+        [InlineData("16", "828745")]
+        [InlineData("17", "829270")]
         public void TestNumericField(string fileName, string expected)
         {
             var sut = new LeadToolsOpticalRecognizer(licenseApplier);
