@@ -8,16 +8,17 @@
     using Imaging.ZoneConfigurations.Numeric;
     using Recognition;
     using Xunit;
-    using JetBrains.dotMemoryUnit;
     using Xunit.Abstractions;
 
     public class LeadToolsOpticalRecognizerTests
     {
+        private readonly ITestOutputHelper output;
         private readonly LeadToolsLicenseApplier licenseApplier;
+        private LeadToolsOpticalRecognizer opticalRecognizer;
 
-
-        public LeadToolsOpticalRecognizerTests()
+        public LeadToolsOpticalRecognizerTests(ITestOutputHelper output)
         {
+            this.output = output;
             licenseApplier = new LeadToolsLicenseApplier();
         }
 
@@ -39,16 +40,37 @@
         [InlineData("15", "828744")]
         [InlineData("16", "828745")]
         [InlineData("17", "829270")]
+        [InlineData("18", "830560")]
+        [InlineData("19", "832148")]
+        [InlineData("20", "830539")]
+        [InlineData("21", "830429")]
+        [InlineData("22", "830644")]
+        [InlineData("23", "830754")]
+        [InlineData("24", "830289")]
+        [InlineData("25", "827264")]
+        [InlineData("26", "830292")]
+        [InlineData("27", "827496")]
+        [InlineData("28", "830326")]
+        [InlineData("29", "830329")]
+        [InlineData("30", "832144")]
+        [InlineData("31", "832145")]
+        [InlineData("32", "832146")]
         public void TestUniqueBarcode(string fileName, string expected)
         {
-            var sut = new LeadToolsOpticalRecognizer(licenseApplier);
+            var sut = GetSut();
             var bitmapSource = LoadImage($"Barcodes\\{fileName}.jpg");
             var numericStringFilter = new NumericStringFilter { MinLength = 6, MaxLength = 6 };
             var recognizedPage = sut.Recognize(
                 bitmapSource,
                 RecognitionConfiguration.FromSingleImage(bitmapSource, numericStringFilter, Symbology.Barcode));
             var uniqueZone = recognizedPage.RecognizedZones.First();
+
             Assert.Equal(expected, uniqueZone.RecognizedText);
+        }
+
+        private LeadToolsOpticalRecognizer GetSut()
+        {
+            return opticalRecognizer ?? (opticalRecognizer = new LeadToolsOpticalRecognizer(licenseApplier));
         }
 
         [Theory]
@@ -69,9 +91,24 @@
         [InlineData("15", "828744")]
         [InlineData("16", "828745")]
         [InlineData("17", "829270")]
+        [InlineData("18", "830560")]
+        //[InlineData("19", "832148")]
+        [InlineData("20", "830539")]
+        [InlineData("21", "830429")]
+        [InlineData("22", "830644")]
+        [InlineData("23", "830754")]
+        [InlineData("24", "830289")]
+        [InlineData("25", "827264")]
+        //[InlineData("26", "830292")]
+        [InlineData("27", "827496")]
+        [InlineData("28", "830326")]
+        [InlineData("29", "830329")]
+        [InlineData("30", "832144")]
+        [InlineData("31", "832145")]
+        [InlineData("32", "832146")]
         public void TestNumericField(string fileName, string expected)
         {
-            var sut = new LeadToolsOpticalRecognizer(licenseApplier);
+            var sut = GetSut();
             var bitmapSource = LoadImage($"Barcodes\\{fileName}.jpg");
             var numericStringFilter = new NumericStringFilter { MinLength = 6, MaxLength = 6 };
             var recognizedPage = sut.Recognize(
@@ -80,7 +117,7 @@
             var uniqueZone = recognizedPage.RecognizedZones.First();
             Assert.Equal(expected, uniqueZone.RecognizedText);
         }
-      
+
         private static BitmapSource LoadImage(string s)
         {
             return new BitmapImage(new Uri(s, UriKind.Relative));

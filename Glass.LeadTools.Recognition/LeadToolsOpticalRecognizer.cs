@@ -16,7 +16,6 @@
     using Leadtools.Forms;
     using Leadtools.Forms.Ocr;
     using Leadtools.Forms.Ocr.Advantage;
-    using Strategies;
 
     public class LeadToolsOpticalRecognizer : IZoneBasedRecognitionService
     {
@@ -78,7 +77,10 @@
 
         private static IEnumerable<RecognizedZone> GetRecognitionResults(BitmapSource image, IEnumerable<ZoneConfiguration> ocrZones, IOcrPage ocrPage)
         {
-            return from zone in ocrPage.Zones.Where(zone => !zone.IsEngineZone) let configuration = ocrZones.Single(f => string.Equals(f.Id, zone.Name)) let text = ocrPage.GetText(zone.Id) select new RecognizedZone(image, configuration, text);
+            return from zone in ocrPage.Zones.Where(zone => !zone.IsEngineZone)
+                   let configuration = ocrZones.Single(f => string.Equals(f.Id, zone.Name))
+                   let text = ocrPage.GetText(zone.Id)
+                   select new RecognizedZone(image, configuration, text);
         }
 
         private IOcrPage CreateOcrPage(BitmapSource image, IEnumerable<ZoneConfiguration> configs)
@@ -193,57 +195,33 @@
             var barcodeZones = configuration.Zones.Where(z => z.Symbology == Symbology.Barcode);
             return from barcodeConfig in barcodeZones
                    let rect = barcodeConfig.Bounds
-                   let text = GetStringFromBarcode(image, rect, barcodeConfig)
+                   let barcode = image.Crop(rect)
+                   let text = GetStringFromBarcode(barcode, barcodeConfig)
                    select new RecognizedZone(image, barcodeConfig, text);
         }
 
-        private string GetStringFromBarcode(ImageSource image, Rect rect, ZoneConfiguration barcodeConfig)
-        {
-            var leadRect = new LogicalRectangle(rect.X, rect.Y, rect.Width, rect.Height, LogicalUnit.Pixel);
-
-            return GetBestBarcodeMatch(image, barcodeConfig, leadRect);
-        }
-
-        private string GetBestBarcodeMatch(ImageSource image, ZoneConfiguration barcodeConfig, LogicalRectangle leadRect)
+        private string GetStringFromBarcode(BitmapSource image, ZoneConfiguration barcodeConfig)
         {
             var evaluator = barcodeConfig.TextualDataFilter.Evaluator;
-
-            var correctionStrategies = QualityOptions.BarcodeCorrectionStrategies;
-
-            var barcodeSymbologies = Options.BarcodeSymbologies;
             var coreReadOptions = QualityOptions.CoreReadOptions;
 
-            var query = from str in correctionStrategies
-                        let img = str.Apply(image)
-                        let barcodeData =
-                            BarcodeEngine.Reader.ReadBarcode(img.ToRasterImage(), leadRect, barcodeSymbologies.ToArray(), coreReadOptions)
-                        let barcodeText = barcodeData?.Value
-                        let score = evaluator.GetScore(barcodeText)
-                        select new { Score = score, Text = barcodeText };
+            var leadRect = new LogicalRectangle(0, 0, image.PixelWidth, image.PixelHeight, LogicalUnit.Pixel);
 
-            var ordered = query.OrderByDescending(arg => arg.Score);
-            var top = ordered.First();
-            return top.Text;
-        }
-    }
-
-    public class QualityOptions
-    {
-        public List<IStrategy> BarcodeCorrectionStrategies { get; set; } = new List<IStrategy>
-        {
-            new AutoColorStrategy(),
-            new NoProcessStrategy(),
-            new AutoBinarizeStrategy(),
-            new IncreaseContrastStrategy(),
-            new DeskewStrategy()
-        };
-
-        public BarcodeReadOptions[] CoreReadOptions { get; } = {
-            new OneDBarcodeReadOptions()
+            var scores = new List<ScoreResult>();
+            foreach (var strategy in QualityOptions.BarcodeStrategies)
             {
-                AllowPartialRead = true,
-                SearchDirection = BarcodeSearchDirection.HorizontalAndVertical
-            },
-        };
+                BarcodeEngine.Reader.ImageType = strategy.ImageType;
+                var transformedImage = strategy.ImageFilter.Apply(image);
+                var barcodeData = BarcodeEngine.Reader.ReadBarcode(transformedImage.ToRasterImage(), leadRect, Options.BarcodeSymbologies.ToArray(), coreReadOptions);
+                var barcodeText = barcodeData?.Value;
+                var score = evaluator.GetScore(barcodeText);
+                scores.Add(new ScoreResult { Score = score, Text = barcodeText, ImageFilter = strategy.ImageFilter, ImageType = strategy.ImageType });
+            }
+
+            var ordered = scores.OrderByDescending(arg => arg.Score);
+            var top = ordered.First();
+
+            return top.Text;
+        }        
     }
 }

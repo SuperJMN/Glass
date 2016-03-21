@@ -2,17 +2,16 @@ namespace Glass.Imaging.Core
 {
     using System.Windows.Media;
     using System.Windows.Media.Imaging;
-    using PostProcessing;
 
     public class RecognizedZone
     {
-        public RecognizedZone(BitmapSource image, ZoneConfiguration zoneConfiguration, string getStringFromBarcode)
+        public RecognizedZone(BitmapSource image, ZoneConfiguration zoneConfiguration, string text)
         {
             ZoneConfig = zoneConfiguration;
             var bitmapSource = image.Crop(zoneConfiguration.Bounds);
             bitmapSource.Freeze();
             Image = bitmapSource;
-            RecognizedText = getStringFromBarcode;
+            RecognizedText = text;
         }
 
         public string RecognizedText { get; set; }
