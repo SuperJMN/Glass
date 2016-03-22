@@ -55,6 +55,8 @@
         [InlineData("30", "832144")]
         [InlineData("31", "832145")]
         [InlineData("32", "832146")]
+        //[InlineData("33", "831474 ")]
+        //[InlineData("34", "827496")]
         public void TestUniqueBarcode(string fileName, string expected)
         {
             var sut = GetSut();
