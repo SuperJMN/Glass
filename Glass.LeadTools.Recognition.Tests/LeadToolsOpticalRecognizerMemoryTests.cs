@@ -28,7 +28,7 @@
         public void MemoryTest()
         {
             var sut = new LeadToolsOpticalRecognizer(licenseApplier);
-            var bitmapSource = LoadImage($"Barcodes\\{"1"}.jpg");
+            var bitmapSource = LoadImage($"Barcodes\\802492.jpg");
             var numericStringFilter = new NumericStringFilter { MinLength = 6, MaxLength = 6 };
             var recognizedPage = sut.Recognize(
                 bitmapSource,
