@@ -109,6 +109,9 @@
           "lib/net45/_._": {}
         }
       },
+      "NuSpec.ReferenceGenerator/1.4.2": {
+        "type": "package"
+      },
       "System.AppContext/4.0.0": {
         "type": "package",
         "dependencies": {
@@ -835,6 +838,9 @@
         "runtime": {
           "lib/net45/_._": {}
         }
+      },
+      "NuSpec.ReferenceGenerator/1.4.2": {
+        "type": "package"
       },
       "System.AppContext/4.0.0": {
         "type": "package",
@@ -1599,6 +1605,9 @@
         "runtime": {
           "lib/net45/_._": {}
         }
+      },
+      "NuSpec.ReferenceGenerator/1.4.2": {
+        "type": "package"
       },
       "System.AppContext/4.0.0": {
         "type": "package",
@@ -2398,6 +2407,9 @@
         "runtime": {
           "lib/dotnet/Microsoft.VisualBasic.dll": {}
         }
+      },
+      "NuSpec.ReferenceGenerator/1.4.2": {
+        "type": "package"
       },
       "System.AppContext/4.0.0": {
         "type": "package",
@@ -3285,6 +3297,9 @@
         "runtime": {
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
+      },
+      "NuSpec.ReferenceGenerator/1.4.2": {
+        "type": "package"
       },
       "System.AppContext/4.0.0": {
         "type": "package",
@@ -4593,6 +4608,9 @@
         "runtime": {
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
+      },
+      "NuSpec.ReferenceGenerator/1.4.2": {
+        "type": "package"
       },
       "System.AppContext/4.0.0": {
         "type": "package",
@@ -5958,6 +5976,9 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
+      "NuSpec.ReferenceGenerator/1.4.2": {
+        "type": "package"
+      },
       "System.AppContext/4.0.0": {
         "type": "package",
         "dependencies": {
@@ -7146,6 +7167,9 @@
         "runtime": {
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
+      },
+      "NuSpec.ReferenceGenerator/1.4.2": {
+        "type": "package"
       },
       "System.AppContext/4.0.0": {
         "type": "package",
@@ -8350,6 +8374,9 @@
         "runtime": {
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
+      },
+      "NuSpec.ReferenceGenerator/1.4.2": {
+        "type": "package"
       },
       "System.AppContext/4.0.0": {
         "type": "package",
@@ -9611,6 +9638,9 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
+      "NuSpec.ReferenceGenerator/1.4.2": {
+        "type": "package"
+      },
       "System.AppContext/4.0.0": {
         "type": "package",
         "dependencies": {
@@ -10840,6 +10870,9 @@
         "runtime": {
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
+      },
+      "NuSpec.ReferenceGenerator/1.4.2": {
+        "type": "package"
       },
       "System.AppContext/4.0.0": {
         "type": "package",
@@ -12101,6 +12134,9 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
+      "NuSpec.ReferenceGenerator/1.4.2": {
+        "type": "package"
+      },
       "System.AppContext/4.0.0": {
         "type": "package",
         "dependencies": {
@@ -13330,6 +13366,9 @@
         "runtime": {
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
+      },
+      "NuSpec.ReferenceGenerator/1.4.2": {
+        "type": "package"
       },
       "System.AppContext/4.0.0": {
         "type": "package",
@@ -14590,6 +14629,9 @@
         "runtime": {
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
+      },
+      "NuSpec.ReferenceGenerator/1.4.2": {
+        "type": "package"
       },
       "System.AppContext/4.0.0": {
         "type": "package",
@@ -16218,6 +16260,19 @@
         "ref/net46/Microsoft.Win32.Primitives.dll",
         "ref/xamarinios10/_._",
         "ref/xamarinmac20/_._"
+      ]
+    },
+    "NuSpec.ReferenceGenerator/1.4.2": {
+      "sha512": "Ede6MV1IFitgCg+D1Z4ruiLyv+chR4BMjzxLm0qp0IFZHsri4m4IYD4LGwyUnb9LdADsdaWxn12BonXGyQdejA==",
+      "type": "package",
+      "files": [
+        "NuSpec.ReferenceGenerator.1.4.2.nupkg.sha512",
+        "NuSpec.ReferenceGenerator.nuspec",
+        "build/dotnet/NuSpec.ReferenceGenerator.targets",
+        "build/portable-net45+win+wpa81+wp80+MonoAndroid10+xamarinios10+MonoTouch10/NuSpec.ReferenceGenerator.targets",
+        "tools/RefGen.exe",
+        "tools/RefGen.exe.config",
+        "tools/RefGen.pdb"
       ]
     },
     "System.AppContext/4.0.0": {
@@ -18156,7 +18211,8 @@
   "projectFileDependencyGroups": {
     "": [
       "Microsoft.NETCore >= 5.0.0",
-      "Microsoft.NETCore.Portable.Compatibility >= 1.0.0"
+      "Microsoft.NETCore.Portable.Compatibility >= 1.0.0",
+      "NuSpec.ReferenceGenerator >= 1.4.2"
     ],
     ".NETPlatform,Version=v5.0": []
   }
