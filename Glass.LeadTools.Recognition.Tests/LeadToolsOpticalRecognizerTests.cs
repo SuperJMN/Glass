@@ -6,6 +6,8 @@
     using System.IO;
     using System.Linq;
     using System.Windows.Media.Imaging;
+    using Imaging.Core;
+    using Imaging.FullFx;
     using Imaging.PostProcessing;
     using Imaging.ZoneConfigurations;
     using Imaging.ZoneConfigurations.Numeric;
@@ -23,6 +25,7 @@
         {
             this.output = output;
             licenseApplier = new LeadToolsLicenseApplier();
+            ImagingContext.BitmapOperations = new BitmapOperations();
         }
 
         [Theory]

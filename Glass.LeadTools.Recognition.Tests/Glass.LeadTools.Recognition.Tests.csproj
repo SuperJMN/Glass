@@ -250,8 +250,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Glass.Imaging.FullFx\Glass.Imaging.FullFx.csproj">
+      <Project>{C260C85C-42E2-4113-8417-5BA69157FFF2}</Project>
+      <Name>Glass.Imaging.FullFx</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Glass.Imaging\Glass.Imaging.csproj">
-      <Project>{056e7401-e413-4e50-9009-7fe1c69dee4f}</Project>
+      <Project>{65101C83-A00B-4D3E-9EC0-06BA7F35B746}</Project>
       <Name>Glass.Imaging</Name>
     </ProjectReference>
     <ProjectReference Include="..\Glass.LeadTools.Recognition\Glass.LeadTools.Recognition.csproj">

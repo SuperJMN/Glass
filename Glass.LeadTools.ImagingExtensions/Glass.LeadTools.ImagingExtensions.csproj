@@ -237,7 +237,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Glass.Imaging\Glass.Imaging.csproj">
-      <Project>{056e7401-e413-4e50-9009-7fe1c69dee4f}</Project>
+      <Project>{65101c83-a00b-4d3e-9ec0-06ba7f35b746}</Project>
       <Name>Glass.Imaging</Name>
     </ProjectReference>
   </ItemGroup>
