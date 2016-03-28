@@ -6,6 +6,8 @@
     using System.IO;
     using System.Linq;
     using System.Windows.Media.Imaging;
+    using Imaging.Core;
+    using Imaging.FullFx;
     using Imaging.PostProcessing;
     using Imaging.ZoneConfigurations;
     using Imaging.ZoneConfigurations.Numeric;
@@ -21,6 +23,7 @@
         public LeadToolsOpticalRecognizerTests(ITestOutputHelper output)
         {
             licenseApplier = new LeadToolsLicenseApplier();
+            ImagingContext.BitmapOperations = new BitmapOperations();
         }
 
         [Theory]
