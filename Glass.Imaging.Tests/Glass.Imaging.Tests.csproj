@@ -66,13 +66,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Glass.Imaging\Glass.Imaging.csproj">
-      <Project>{056E7401-E413-4E50-9009-7FE1C69DEE4F}</Project>
-      <Name>Glass.Imaging</Name>
-    </ProjectReference>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+    <ProjectReference Include="..\Glass.Imaging\Glass.Imaging.csproj">
+      <Project>{65101C83-A00B-4D3E-9EC0-06BA7F35B746}</Project>
+      <Name>Glass.Imaging</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

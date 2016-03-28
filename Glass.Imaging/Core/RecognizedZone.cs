@@ -8,7 +8,7 @@ namespace Glass.Imaging.Core
         public RecognizedZone(BitmapSource image, ZoneConfiguration zoneConfiguration, string text)
         {
             ZoneConfig = zoneConfiguration;
-            var bitmapSource = image.Crop(zoneConfiguration.Bounds);
+            var bitmapSource = ImagingContext.BitmapOperations.Crop(image, zoneConfiguration.Bounds);
             bitmapSource.Freeze();
             Image = bitmapSource;
             RecognizedText = text;

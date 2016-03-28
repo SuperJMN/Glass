@@ -195,7 +195,7 @@
             var barcodeZones = configuration.Zones.Where(z => z.Symbology == Symbology.Barcode);
             return from barcodeConfig in barcodeZones
                    let rect = barcodeConfig.Bounds
-                   let barcode = image.Crop(rect)
+                   let barcode = ImagingContext.BitmapOperations.Crop(image, rect)
                    let text = GetStringFromBarcode(barcode, barcodeConfig)
                    select new RecognizedZone(image, barcodeConfig, text);
         }

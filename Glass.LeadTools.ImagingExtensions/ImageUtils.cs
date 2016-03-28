@@ -19,7 +19,7 @@
             Codecs.Options.Jpeg.Save.QualityFactor = 25;
         }
 
-    
+
 
         public static LeadRect ToLeadRectRect(this Rect rectCrop)
         {
