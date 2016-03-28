@@ -10,6 +10,11 @@ namespace Glass.LeadTools.Recognition
         {
             new BarcodeStrategy
             {
+                ImageFilter = new NoProcessImageFilter(),
+                ImageType = BarcodeImageType.ScannedDocument
+            },
+            new BarcodeStrategy
+            {
                 ImageFilter = new IncreaseContrastImageFilter(),
                 ImageType = BarcodeImageType.Picture
 
@@ -18,7 +23,11 @@ namespace Glass.LeadTools.Recognition
             {
                 ImageFilter = new IncreaseContrastImageFilter(),
                 ImageType = BarcodeImageType.ScannedDocument
-
+            },
+            new BarcodeStrategy
+            {
+                ImageFilter = new ExtendedFilter(),
+                ImageType = BarcodeImageType.ScannedDocument
             },
         };
 

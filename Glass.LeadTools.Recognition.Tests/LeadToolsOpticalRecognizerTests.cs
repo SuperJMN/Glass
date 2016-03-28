@@ -15,13 +15,11 @@
 
     public class LeadToolsOpticalRecognizerTests
     {
-        private readonly ITestOutputHelper output;
         private readonly LeadToolsLicenseApplier licenseApplier;
         private LeadToolsOpticalRecognizer opticalRecognizer;
 
         public LeadToolsOpticalRecognizerTests(ITestOutputHelper output)
         {
-            this.output = output;
             licenseApplier = new LeadToolsLicenseApplier();
         }
 
