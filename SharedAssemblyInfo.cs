@@ -4,12 +4,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Glass.Basics")]
+[assembly: AssemblyTitle("Glass")]
 [assembly: AssemblyDescription("Glass Library")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("JMN")]
-[assembly: AssemblyProduct("Glass.Basics")]
-[assembly: AssemblyCopyright("Copyright ©  2013")]
+[assembly: AssemblyProduct("Glass")]
+[assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
