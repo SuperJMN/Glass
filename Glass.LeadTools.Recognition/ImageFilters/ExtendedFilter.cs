@@ -15,8 +15,8 @@ namespace Glass.LeadTools.Recognition.ImageFilters
         {
             using (var r = image.ToRasterImage())
             {
-                new ChangeContrastCommand().Run(r);
-                new AutoBinarizeCommand { Factor = 2}.Run(r);
+                new AutoColorLevelCommand() { Type = AutoColorLevelCommandType.Contrast }.Run(r);
+                new AutoBinarizeCommand { Factor = 2 }.Run(r);
                 new MedianCommand(2).Run(r);
 
                 using (var c = new RasterCodecs())
