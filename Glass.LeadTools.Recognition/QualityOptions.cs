@@ -24,11 +24,11 @@ namespace Glass.LeadTools.Recognition
                 ImageFilter = new IncreaseContrastImageFilter(),
                 ImageType = BarcodeImageType.ScannedDocument
             },
-            new BarcodeStrategy
-            {
-                ImageFilter = new ExtendedFilter(),
-                ImageType = BarcodeImageType.ScannedDocument
-            },
+            //new BarcodeStrategy
+            //{
+            //    ImageFilter = new ExtendedFilter(),
+            //    ImageType = BarcodeImageType.ScannedDocument
+            //},
         };
 
         public BarcodeReadOptions[] CoreReadOptions { get; } = {

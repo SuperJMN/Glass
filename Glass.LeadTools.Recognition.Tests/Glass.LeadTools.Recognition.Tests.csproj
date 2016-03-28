@@ -391,7 +391,7 @@
     <None Include="Barcodes\802495.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Barcodes\802496.jpg">
+    <None Include="Barcodes\-802496.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Barcodes\Excluded\802497.jpg">
