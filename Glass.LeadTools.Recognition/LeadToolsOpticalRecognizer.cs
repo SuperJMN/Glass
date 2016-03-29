@@ -220,14 +220,23 @@
         private IEnumerable<ScoreResult> GetScoresUsingAlternateDecoder(BitmapSource image, IEvaluator evaluator)
         {
             var writeableBitmap = new WriteableBitmap(image);
-            var result = alternateBarcodeDecoder.Decode(writeableBitmap, new Dictionary<DecodeOptions, object>());
-            var text = result.Text;
-            if (text != null)
+            string text;
+            try
             {
-                yield return new ScoreResult { Text = text, Score = evaluator.GetScore(text)};
+                var result = alternateBarcodeDecoder.Decode(writeableBitmap, new Dictionary<DecodeOptions, object>());
+                text = result.Text;                
+            }
+            catch (NotFoundException)
+            {
+                text = null;
             }
 
-            yield break;
+            if (text == null)
+            {
+                yield break;
+            }
+
+            yield return new ScoreResult { Text = text, Score = evaluator.GetScore(text) };
         }
 
         private List<ScoreResult> GetScoresUsingLeadToolsDecoder(BitmapSource image, IEvaluator evaluator)
@@ -254,7 +263,7 @@
                 {
                     var barcodeText = result;
                     var score = evaluator.GetScore(barcodeText);
-                    scores.Add(new ScoreResult {Score = score, Text = barcodeText, ImageFilter = strategy.ImageFilter, ImageType = strategy.ImageType});
+                    scores.Add(new ScoreResult { Score = score, Text = barcodeText, ImageFilter = strategy.ImageFilter, ImageType = strategy.ImageType });
                 }
             }
             return scores;
