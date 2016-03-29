@@ -5,6 +5,7 @@
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
+    using System.Windows.Media;
     using System.Windows.Media.Imaging;
     using Imaging.Core;
     using Imaging.FullFx;
@@ -28,12 +29,28 @@
             ImagingContext.BitmapOperations = new BitmapOperations();
         }
 
+        [Fact]
+        public void EmptyBitmapGivesNoResults()
+        {
+            var sut = GetSut();
+            var numericStringFilter = new NumericStringFilter { MinLength = 6, MaxLength = 6 };
+            var bmp = GetEmptyBitmap();
+            var recognizedPage = sut.Recognize(bmp, RecognitionConfiguration.FromSingleImage(bmp, numericStringFilter, Symbology.Barcode));
+
+            Assert.Empty(recognizedPage.RecognizedZones);
+        }
+
+        private static WriteableBitmap GetEmptyBitmap()
+        {
+            return new WriteableBitmap(10, 10, 96, 96, PixelFormats.Bgr24, new BitmapPalette(new List<Color> { Color.FromRgb(0, 0, 0) }));
+        }
+
         [Theory]
         [ClassData(typeof(BarcodeTestDataProvider))]
         public void CroppedBarcode(BitmapSource image, string expected)
         {
             var sut = GetSut();
-            var numericStringFilter = new NumericStringFilter {MinLength = 6, MaxLength = 6};
+            var numericStringFilter = new NumericStringFilter { MinLength = 6, MaxLength = 6 };
             var recognizedPage = sut.Recognize(
                 image,
                 RecognitionConfiguration.FromSingleImage(image, numericStringFilter, Symbology.Barcode));
@@ -69,7 +86,7 @@
         public void TestNumericField(BitmapSource image, string expected)
         {
             var sut = GetSut();
-            var numericStringFilter = new NumericStringFilter {MinLength = 6, MaxLength = 6};
+            var numericStringFilter = new NumericStringFilter { MinLength = 6, MaxLength = 6 };
             var recognizedPage = sut.Recognize(
                 image,
                 RecognitionConfiguration.FromSingleImage(image, numericStringFilter, Symbology.Text));
@@ -80,14 +97,15 @@
 
     public abstract class TestFilesProvider : IEnumerable<object[]>
     {
-        private IEnumerable<object[]> data {
+        private IEnumerable<object[]> data
+        {
             get
             {
                 return from path in Directory.GetFiles("Barcodes")
                        let filename = Path.GetFileNameWithoutExtension(path)
                        let expected = filename.Replace("!", "").Replace("-", "")
                        where !filename.Contains(IgnoreChar)
-                       select new object[] {LoadImage(path), expected };
+                       select new object[] { LoadImage(path), expected };
             }
         }
 
@@ -117,7 +135,7 @@
             {
                 return '-';
             }
-        }  
+        }
     }
 
     internal class NumericTestDataProvider : TestFilesProvider

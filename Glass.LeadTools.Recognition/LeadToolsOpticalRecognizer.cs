@@ -199,6 +199,7 @@
                    let rect = barcodeConfig.Bounds
                    let barcode = ImagingContext.BitmapOperations.Crop(image, rect)
                    let text = GetStringFromBarcode(barcode, barcodeConfig)
+                   where text != null
                    select new RecognizedZone(image, barcodeConfig, text);
         }
 
@@ -212,9 +213,9 @@
             var results = leadReaderScores.Concat(alternateScores);
 
             var ordered = results.OrderByDescending(arg => arg.Score);
-            var top = ordered.First();
+            var top = ordered.FirstOrDefault();
 
-            return top.Text;
+            return top?.Text;
         }
 
         private IEnumerable<ScoreResult> GetScoresUsingAlternateDecoder(BitmapSource image, IEvaluator evaluator)
@@ -226,7 +227,7 @@
                 var result = alternateBarcodeDecoder.Decode(writeableBitmap, new Dictionary<DecodeOptions, object>());
                 text = result.Text;                
             }
-            catch (NotFoundException)
+            catch
             {
                 text = null;
             }
