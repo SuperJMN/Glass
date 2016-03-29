@@ -56,6 +56,10 @@
       <HintPath>..\packages\JetBrains.dotMemoryUnit.2.1.20150828.125449\lib\dotMemory.Unit.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Glass.Imaging, Version=1.6.0.61, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Glass.Imaging.1.6.0.61\lib\net461\Glass.Imaging.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Leadtools, Version=19.0.4.0, Culture=neutral, PublicKeyToken=9cf889f53ea9b907, processorArchitecture=x86">
       <HintPath>..\packages\LeadTools.ImagingAndOCR-x86.19.0.6\lib\net45\Leadtools.dll</HintPath>
       <Private>True</Private>
@@ -245,18 +249,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BulkBarcodeTestFilesProvider.cs" />
     <Compile Include="LeadToolsOpticalRecognizerMemoryTests.cs" />
     <Compile Include="LeadToolsOpticalRecognizerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Glass.Imaging.FullFx\Glass.Imaging.FullFx.csproj">
-      <Project>{C260C85C-42E2-4113-8417-5BA69157FFF2}</Project>
+      <Project>{c260c85c-42e2-4113-8417-5ba69157fff2}</Project>
       <Name>Glass.Imaging.FullFx</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Glass.Imaging\Glass.Imaging.csproj">
-      <Project>{65101C83-A00B-4D3E-9EC0-06BA7F35B746}</Project>
-      <Name>Glass.Imaging</Name>
     </ProjectReference>
     <ProjectReference Include="..\Glass.LeadTools.Recognition\Glass.LeadTools.Recognition.csproj">
       <Project>{4BDCF46B-29D8-4844-AB49-B17A65FD8C2C}</Project>
@@ -389,7 +390,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Barcodes\-802494.jpg">
+    <None Include="Barcodes\802494.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Barcodes\802495.jpg">
@@ -460,7 +461,66 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Barcodes\Caja 52\" />
     <Folder Include="Barcodes\Excluded\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Barcodes\803249.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Barcodes\804712.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Barcodes\804722.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Barcodes\!804733.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Barcodes\!804741.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Barcodes\804753.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Barcodes\804782.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Barcodes\803174.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Barcodes\803254.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Barcodes\803274.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Barcodes\!803304.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Barcodes\803307.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Barcodes\804714.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Barcodes\804715.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Barcodes\804719.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Barcodes\804721.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Barcodes\804798.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Barcodes\804799.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

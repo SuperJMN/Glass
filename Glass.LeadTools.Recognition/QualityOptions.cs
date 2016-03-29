@@ -15,18 +15,24 @@ namespace Glass.LeadTools.Recognition
             },
             new BarcodeStrategy
             {
-                ImageFilter = new IncreaseContrastImageFilter(),
+                ImageFilter = new HistogramContrastImageFilter(),
                 ImageType = BarcodeImageType.Picture
 
             },
             new BarcodeStrategy
             {
-                ImageFilter = new IncreaseContrastImageFilter(),
+                ImageFilter = new HistogramContrastImageFilter(),
                 ImageType = BarcodeImageType.ScannedDocument
             },
             new BarcodeStrategy
             {
                 ImageFilter = new ExtendedFilter(),
+                ImageType = BarcodeImageType.ScannedDocument
+            },
+
+            new BarcodeStrategy
+            {
+                ImageFilter = new AutoContrastImageFilter(),
                 ImageType = BarcodeImageType.ScannedDocument
             },
         };

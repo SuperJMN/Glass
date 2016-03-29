@@ -17,27 +17,46 @@
 
     public class LeadToolsOpticalRecognizerTests
     {
+        private readonly ITestOutputHelper output;
         private readonly LeadToolsLicenseApplier licenseApplier;
         private LeadToolsOpticalRecognizer opticalRecognizer;
 
         public LeadToolsOpticalRecognizerTests(ITestOutputHelper output)
         {
+            this.output = output;
             licenseApplier = new LeadToolsLicenseApplier();
             ImagingContext.BitmapOperations = new BitmapOperations();
         }
 
         [Theory]
         [ClassData(typeof(BarcodeTestDataProvider))]
-        public void TestUniqueBarcode(BitmapSource image, string expected)
+        public void CroppedBarcode(BitmapSource image, string expected)
         {
             var sut = GetSut();
             var numericStringFilter = new NumericStringFilter {MinLength = 6, MaxLength = 6};
             var recognizedPage = sut.Recognize(
                 image,
                 RecognitionConfiguration.FromSingleImage(image, numericStringFilter, Symbology.Barcode));
-            var uniqueZone = recognizedPage.RecognizedZones.First();
 
+            var uniqueZone = recognizedPage.RecognizedZones.FirstOrDefault();
+
+            Assert.NotNull(uniqueZone);
             Assert.Equal(expected, uniqueZone.RecognizedText);
+        }
+
+        [Theory(Skip = "Sólo para lote")]
+        [ClassData(typeof(BulkBarcodeTestFilesProvider))]
+        public void BulkUniqueBarcode(BitmapSource image)
+        {
+            var sut = GetSut();
+            var numericStringFilter = new NumericStringFilter { MinLength = 6, MaxLength = 6 };
+            var recognizedPage = sut.Recognize(
+                image,
+                RecognitionConfiguration.FromSingleImage(image, numericStringFilter, Symbology.Barcode));
+
+            var uniqueZone = recognizedPage.RecognizedZones.First();
+            output.WriteLine(uniqueZone.RecognizedText);
+            Assert.Equal(6, uniqueZone.RecognizedText.Length);
         }
 
         private LeadToolsOpticalRecognizer GetSut()
@@ -56,11 +75,6 @@
                 RecognitionConfiguration.FromSingleImage(image, numericStringFilter, Symbology.Text));
             var uniqueZone = recognizedPage.RecognizedZones.First();
             Assert.Equal(expected, uniqueZone.RecognizedText);
-        }
-
-        private static BitmapSource LoadImage(string s)
-        {
-            return new BitmapImage(new Uri(s, UriKind.Relative));
         }
     }
 
