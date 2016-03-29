@@ -13,12 +13,12 @@
         <projectUrl>https://github.com/SuperJMN/Glass-Legacy</projectUrl>
         <iconUrl>http://aventuraspuntonet.files.wordpress.com/2013/03/glass.png?w=128</iconUrl>
 
+        <dependencies>
+            <dependency id="MessagingToolkit.Barcode" version="1.7.0.2" />
+            <dependency id="Glass.Imaging" version="$version$" />
+        </dependencies>
+        
     </metadata>
-    
-    <dependencies>
-        <dependency id="MessagingToolkit.Barcode" version="1.7.0.2" />
-        <dependency id="Glass.Imaging" version="$version$" />
-    </dependencies>
-    
+       
     <files />
 </package>
