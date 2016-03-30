@@ -1,9 +1,6 @@
 ﻿namespace Glass.LeadTools.Recognition.Tests
 {
-    using System;
-    using System.Collections;
     using System.Collections.Generic;
-    using System.IO;
     using System.Linq;
     using System.Windows.Media;
     using System.Windows.Media.Imaging;
@@ -95,7 +92,7 @@
             Assert.Equal(expected, uniqueZone.RecognizedText);
         }
 
-        [Theory(Skip = "Porque ni uno funciona, copón")]
+        [Theory(Skip = "OCR doesn't behave like it should")]
         [ClassData(typeof(TextTestDataProvider))]
         public void AlphaNumeric(BitmapSource image, string expected)
         {
@@ -104,90 +101,6 @@
             var recognizedPage = sut.Recognize(image, RecognitionConfiguration.FromSingleImage(image, stringFilter, Symbology.Text));
             var uniqueZone = recognizedPage.RecognizedZones.First();
             Assert.Equal(expected, uniqueZone.RecognizedText);
-        }
-    }
-
-    public abstract class TestFilesProvider : IEnumerable<object[]>
-    {
-        protected TestFilesProvider(string path)
-        {
-            pathToFiles = path;
-        }
-
-        private readonly string pathToFiles;
-
-        private IEnumerable<object[]> data
-        {
-            get
-            {
-                return from path in Directory.GetFiles(pathToFiles)
-                       let filename = Path.GetFileNameWithoutExtension(path)
-                       let expected = filename.Replace("!", "").Replace("-", "")
-                       where !filename.Contains(IgnoreChar)
-                       select new object[] { LoadImage(path), expected };
-            }
-        }
-
-        protected abstract char IgnoreChar { get; }
-
-        private static BitmapSource LoadImage(string s)
-        {
-            return new BitmapImage(new Uri(s, UriKind.Relative));
-        }
-
-        public IEnumerator<object[]> GetEnumerator()
-        {
-            return data.GetEnumerator();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
-        }
-    }
-
-    internal class BarcodeTestDataProvider : TestFilesProvider
-    {
-        protected override char IgnoreChar
-        {
-            get
-            {
-                return '-';
-            }
-        }
-
-        public BarcodeTestDataProvider() : base("Barcodes")
-        {
-        }
-    }
-
-    internal class NumericTestDataProvider : TestFilesProvider
-    {
-        protected override char IgnoreChar
-        {
-            get
-            {
-                return '!';
-            }
-        }
-
-        public NumericTestDataProvider() : base("Barcodes")
-        {
-        }
-    }
-
-    internal class TextTestDataProvider : TestFilesProvider
-    {
-        protected override char IgnoreChar
-        {
-            get
-            {
-                return '!';
-            }
-        }
-
-        public TextTestDataProvider() : base("Text")
-        {
         }
     }
 }

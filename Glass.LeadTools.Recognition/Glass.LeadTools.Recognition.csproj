@@ -238,7 +238,6 @@
     </Compile>
     <Compile Include="BarcodeRecognitionOptions.cs" />
     <Compile Include="BarcodeStrategy.cs" />
-    <Compile Include="OcrOptions.cs" />
     <Compile Include="QualityOptions.cs" />
     <Compile Include="RecognizeOptions.cs" />
     <Compile Include="ILeadToolsLicenseApplier.cs" />
@@ -256,7 +255,6 @@
       <Name>Glass.LeadTools.ImagingExtensions</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <None Include="Glass.LeadTools.Recognition.nuspec">
       <SubType>Designer</SubType>

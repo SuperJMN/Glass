@@ -56,8 +56,8 @@
       <HintPath>..\packages\JetBrains.dotMemoryUnit.2.1.20150828.125449\lib\dotMemory.Unit.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Glass.Imaging, Version=1.6.0.61, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Glass.Imaging.1.6.0.61\lib\net461\Glass.Imaging.dll</HintPath>
+    <Reference Include="Glass.Imaging, Version=1.6.0.70, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Glass.Imaging.1.6.0.70\lib\net461\Glass.Imaging.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Leadtools, Version=19.0.4.0, Culture=neutral, PublicKeyToken=9cf889f53ea9b907, processorArchitecture=x86">
@@ -249,10 +249,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BulkBarcodeTestFilesProvider.cs" />
+    <Compile Include="DataProviders\BarcodeTestDataProvider.cs" />
+    <Compile Include="DataProviders\BulkBarcodeTestFilesProvider.cs" />
     <Compile Include="LeadToolsOpticalRecognizerMemoryTests.cs" />
     <Compile Include="LeadToolsOpticalRecognizerTests.cs" />
+    <Compile Include="DataProviders\NumericTestDataProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="DataProviders\TestFilesProvider.cs" />
+    <Compile Include="DataProviders\TextTestDataProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Glass.Imaging.FullFx\Glass.Imaging.FullFx.csproj">
