@@ -199,7 +199,6 @@
                    let rect = barcodeConfig.Bounds
                    let barcode = ImagingContext.BitmapOperations.Crop(image, rect)
                    let text = GetStringFromBarcode(barcode, barcodeConfig)
-                   where text != null
                    select new RecognizedZone(image, barcodeConfig, text);
         }
 

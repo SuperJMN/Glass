@@ -30,14 +30,14 @@
         }
 
         [Fact]
-        public void EmptyBitmapGivesNoResults()
+        public void EmptyBitmapGivesEmptyResult()
         {
             var sut = GetSut();
             var numericStringFilter = new NumericStringFilter { MinLength = 6, MaxLength = 6 };
             var bmp = GetEmptyBitmap();
             var recognizedPage = sut.Recognize(bmp, RecognitionConfiguration.FromSingleImage(bmp, numericStringFilter, Symbology.Barcode));
 
-            Assert.Empty(recognizedPage.RecognizedZones);
+            Assert.Null(recognizedPage.RecognizedZones.First().RecognizedText);
         }
 
         private static WriteableBitmap GetEmptyBitmap()
