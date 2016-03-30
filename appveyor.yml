@@ -1,0 +1,15 @@
+version: 1.6.0.{build}
+assembly_info:
+  patch: true
+  file: '**\SharedAssemblyInfo.*'
+  assembly_version: '{version}'
+  assembly_file_version: '{version}'
+  assembly_informational_version: '{version}'
+before_build:
+- cmd: nuget restore Glass.sln
+build:
+  project: Glass.sln
+  publish_nuget: true
+  publish_nuget_symbols: true
+  include_nuget_references: true
+  verbosity: minimal
