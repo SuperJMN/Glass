@@ -1,12 +1,12 @@
-namespace Glass.LeadTools.Recognition.ImageFilters
+namespace Glass.LeadTools.ImagingExtensions.ImageFilters
 {
     using System.Windows.Media;
-    using ImagingExtensions;
+    using System.Windows.Media.Imaging;
     using Leadtools.ImageProcessing.Core;
 
     internal class AutoBinarizeImageFilter : IImageFilter
     {
-        public ImageSource Apply(ImageSource image)
+        public BitmapSource Apply(BitmapSource image)
         {
             using (var r = image.ToRasterImage())
             {

@@ -1,7 +1,7 @@
 namespace Glass.LeadTools.Recognition
 {
     using System.Collections.Generic;
-    using ImageFilters;
+    using ImagingExtensions.ImageFilters;
     using Leadtools.Barcode;
 
     public class QualityOptions

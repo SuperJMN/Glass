@@ -1,12 +1,12 @@
-namespace Glass.LeadTools.Recognition.ImageFilters
+namespace Glass.LeadTools.ImagingExtensions.ImageFilters
 {
     using System.Windows.Media;
-    using ImagingExtensions;
+    using System.Windows.Media.Imaging;
     using Leadtools.ImageProcessing.Color;
 
-    internal class AutoContrastImageFilter : IImageFilter
+    public class AutoContrastImageFilter : IImageFilter
     {
-        public ImageSource Apply(ImageSource image)
+        public BitmapSource Apply(BitmapSource image)
         {
             var raster = image.ToRasterImage();
             new AutoColorLevelCommand { Type = AutoColorLevelCommandType.Contrast}.Run(raster);

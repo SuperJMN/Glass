@@ -1,6 +1,6 @@
 ﻿namespace Glass.LeadTools.Recognition
 {
-    using ImageFilters;
+    using ImagingExtensions.ImageFilters;
     using Leadtools.Barcode;
 
     public class ScoreResult

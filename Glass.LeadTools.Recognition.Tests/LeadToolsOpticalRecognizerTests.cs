@@ -11,6 +11,7 @@
     using Imaging.FullFx;
     using Imaging.PostProcessing;
     using Imaging.ZoneConfigurations;
+    using Imaging.ZoneConfigurations.Alphanumeric;
     using Imaging.ZoneConfigurations.Numeric;
     using Recognition;
     using Xunit;
@@ -93,15 +94,33 @@
             var uniqueZone = recognizedPage.RecognizedZones.First();
             Assert.Equal(expected, uniqueZone.RecognizedText);
         }
+
+        [Theory(Skip = "Porque ni uno funciona, copón")]
+        [ClassData(typeof(TextTestDataProvider))]
+        public void AlphaNumeric(BitmapSource image, string expected)
+        {
+            var sut = GetSut();
+            var stringFilter = new AlphanumericStringFilter();
+            var recognizedPage = sut.Recognize(image, RecognitionConfiguration.FromSingleImage(image, stringFilter, Symbology.Text));
+            var uniqueZone = recognizedPage.RecognizedZones.First();
+            Assert.Equal(expected, uniqueZone.RecognizedText);
+        }
     }
 
     public abstract class TestFilesProvider : IEnumerable<object[]>
     {
+        protected TestFilesProvider(string path)
+        {
+            pathToFiles = path;
+        }
+
+        private readonly string pathToFiles;
+
         private IEnumerable<object[]> data
         {
             get
             {
-                return from path in Directory.GetFiles("Barcodes")
+                return from path in Directory.GetFiles(pathToFiles)
                        let filename = Path.GetFileNameWithoutExtension(path)
                        let expected = filename.Replace("!", "").Replace("-", "")
                        where !filename.Contains(IgnoreChar)
@@ -136,6 +155,10 @@
                 return '-';
             }
         }
+
+        public BarcodeTestDataProvider() : base("Barcodes")
+        {
+        }
     }
 
     internal class NumericTestDataProvider : TestFilesProvider
@@ -146,6 +169,25 @@
             {
                 return '!';
             }
+        }
+
+        public NumericTestDataProvider() : base("Barcodes")
+        {
+        }
+    }
+
+    internal class TextTestDataProvider : TestFilesProvider
+    {
+        protected override char IgnoreChar
+        {
+            get
+            {
+                return '!';
+            }
+        }
+
+        public TextTestDataProvider() : base("Text")
+        {
         }
     }
 }

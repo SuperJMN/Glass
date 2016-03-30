@@ -11,11 +11,15 @@
     using Imaging.PostProcessing;
     using Imaging.ZoneConfigurations;
     using ImagingExtensions;
+    using ImagingExtensions.ImageFilters;
+    using Leadtools;
     using Leadtools.Barcode;
     using Leadtools.Codecs;
     using Leadtools.Forms;
     using Leadtools.Forms.Ocr;
     using Leadtools.Forms.Ocr.Advantage;
+    using Leadtools.ImageProcessing.Color;
+    using Leadtools.ImageProcessing.Core;
     using MessagingToolkit.Barcode;
 
     public class LeadToolsOpticalRecognizer : IZoneBasedRecognitionService
@@ -100,18 +104,35 @@
             return ocrPage;
         }
 
-        private ImageSource GetImageToOcr(BitmapSource image)
+        private BitmapSource GetImageToOcr(BitmapSource image)
         {
+            var deskewed = image;
+
             var scale = Options.SourceScaleForOcr;
             var isScalingEnabled = Options.IsSourceScalingEnabledForOcr;
 
-            var finalBitmap = isScalingEnabled ? new TransformedBitmap(image, new ScaleTransform(scale, scale)) : image;
+            var finalBitmap = isScalingEnabled ? new TransformedBitmap(deskewed, new ScaleTransform(scale, scale)) : deskewed;
 
-            using (var raster = finalBitmap.ToRasterImage())
-            {
-                return raster.OptimizeImageForOcr().ToBitmapSource();
-            }
+            return OptimizeImageForOcr(finalBitmap);            
         }
+
+        private static BitmapSource OptimizeImageForOcr(BitmapSource bitmap)
+        {
+            return new AutoColorLevelFilter().Apply(bitmap);
+        }
+
+        public static RasterImage OptimizeImageForOcr(RasterImage image)
+        {
+            var clone = image.Clone();
+            //new AutoBinarizeCommand(0, AutoBinarizeCommandFlags.UseAutoThreshold).Run(clone);
+            //new ColorResolutionCommand { BitsPerPixel = 1 }.Run(clone);
+            //new MinimumCommand { Dimension = 4 }.Run(clone);
+
+            new AutoColorLevelCommand().Run(clone);
+
+            return clone;
+        }
+
 
         private IEnumerable<OcrZone> GetZones(double dpiX, double dpiY, IEnumerable<ZoneConfiguration> zones)
         {

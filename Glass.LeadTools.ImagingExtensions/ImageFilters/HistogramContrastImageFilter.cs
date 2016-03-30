@@ -1,12 +1,12 @@
-namespace Glass.LeadTools.Recognition.ImageFilters
+namespace Glass.LeadTools.ImagingExtensions.ImageFilters
 {
     using System.Windows.Media;
-    using ImagingExtensions;
+    using System.Windows.Media.Imaging;
     using Leadtools.ImageProcessing.Color;
 
-    internal class HistogramContrastImageFilter : IImageFilter
+    public class HistogramContrastImageFilter : IImageFilter
     {
-        public ImageSource Apply(ImageSource image)
+        public BitmapSource Apply(BitmapSource image)
         {
             var raster = image.ToRasterImage();
             new HistogramContrastCommand() { Contrast = 1000 }.Run(raster);

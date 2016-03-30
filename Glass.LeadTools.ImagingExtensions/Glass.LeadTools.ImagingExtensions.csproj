@@ -229,6 +229,16 @@
     <Compile Include="..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="ImageFilters\AutoBinarizeImageFilter.cs" />
+    <Compile Include="ImageFilters\AutoColorImageFilter.cs" />
+    <Compile Include="ImageFilters\AutoColorLevelFilter.cs" />
+    <Compile Include="ImageFilters\AutoContrastImageFilter.cs" />
+    <Compile Include="ImageFilters\DeskewFilter.cs" />
+    <Compile Include="ImageFilters\DeskewImageFilter.cs" />
+    <Compile Include="ImageFilters\ExtendedFilter.cs" />
+    <Compile Include="ImageFilters\HistogramContrastImageFilter.cs" />
+    <Compile Include="ImageFilters\IImageFilter.cs" />
+    <Compile Include="ImageFilters\NoProcessImageFilter.cs" />
     <Compile Include="ImageUtils.cs" />
   </ItemGroup>
   <ItemGroup>

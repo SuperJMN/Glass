@@ -3,6 +3,7 @@
     using System;
     using System.Windows;
     using System.Windows.Media;
+    using System.Windows.Media.Imaging;
     using Leadtools;
     using Leadtools.Codecs;
     using Leadtools.ImageProcessing;
@@ -35,18 +36,6 @@
             return image;
         }
 
-        public static RasterImage OptimizeImageForOcr(this RasterImage image)
-        {
-            var clone = image.Clone();
-            //new AutoBinarizeCommand(0, AutoBinarizeCommandFlags.UseAutoThreshold).Run(clone);
-            //new ColorResolutionCommand { BitsPerPixel = 1 }.Run(clone);
-            //new MinimumCommand { Dimension = 4 }.Run(clone);
-
-            new AutoColorLevelCommand().Run(clone);
-
-            return clone;
-        }
-
         public static RasterImage OptimizeImageForBarcode(this RasterImage image)
         {
             var clone = image.Clone();
@@ -74,11 +63,11 @@
             }
         }
 
-        public static ImageSource ToBitmapSource(this RasterImage rasterImage)
+        public static BitmapSource ToBitmapSource(this RasterImage rasterImage)
         {
             var convertToSource = RasterImageConverter.ConvertToSource(rasterImage, ConvertToSourceOptions.None);
             convertToSource.Freeze();
-            return convertToSource;
+            return (BitmapSource) convertToSource;
         }
 
         public static RasterImage ToRasterImage(this ImageSource rasterImage)

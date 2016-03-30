@@ -238,20 +238,12 @@
     </Compile>
     <Compile Include="BarcodeRecognitionOptions.cs" />
     <Compile Include="BarcodeStrategy.cs" />
-    <Compile Include="ImageFilters\AutoContrastImageFilter.cs" />
-    <Compile Include="ImageFilters\ExtendedFilter.cs" />
     <Compile Include="OcrOptions.cs" />
     <Compile Include="QualityOptions.cs" />
     <Compile Include="RecognizeOptions.cs" />
-    <Compile Include="ImageFilters\AutoBinarizeImageFilter.cs" />
-    <Compile Include="ImageFilters\AutoColorImageFilter.cs" />
     <Compile Include="ILeadToolsLicenseApplier.cs" />
-    <Compile Include="ImageFilters\DeskewImageFilter.cs" />
-    <Compile Include="ImageFilters\HistogramContrastImageFilter.cs" />
-    <Compile Include="ImageFilters\IImageFilter.cs" />
     <Compile Include="LeadToolsOpticalRecognizer.cs" />
     <Compile Include="LeadToolsLicenseApplier.cs" />
-    <Compile Include="ImageFilters\NoProcessImageFilter.cs" />
     <Compile Include="ScoreResult.cs" />
   </ItemGroup>
   <ItemGroup>
