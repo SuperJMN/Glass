@@ -44,8 +44,29 @@ namespace Glass.Imaging.ZoneConfigurations
 
         private string ReplaceBarcodeString(string str)
         {
-            var regex = new Regex(@"[\s1|ILl]{3,}\s|\s[\s1|ILl]{3,}");
-            return regex.Replace(str, " <BARCODE> ");
+            var split = str.Split(' ');
+
+            var scoreList = from s in split
+                            let score = GetScore(s)
+                            select new { Text = s, Score = score };
+
+            return string.Join(" ", scoreList.Select(arg => arg.Score > 0.6 ? "<NOISE>" : arg.Text));            
+        }
+
+        private double GetScore(string s)
+        {
+            var lenght = s.Length;
+            var noSpaces = !s.Any(char.IsWhiteSpace) ? 1 : 0;
+            var lotsOfSymbols = (double) s.Count(char.IsSymbol)/lenght;
+            var lotsOfSuspiciousChars = (double) s.Count(IsSuspicious)/lenght;
+            var score = noSpaces * 0.2 + lotsOfSymbols * 0.2 + lotsOfSuspiciousChars * 0.6;
+            return score;
+        }
+
+        private bool IsSuspicious(char c)
+        {
+            var suspicious = "1|!NLlIWN|“";
+            return suspicious.Contains(c);
         }
     }
 }

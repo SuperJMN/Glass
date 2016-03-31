@@ -4,13 +4,13 @@ namespace Glass.LeadTools.ImagingExtensions.ImageFilters
     using System.Windows.Media.Imaging;
     using Leadtools.ImageProcessing.Core;
 
-    internal class DeskewImageFilter : IImageFilter
+    public class DeskewImageFilter : IImageFilter
     {
         public BitmapSource Apply(BitmapSource image)
         {
             using (var r = image.ToRasterImage())
             {
-                new DeskewCommand().Run(r);
+                new DeskewCommand() { Flags = DeskewCommandFlags.RotateBicubic }.Run(r);
                 return r.ToBitmapSource();
             }
         }

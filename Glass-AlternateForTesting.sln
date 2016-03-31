@@ -17,11 +17,17 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Glass.LeadTools.Recognition
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Glass.Imaging.Tests", "Glass.Imaging.Tests\Glass.Imaging.Tests.csproj", "{A7FC6BC9-D691-413A-B839-9D1EC30AE7E1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Glass.LeadTools.Recognition.Tests", "Glass.LeadTools.Recognition.Tests\Glass.LeadTools.Recognition.Tests.csproj", "{D017BD3C-FC45-478D-927F-3C025BB480B0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Glass.Imaging.Recognition.Tests", "Glass.LeadTools.Recognition.Tests\Glass.Imaging.Recognition.Tests.csproj", "{D017BD3C-FC45-478D-927F-3C025BB480B0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Glass.Imaging", "Glass.Imaging\Glass.Imaging.csproj", "{65101C83-A00B-4D3E-9EC0-06BA7F35B746}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Glass.Imaging.FullFx", "Glass.Imaging.FullFx\Glass.Imaging.FullFx.csproj", "{C260C85C-42E2-4113-8417-5BA69157FFF2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Glass.Ocr.Tesseract", "Glass.Ocr.Tesseract\Glass.Ocr.Tesseract.csproj", "{9A0D9305-8B20-41E6-97C7-CF1B8070F6C9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Glass.Barcodes.MessagingToolkit", "Glass.Barcodes.MessagingToolkit\Glass.Barcodes.MessagingToolkit.csproj", "{A4380789-8C29-4E64-B42D-5872908C446C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{17A2B060-30CC-4DC0-92B1-68826521F380}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -111,8 +117,28 @@ Global
 		{C260C85C-42E2-4113-8417-5BA69157FFF2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C260C85C-42E2-4113-8417-5BA69157FFF2}.Release|x86.ActiveCfg = Release|Any CPU
 		{C260C85C-42E2-4113-8417-5BA69157FFF2}.Release|x86.Build.0 = Release|Any CPU
+		{9A0D9305-8B20-41E6-97C7-CF1B8070F6C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A0D9305-8B20-41E6-97C7-CF1B8070F6C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A0D9305-8B20-41E6-97C7-CF1B8070F6C9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9A0D9305-8B20-41E6-97C7-CF1B8070F6C9}.Debug|x86.Build.0 = Debug|Any CPU
+		{9A0D9305-8B20-41E6-97C7-CF1B8070F6C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A0D9305-8B20-41E6-97C7-CF1B8070F6C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A0D9305-8B20-41E6-97C7-CF1B8070F6C9}.Release|x86.ActiveCfg = Release|Any CPU
+		{9A0D9305-8B20-41E6-97C7-CF1B8070F6C9}.Release|x86.Build.0 = Release|Any CPU
+		{A4380789-8C29-4E64-B42D-5872908C446C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4380789-8C29-4E64-B42D-5872908C446C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4380789-8C29-4E64-B42D-5872908C446C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A4380789-8C29-4E64-B42D-5872908C446C}.Debug|x86.Build.0 = Debug|Any CPU
+		{A4380789-8C29-4E64-B42D-5872908C446C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4380789-8C29-4E64-B42D-5872908C446C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4380789-8C29-4E64-B42D-5872908C446C}.Release|x86.ActiveCfg = Release|Any CPU
+		{A4380789-8C29-4E64-B42D-5872908C446C}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A7FC6BC9-D691-413A-B839-9D1EC30AE7E1} = {17A2B060-30CC-4DC0-92B1-68826521F380}
+		{D017BD3C-FC45-478D-927F-3C025BB480B0} = {17A2B060-30CC-4DC0-92B1-68826521F380}
 	EndGlobalSection
 EndGlobal

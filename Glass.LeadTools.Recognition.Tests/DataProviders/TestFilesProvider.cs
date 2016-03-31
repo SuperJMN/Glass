@@ -22,13 +22,10 @@ namespace Glass.LeadTools.Recognition.Tests.DataProviders
             {
                 return from path in Directory.GetFiles(pathToFiles)
                     let filename = Path.GetFileNameWithoutExtension(path)
-                    let expected = filename.Replace("!", "").Replace("-", "")
-                    where !filename.Contains(IgnoreChar)
+                    let expected = filename
                     select new object[] { LoadImage(path), expected };
             }
         }
-
-        protected abstract char IgnoreChar { get; }
 
         private static BitmapSource LoadImage(string s)
         {

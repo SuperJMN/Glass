@@ -125,7 +125,7 @@
     <Compile Include="ChildProportions.cs" />
     <Compile Include="CloneUtils.cs" />
     <Compile Include="Designer\IDesignerItem.cs" />
-    <Compile Include="Designer\SizeIndicator.xaml.cs">
+    <Compile Include="Designer\SizeInfoControl.cs">
       <DependentUpon>SizeIndicator.xaml</DependentUpon>
     </Compile>
     <Compile Include="DragControl.cs" />

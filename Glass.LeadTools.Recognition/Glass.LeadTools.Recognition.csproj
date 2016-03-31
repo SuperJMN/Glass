@@ -215,14 +215,11 @@
       <HintPath>..\packages\LeadTools.ImagingAndOCR-x86.19.0.6\lib\net45\Leadtools.Windows.Media.TransitionBase.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="MessagingToolkit.Barcode, Version=1.7.0.1, Culture=neutral, PublicKeyToken=4d44dd7196d3c1ac, processorArchitecture=x86">
-      <HintPath>..\packages\MessagingToolkit.Barcode.1.7.0.2\lib\net40\WPF\x86\MessagingToolkit.Barcode.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -236,18 +233,15 @@
     <Compile Include="..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="BarcodeRecognitionOptions.cs" />
     <Compile Include="BarcodeStrategy.cs" />
-    <Compile Include="QualityOptions.cs" />
-    <Compile Include="RecognizeOptions.cs" />
+    <Compile Include="LeadToolsZoneBasedBarcodeReader.cs" />
+    <Compile Include="LeadToolsZoneBasedOcrService.cs" />
     <Compile Include="ILeadToolsLicenseApplier.cs" />
-    <Compile Include="LeadToolsOpticalRecognizer.cs" />
     <Compile Include="LeadToolsLicenseApplier.cs" />
-    <Compile Include="ScoreResult.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Glass.Imaging\Glass.Imaging.csproj">
-      <Project>{65101C83-A00B-4D3E-9EC0-06BA7F35B746}</Project>
+      <Project>{056e7401-e413-4e50-9009-7fe1c69dee4f}</Project>
       <Name>Glass.Imaging</Name>
     </ProjectReference>
     <ProjectReference Include="..\Glass.LeadTools.ImagingExtensions\Glass.LeadTools.ImagingExtensions.csproj">
@@ -261,14 +255,8 @@
     </None>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\packages\LeadTools.Ocr.AdvantageEngine-x86.19.0.1\build\LeadTools.Ocr.AdvantageEngine-x86.targets" Condition="Exists('..\packages\LeadTools.Ocr.AdvantageEngine-x86.19.0.1\build\LeadTools.Ocr.AdvantageEngine-x86.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\LeadTools.Ocr.AdvantageEngine-x86.19.0.1\build\LeadTools.Ocr.AdvantageEngine-x86.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\LeadTools.Ocr.AdvantageEngine-x86.19.0.1\build\LeadTools.Ocr.AdvantageEngine-x86.targets'))" />
-  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

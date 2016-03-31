@@ -10,7 +10,7 @@
         <owners>José Manuel Nieto (SuperJMN)</owners>
         <licenseUrl>http://opensource.org/licenses/Apache-2.0</licenseUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <projectUrl>https://github.com/SuperJMN/Glass-Legacy</projectUrl>
+        <projectUrl>https://github.com/SuperJMN/Glass</projectUrl>
         <iconUrl>http://aventuraspuntonet.files.wordpress.com/2013/03/glass.png?w=128</iconUrl>
 
         <dependencies>

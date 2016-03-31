@@ -2,7 +2,7 @@ namespace Glass.Imaging.ZoneConfigurations.Alphanumeric
 {
     using System.Linq;
 
-    public class AlphanumericEvaluator : Evaluator, IEvaluator
+    public class AlphanumericEvaluator : Evaluator
     {
         public AlphanumericEvaluator(StringFilter stringFilter) : base(stringFilter)
         {

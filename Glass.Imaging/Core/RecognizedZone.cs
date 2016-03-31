@@ -5,18 +5,18 @@ namespace Glass.Imaging.Core
 
     public class RecognizedZone
     {
-        public RecognizedZone(BitmapSource image, ZoneConfiguration zoneConfiguration, string text)
+        public RecognizedZone(BitmapSource bitmap, ZoneConfiguration zoneConfiguration, string text)
         {
             ZoneConfig = zoneConfiguration;
-            var bitmapSource = ImagingContext.BitmapOperations.Crop(image, zoneConfiguration.Bounds);
+            var bitmapSource = ImagingContext.BitmapOperations.Crop(bitmap, zoneConfiguration.Bounds);
             bitmapSource.Freeze();
-            Image = bitmapSource;
+            Bitmap = bitmapSource;
             RecognizedText = text;
         }
 
         public string RecognizedText { get; set; }
 
-        public ImageSource Image { get; set; }
+        public BitmapSource Bitmap { get; set; }
 
         public ZoneConfiguration ZoneConfig { get; set; }
         public string Id => ZoneConfig.Id;

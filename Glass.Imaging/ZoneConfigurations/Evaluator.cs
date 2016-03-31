@@ -8,14 +8,14 @@ namespace Glass.Imaging.ZoneConfigurations
     {
         protected StringFilter Filter { get; }
 
-        private const double ValidCharFactor = 5;
+        private const double ValidCharFactor = 4;
         private const double InvalidCharFactor = 3;
         private const double LengthScore = 20;
         private const double RegexScore = 50;
 
         protected Evaluator(StringFilter stringFilter)
         {
-            this.Filter = stringFilter;
+            Filter = stringFilter;
         }
 
         public virtual double GetScore(string s)
@@ -25,7 +25,7 @@ namespace Glass.Imaging.ZoneConfigurations
                 return double.MinValue;
             }
 
-            if (s.Equals("<BARCODE>"))
+            if (s.Equals("<NOISE>"))
             {
                 return double.MinValue;
             }
@@ -53,8 +53,6 @@ namespace Glass.Imaging.ZoneConfigurations
             var score = validScore + invalidScore + lengthScore + regexScore;
             return score;
         }
-
-
 
         protected abstract int GetValidChars(string str);
 

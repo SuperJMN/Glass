@@ -233,7 +233,6 @@
     <Compile Include="ImageFilters\AutoColorImageFilter.cs" />
     <Compile Include="ImageFilters\AutoColorLevelFilter.cs" />
     <Compile Include="ImageFilters\AutoContrastImageFilter.cs" />
-    <Compile Include="ImageFilters\DeskewFilter.cs" />
     <Compile Include="ImageFilters\DeskewImageFilter.cs" />
     <Compile Include="ImageFilters\ExtendedFilter.cs" />
     <Compile Include="ImageFilters\HistogramContrastImageFilter.cs" />
@@ -247,7 +246,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Glass.Imaging\Glass.Imaging.csproj">
-      <Project>{65101c83-a00b-4d3e-9ec0-06ba7f35b746}</Project>
+      <Project>{056e7401-e413-4e50-9009-7fe1c69dee4f}</Project>
       <Name>Glass.Imaging</Name>
     </ProjectReference>
   </ItemGroup>
