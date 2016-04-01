@@ -7,6 +7,7 @@
     using System.Windows.Media.Imaging;
     using global::Tesseract;
     using Imaging;
+    using Imaging.Filters;
     using Imaging.PostProcessing;
     using Imaging.ZoneConfigurations;
     using LeadTools.ImagingExtensions.ImageFilters;
@@ -23,7 +24,7 @@
         {
             ImageFilters = new List<IImageFilter>
             {
-                new AutoContrastImageFilter(),
+                new AutoContrastFilterFree(),
             };
 
             engine = new TesseractEngine(@"./tessdata", "spa", EngineMode.Default);

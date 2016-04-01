@@ -50,10 +50,6 @@
       <Project>{056e7401-e413-4e50-9009-7fe1c69dee4f}</Project>
       <Name>Glass.Imaging</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Glass.LeadTools.ImagingExtensions\Glass.LeadTools.ImagingExtensions.csproj">
-      <Project>{19640712-AA2A-42EC-9402-58857979F05E}</Project>
-      <Name>Glass.LeadTools.ImagingExtensions</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Glass.Ocr.Tesseract.nuspec">

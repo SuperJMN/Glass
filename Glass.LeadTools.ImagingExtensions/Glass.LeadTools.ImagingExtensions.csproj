@@ -236,7 +236,6 @@
     <Compile Include="ImageFilters\DeskewImageFilter.cs" />
     <Compile Include="ImageFilters\ExtendedFilter.cs" />
     <Compile Include="ImageFilters\HistogramContrastImageFilter.cs" />
-    <Compile Include="ImageFilters\IImageFilter.cs" />
     <Compile Include="ImageFilters\NoProcessImageFilter.cs" />
     <Compile Include="ImageUtils.cs" />
   </ItemGroup>

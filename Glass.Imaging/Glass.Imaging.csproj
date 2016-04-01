@@ -31,6 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <None Include="Glass.Imaging.nuspec" />
+    <None Include="packages.config" />
     <!-- A reference to the entire .NET Framework is automatically included -->
   </ItemGroup>
   <ItemGroup>
@@ -48,6 +49,8 @@
     <Compile Include="Core\StringExtensions.cs" />
     <Compile Include="Core\TaggedImage.cs" />
     <Compile Include="Core\Transform.cs" />
+    <Compile Include="Filters\AutoContrastFilterFree.cs" />
+    <Compile Include="IImageFilter.cs" />
     <Compile Include="IImageToTextConverter.cs" />
     <Compile Include="ImageTarget.cs" />
     <Compile Include="PostProcessing\FilterType.cs" />
@@ -69,10 +72,24 @@
     <Compile Include="ZoneConfigurations\ZeroEvaluator.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="AForge, Version=2.2.5.0, Culture=neutral, PublicKeyToken=c1db6ff4eaa06aeb, processorArchitecture=MSIL">
+      <HintPath>..\packages\AForge.2.2.5\lib\AForge.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="AForge.Imaging, Version=2.2.5.0, Culture=neutral, PublicKeyToken=ba8ddea9676ca48b, processorArchitecture=MSIL">
+      <HintPath>..\packages\AForge.Imaging.2.2.5\lib\AForge.Imaging.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="AForge.Math, Version=2.2.5.0, Culture=neutral, PublicKeyToken=abba2e25397ee8c9, processorArchitecture=MSIL">
+      <HintPath>..\packages\AForge.Math.2.2.5\lib\AForge.Math.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="PresentationCore">
       <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\PresentationCore.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xaml" />
     <Reference Include="WindowsBase">
       <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\WindowsBase.dll</HintPath>
     </Reference>
