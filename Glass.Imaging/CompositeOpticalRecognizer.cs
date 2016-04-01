@@ -29,11 +29,12 @@
                 var applicableEngines = engines.Where(e => IsValidTarget(zoneConfiguration, e)).ToList();
 
                 var zoneBitmap = ImagingContext.BitmapOperations.Crop(bitmap, zoneConfiguration.Bounds);
+                zoneBitmap.Freeze();
                 string text;
 
                 if (applicableEngines.Any())
                 {
-                    var textsFromEngines = from engine in applicableEngines
+                    var textsFromEngines = from engine in applicableEngines.AsParallel()
                         select engine.Recognize(zoneBitmap, zoneConfiguration);
 
                     var texts = textsFromEngines.SelectMany(t => t);

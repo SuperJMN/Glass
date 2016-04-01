@@ -50,7 +50,7 @@
 
         private BarcodeEngine BarcodeEngine { get; } = new BarcodeEngine
         {
-            Reader = {ImageType = BarcodeImageType.Picture}
+            Reader = { ImageType = BarcodeImageType.Picture }
         };
 
         public BarcodeReadOptions[] CoreReadOptions { get; set; } = {
@@ -76,13 +76,17 @@
 
             var leadRect = new LogicalRectangle(0, 0, bitmap.PixelWidth, bitmap.PixelHeight, LogicalUnit.Pixel);
 
+            var recognitionUnits = from strategy in BarcodeStrategies.AsParallel()
+                                   let filteredImage = Freeze(strategy.ImageFilter.Apply(bitmap))
+                                   select new { ImageType = strategy.ImageType, FilteredImage = filteredImage };
+
             IEnumerable<string> identifiedTexts = new List<string>();
-            foreach (var strategy in BarcodeStrategies)
+            foreach (var workUnit in recognitionUnits)
             {
-                BarcodeEngine.Reader.ImageType = strategy.ImageType;
-                var transformedImage = strategy.ImageFilter.Apply(bitmap);
+                BarcodeEngine.Reader.ImageType = workUnit.ImageType;
+
                 var barcodeDatas = BarcodeEngine.Reader.ReadBarcodes(
-                    transformedImage.ToRasterImage(),
+                    workUnit.FilteredImage.ToRasterImage(),
                     leadRect,
                     10,
                     BarcodeSymbologies.ToArray(),
@@ -92,10 +96,15 @@
                 identifiedTexts = identifiedTexts.Concat(textForStrategy);
             }
 
-
             return identifiedTexts;
         }
 
-        public IEnumerable<ImageTarget> ImageTargets => new Collection<ImageTarget> {  new ImageTarget { Symbology = Symbology.Barcode, FilterTypes = FilterType.All}};
+        private BitmapSource Freeze(BitmapSource apply)
+        {
+            apply.Freeze();
+            return apply;
+        }
+
+        public IEnumerable<ImageTarget> ImageTargets => new Collection<ImageTarget> { new ImageTarget { Symbology = Symbology.Barcode, FilterTypes = FilterType.All } };
     }
 }
