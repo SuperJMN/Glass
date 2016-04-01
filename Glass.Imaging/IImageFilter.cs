@@ -1,6 +1,5 @@
-namespace Glass.LeadTools.ImagingExtensions.ImageFilters
+namespace Glass.Imaging
 {
-    using System.Windows.Media;
     using System.Windows.Media.Imaging;
 
     public interface IImageFilter

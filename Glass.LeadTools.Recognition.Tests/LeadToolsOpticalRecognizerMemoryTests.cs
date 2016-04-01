@@ -1,4 +1,4 @@
-﻿namespace Glass.LeadTools.Recognition.Tests
+﻿namespace Glass.Imaging.Recognition.Tests
 {
     using Imaging.PostProcessing;
     using Imaging.ZoneConfigurations;
@@ -9,7 +9,7 @@
     using Xunit;
     using Xunit.Abstractions;
 
-    public class LeadToolsOpticalRecognizerMemoryTests : OpticalRecognitionTestBase
+    public class LeadToolsOpticalRecognizerMemoryTests : MultiEngineTestBase
     {
         public LeadToolsOpticalRecognizerMemoryTests(ITestOutputHelper output)
         {

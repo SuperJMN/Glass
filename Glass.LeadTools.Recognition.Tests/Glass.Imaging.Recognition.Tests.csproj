@@ -8,8 +8,8 @@
     <ProjectGuid>{D017BD3C-FC45-478D-927F-3C025BB480B0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Glass.LeadTools.Recognition.Tests</RootNamespace>
-    <AssemblyName>Glass.LeadTools.Recognition.Tests</AssemblyName>
+    <RootNamespace>Glass.Imaging.Recognition.Tests</RootNamespace>
+    <AssemblyName>Glass.Imaging.Recognition.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <NuGetPackageImportStamp>
@@ -249,18 +249,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BarcodeTests.cs" />
+    <Compile Include="BarcodeEngineTest.cs" />
+    <Compile Include="MultiEngine.cs" />
     <Compile Include="DataProviders\Barcode\NumericBarcodeTestDataProvider.cs" />
     <Compile Include="DataProviders\BulkBarcodeTestFilesProvider.cs" />
+    <Compile Include="EngineTestBase.cs" />
     <Compile Include="LeadToolsOpticalRecognizerMemoryTests.cs" />
     <Compile Include="ExtraTests.cs" />
     <Compile Include="DataProviders\Text\NumericTestDataProvider.cs" />
-    <Compile Include="OpticalRecognitionTestBase.cs" />
+    <Compile Include="MessagingToolkitBarcodeEngineTests.cs" />
+    <Compile Include="OcrEngineTest.cs" />
+    <Compile Include="MultiEngineTestBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DataProviders\TestFilesProvider.cs" />
     <Compile Include="DataProviders\Text\TextTestDataProvider.cs" />
     <Compile Include="DataProviders\Barcode\AlphanumericBarcodeTestDataProvider.cs" />
-    <Compile Include="TextTests.cs" />
+    <Compile Include="TesseractEngineTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Glass.Barcodes.MessagingToolkit\Glass.Barcodes.MessagingToolkit.csproj">

@@ -1,4 +1,4 @@
-﻿namespace Glass.LeadTools.Recognition.Tests.DataProviders
+﻿namespace Glass.Imaging.Recognition.Tests.DataProviders
 {
     using System;
     using System.Collections;

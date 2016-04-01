@@ -1,4 +1,4 @@
-namespace Glass.LeadTools.Recognition.Tests.DataProviders.Barcode
+namespace Glass.Imaging.Recognition.Tests.DataProviders.Barcode
 {
     public class AlphanumericBarcodeTestDataProvider : TestFilesProvider
     {

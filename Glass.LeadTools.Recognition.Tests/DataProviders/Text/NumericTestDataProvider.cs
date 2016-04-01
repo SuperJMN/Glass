@@ -1,4 +1,4 @@
-namespace Glass.LeadTools.Recognition.Tests.DataProviders.Text
+namespace Glass.Imaging.Recognition.Tests.DataProviders.Text
 {
     internal class NumericTestDataProvider : TestFilesProvider
     {

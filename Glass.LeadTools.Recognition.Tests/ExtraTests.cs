@@ -1,4 +1,4 @@
-﻿namespace Glass.LeadTools.Recognition.Tests
+﻿namespace Glass.Imaging.Recognition.Tests
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -11,7 +11,7 @@
     using Xunit;
     using Xunit.Abstractions;
 
-    public class ExtraTests : OpticalRecognitionTestBase
+    public class ExtraTests : MultiEngineTestBase
     {
         private readonly ITestOutputHelper output;
         

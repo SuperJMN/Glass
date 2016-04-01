@@ -1,5 +1,6 @@
 ﻿namespace Glass.LeadTools.Recognition
 {
+    using Imaging;
     using ImagingExtensions.ImageFilters;
     using Leadtools.Barcode;
 

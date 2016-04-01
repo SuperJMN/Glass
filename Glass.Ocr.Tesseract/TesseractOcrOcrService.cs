@@ -10,7 +10,6 @@
     using Imaging.Filters;
     using Imaging.PostProcessing;
     using Imaging.ZoneConfigurations;
-    using LeadTools.ImagingExtensions.ImageFilters;
 
     public class TesseractOcrOcrService : IImageToTextConverter
     {
@@ -45,17 +44,7 @@
                 {
                     using (var page = engine.Process(img, PageSegMode.SingleBlock))
                     {
-                        if (IsAlpha(barcodeConfig))
-                        {
-                            yield return page.GetText();
-                        }
-                        else
-                        {
-                            if (page.GetMeanConfidence() > 0.80)
-                            {
-                                yield return page.GetText();
-                            }
-                        }
+                        yield return page.GetText();
                     }
                 }
 

@@ -2,6 +2,7 @@ namespace Glass.LeadTools.ImagingExtensions.ImageFilters
 {
     using System.Windows.Media;
     using System.Windows.Media.Imaging;
+    using Imaging;
 
     public class NoProcessImageFilter : IImageFilter
     {

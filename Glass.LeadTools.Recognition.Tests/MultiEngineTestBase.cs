@@ -1,4 +1,4 @@
-namespace Glass.LeadTools.Recognition.Tests
+namespace Glass.Imaging.Recognition.Tests
 {
     using System;
     using System.Collections.Generic;
@@ -6,18 +6,19 @@ namespace Glass.LeadTools.Recognition.Tests
     using System.Windows.Media.Imaging;
     using Barcodes.MessagingToolkit;
     using Imaging;
-    using Imaging.Core;
-    using Imaging.FullFx;
-    using Imaging.PostProcessing;
-    using Imaging.ZoneConfigurations;
+    using Core;
+    using FullFx;
+    using PostProcessing;
+    using ZoneConfigurations;
+    using LeadTools.Recognition;
     using Ocr.Tesseract;
 
-    public abstract class OpticalRecognitionTestBase
+    public abstract class MultiEngineTestBase
     {
         private CompositeOpticalRecognizer opticalRecognizer;
         private readonly ILeadToolsLicenseApplier licenseApplier = new LeadToolsLicenseApplier();
 
-        protected OpticalRecognitionTestBase()
+        protected MultiEngineTestBase()
         {
             ImagingContext.BitmapOperations = new BitmapOperations();
         }
