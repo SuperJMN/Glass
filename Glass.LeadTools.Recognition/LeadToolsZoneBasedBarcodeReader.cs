@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
+    using System.Windows.Media;
     using System.Windows.Media.Imaging;
     using Imaging;
     using Imaging.PostProcessing;
@@ -48,11 +49,6 @@
             licenseApplier.ApplyLicense();
         }
 
-        private BarcodeEngine BarcodeEngine { get; } = new BarcodeEngine
-        {
-            Reader = { ImageType = BarcodeImageType.Picture }
-        };
-
         public BarcodeReadOptions[] CoreReadOptions { get; set; } = {
             new OneDBarcodeReadOptions
             {
@@ -76,27 +72,20 @@
 
             var leadRect = new LogicalRectangle(0, 0, bitmap.PixelWidth, bitmap.PixelHeight, LogicalUnit.Pixel);
 
-            var recognitionUnits = from strategy in BarcodeStrategies.AsParallel()
+            var unitsOfWork = from strategy in BarcodeStrategies
                                    let filteredImage = Freeze(strategy.ImageFilter.Apply(bitmap))
                                    select new { ImageType = strategy.ImageType, FilteredImage = filteredImage };
 
-            IEnumerable<string> identifiedTexts = new List<string>();
-            foreach (var workUnit in recognitionUnits)
-            {
-                BarcodeEngine.Reader.ImageType = workUnit.ImageType;
+            return unitsOfWork.AsParallel().SelectMany(u => GetText(leadRect, coreReadOptions, u.FilteredImage, u.ImageType));            
+        }
 
-                var barcodeDatas = BarcodeEngine.Reader.ReadBarcodes(
-                    workUnit.FilteredImage.ToRasterImage(),
-                    leadRect,
-                    10,
-                    BarcodeSymbologies.ToArray(),
-                    coreReadOptions);
-
-                var textForStrategy = barcodeDatas.Where(data => data.Value != null).Select(data => data.Value);
-                identifiedTexts = identifiedTexts.Concat(textForStrategy);
-            }
-
-            return identifiedTexts;
+        private IEnumerable<string> GetText(LogicalRectangle leadRect, BarcodeReadOptions[] coreReadOptions, ImageSource image, BarcodeImageType imageType)
+        {
+            var engine = new BarcodeEngine();
+            engine.Reader.ImageType = imageType;
+            var barcodeDatas = engine.Reader.ReadBarcodes(image.ToRasterImage(), leadRect, 10, BarcodeSymbologies.ToArray(), coreReadOptions);
+            var textForStrategy = barcodeDatas.Where(data => data.Value != null).Select(data => data.Value);
+            return textForStrategy;
         }
 
         private BitmapSource Freeze(BitmapSource apply)
