@@ -76,7 +76,7 @@
                                    let filteredImage = Freeze(strategy.ImageFilter.Apply(bitmap))
                                    select new { ImageType = strategy.ImageType, FilteredImage = filteredImage };
 
-            return unitsOfWork.AsParallel().SelectMany(u => GetText(leadRect, coreReadOptions, u.FilteredImage, u.ImageType));            
+            return unitsOfWork.SelectMany(u => GetText(leadRect, coreReadOptions, u.FilteredImage, u.ImageType));            
         }
 
         private IEnumerable<string> GetText(LogicalRectangle leadRect, BarcodeReadOptions[] coreReadOptions, ImageSource image, BarcodeImageType imageType)

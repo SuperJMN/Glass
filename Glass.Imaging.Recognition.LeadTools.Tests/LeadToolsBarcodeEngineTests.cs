@@ -7,13 +7,13 @@
 
     public class LeadToolsBarcodeEngineTests : BarcodeEngineTest
     {
-        protected override IImageToTextConverter GetSut()
-        {
-            return new LeadToolsZoneBasedBarcodeReader(new LeadToolsLicenseApplier());
-        }
+        protected override IImageToTextConverter Engine { get; } = new LeadToolsZoneBasedBarcodeReader(new LeadToolsLicenseApplier());
 
         public LeadToolsBarcodeEngineTests(ITestOutputHelper output) : base(output)
         {
         }
+
+        protected override double AlphanumericSuccessRate => 0;
+        protected override double NumericSuccessRate => 0.8;
     }
 }

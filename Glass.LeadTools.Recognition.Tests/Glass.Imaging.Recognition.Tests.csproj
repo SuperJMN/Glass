@@ -251,19 +251,19 @@
   <ItemGroup>
     <Compile Include="BarcodeEngineTest.cs" />
     <Compile Include="MultiEngine.cs" />
-    <Compile Include="DataProviders\Barcode\NumericBarcodeTestDataProvider.cs" />
+    <Compile Include="DataProviders\Barcode\NumericBarcodeTestCases.cs" />
     <Compile Include="DataProviders\BulkBarcodeTestFilesProvider.cs" />
     <Compile Include="EngineTestBase.cs" />
     <Compile Include="LeadToolsOpticalRecognizerMemoryTests.cs" />
     <Compile Include="ExtraTests.cs" />
-    <Compile Include="DataProviders\Text\NumericTestDataProvider.cs" />
+    <Compile Include="DataProviders\Text\NumericTestCases.cs" />
     <Compile Include="MessagingToolkitBarcodeEngineTests.cs" />
     <Compile Include="OcrEngineTest.cs" />
     <Compile Include="MultiEngineTestBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="DataProviders\TestFilesProvider.cs" />
-    <Compile Include="DataProviders\Text\TextTestDataProvider.cs" />
-    <Compile Include="DataProviders\Barcode\AlphanumericBarcodeTestDataProvider.cs" />
+    <Compile Include="DataProviders\TestCases.cs" />
+    <Compile Include="DataProviders\Text\AlphanumericTestCases.cs" />
+    <Compile Include="DataProviders\Barcode\AlphanumericBarcodeTestCases.cs" />
     <Compile Include="TesseractEngineTests.cs" />
   </ItemGroup>
   <ItemGroup>

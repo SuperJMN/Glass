@@ -7,23 +7,23 @@ namespace Glass.Imaging.Recognition.Tests.DataProviders
     using System.Linq;
     using System.Windows.Media.Imaging;
 
-    public abstract class TestFilesProvider : IEnumerable<object[]>
+    public abstract class TestCases : IEnumerable<TestCase>
     {
-        protected TestFilesProvider(string path)
+        protected TestCases(string path)
         {
             pathToFiles = path;
         }
 
         private readonly string pathToFiles;
 
-        private IEnumerable<object[]> data
+        private IEnumerable<TestCase> data
         {
             get
             {
                 return from path in Directory.GetFiles(pathToFiles)
                     let filename = Path.GetFileNameWithoutExtension(path)
                     let expected = filename
-                    select new object[] { LoadImage(path), expected };
+                    select new TestCase { Bitmap = LoadImage(path), Expected = expected };
             }
         }
 
@@ -32,7 +32,7 @@ namespace Glass.Imaging.Recognition.Tests.DataProviders
             return new BitmapImage(new Uri(s, UriKind.Relative));
         }
 
-        public IEnumerator<object[]> GetEnumerator()
+        public IEnumerator<TestCase> GetEnumerator()
         {
             return data.GetEnumerator();
         }

@@ -1,14 +1,14 @@
 namespace Glass.Imaging.Recognition.Tests
 {
-    using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Windows;
     using System.Windows.Media.Imaging;
-    using Imaging;
     using Core;
     using FullFx;
-    using ZoneConfigurations;
+    using Xunit;
     using Xunit.Abstractions;
+    using ZoneConfigurations;
 
     public abstract class EngineTestBase
     {
@@ -20,24 +20,44 @@ namespace Glass.Imaging.Recognition.Tests
             ImagingContext.BitmapOperations = new BitmapOperations();
         }
 
-        protected abstract IImageToTextConverter GetSut();
+        protected abstract IImageToTextConverter Engine { get; }
 
-        protected static BitmapSource LoadImage(string s)
+        private string ExtractFirstFiltered(BitmapSource bitmap, ITextualDataFilter filter, Symbology symbology)
         {
-            return new BitmapImage(new Uri(s, UriKind.Relative));
-        }
-
-        protected string ExtractFirstFiltered(BitmapSource bitmap, ITextualDataFilter filter, Symbology symbology)
-        {
-            var sut = GetSut();
-
             var bounds = new Rect(0, 0, bitmap.Width, bitmap.Height);
-            var zoneConfiguration = new ZoneConfiguration { Bounds = bounds, TextualDataFilter = filter, Id = "", Symbology = symbology };
+            var zoneConfiguration = new ZoneConfiguration {Bounds = bounds, TextualDataFilter = filter, Id = "", Symbology = symbology};
 
-            var text = sut.Recognize(bitmap, zoneConfiguration).FirstOrDefault();
+            var text = Engine.Recognize(bitmap, zoneConfiguration).FirstOrDefault();
             var filtered = zoneConfiguration.TextualDataFilter.Filter(text);
 
             return filtered;
         }
+
+        protected void AssertSuccessRate(IEnumerable<TestCase> testCases, ITextualDataFilter stringFilter, double minimumAcceptable, Symbology symbology)
+        {
+            var cases = testCases as IList<TestCase> ?? testCases.ToList();
+
+            var testExecutions = from c in cases
+                let result = ExtractFirstFiltered(c.Bitmap, stringFilter, symbology)
+                select new {Result = result, Expected = c.Expected};
+
+            foreach (var testExecution in testExecutions)
+            {
+                output.WriteLine($"Expected: {testExecution.Expected} Result: {testExecution.Result}");
+            }
+
+            var success = testExecutions.Count(testCase => testCase.Expected == testCase.Result);
+            var total = testExecutions.Count();
+
+            var d = (double) success/total;
+            output.WriteLine($"Success Ratio: {d}");
+            Assert.True(d >= minimumAcceptable);
+        }
+    }
+
+    public class TestCase
+    {
+        public BitmapSource Bitmap { get; set; }
+        public string Expected { get; set; }
     }
 }

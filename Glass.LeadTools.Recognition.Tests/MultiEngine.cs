@@ -4,13 +4,13 @@
     using DataProviders;
     using DataProviders.Barcode;
     using DataProviders.Text;
-    using Imaging.ZoneConfigurations;
-    using Imaging.ZoneConfigurations.Alphanumeric;
-    using Imaging.ZoneConfigurations.Numeric;
+    using ZoneConfigurations;
+    using ZoneConfigurations.Alphanumeric;
+    using ZoneConfigurations.Numeric;
     using Xunit;
     using Xunit.Abstractions;
 
-    public class MultiEngine : MultiEngineTestBase
+    class MultiEngine : MultiEngineTestBase
     {
         private readonly ITestOutputHelper output;
         
@@ -19,29 +19,29 @@
             this.output = output;                       
         }
 
-        [Theory]
-        [ClassData(typeof(NumericBarcodeTestDataProvider))]
+        [Theory(Skip = "Just no")]
+        [ClassData(typeof(NumericBarcodeTestCases))]
         public void NumericBarcode(BitmapSource image, string expected)
         {
             Assert.Equal(expected, Extract(image, new NumericStringFilter { MinLength = 6, MaxLength = 6 }, Symbology.Barcode));
         }
 
-        [Theory(Skip = "Not working")]
-        [ClassData(typeof(AlphanumericBarcodeTestDataProvider))]
+        [Theory(Skip = "Just no")]
+        [ClassData(typeof(AlphanumericBarcodeTestCases))]
         public void AlphanumericBarcode(BitmapSource image, string expected)
         {
             Assert.Equal(expected, Extract(image, new AlphanumericStringFilter {MinLength = 12, MaxLength = 13}, Symbology.Barcode));
         }
 
-        [Theory]
-        [ClassData(typeof(NumericTestDataProvider))]
+        [Theory(Skip = "Just no")]
+        [ClassData(typeof(NumericTestCases))]
         public void Numeric(BitmapSource image, string expected)
         {
             Assert.Equal(expected, Extract(image, new NumericStringFilter { MinLength = 6, MaxLength = 6, }, Symbology.Text));
         }
 
-        [Theory]
-        [ClassData(typeof(TextTestDataProvider))]
+        [Theory(Skip = "Just no")]
+        [ClassData(typeof(AlphanumericTestCases))]
         public void AlphaNumeric(BitmapSource image, string expected)
         {
             Assert.Equal(expected, Extract(image, new AlphanumericStringFilter(), Symbology.Text));

@@ -6,13 +6,13 @@
 
     public class TesseractEngineTests : OcrEngineTest
     {
-        protected override IImageToTextConverter GetSut()
-        {
-            return new TesseractOcrOcrService();
-        }
+        protected override IImageToTextConverter Engine { get; } = new TesseractOcrOcrService();
 
         public TesseractEngineTests(ITestOutputHelper output) : base(output)
         {
         }
+
+        protected override double AlphaNumericSuccessRate => 0.4;
+        protected override double NumericSuccessRate => 0.67;
     }
 }

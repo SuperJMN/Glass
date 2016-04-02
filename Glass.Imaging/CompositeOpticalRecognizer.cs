@@ -34,7 +34,7 @@
 
                 if (applicableEngines.Any())
                 {
-                    var textsFromEngines = from engine in applicableEngines.AsParallel()
+                    var textsFromEngines = from engine in applicableEngines
                         select engine.Recognize(zoneBitmap, zoneConfiguration);
 
                     var texts = textsFromEngines.SelectMany(t => t);
