@@ -37,13 +37,14 @@ namespace Glass.Imaging.Recognition.Tests
         {
             var cases = testCases as IList<TestCase> ?? testCases.ToList();
 
-            var testExecutions = from c in cases
+            var testExecutions = (from c in cases
                 let result = ExtractFirstFiltered(c.Bitmap, stringFilter, symbology)
-                select new {Result = result, Expected = c.Expected};
+                select new {Result = result, Expected = c.Expected, Success = result == c.Expected}).ToList();
 
             foreach (var testExecution in testExecutions)
             {
-                output.WriteLine($"Expected: {testExecution.Expected} Result: {testExecution.Result}");
+                var isSuccess = testExecution.Success ? "OK" : "FAILED";
+                output.WriteLine($"{isSuccess}: Expected: {testExecution.Expected} Result: {testExecution.Result}");
             }
 
             var success = testExecutions.Count(testCase => testCase.Expected == testCase.Result);

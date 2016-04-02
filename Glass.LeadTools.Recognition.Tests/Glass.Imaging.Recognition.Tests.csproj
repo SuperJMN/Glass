@@ -553,9 +553,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="config.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="Images\Texts\Numeric\802492.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
