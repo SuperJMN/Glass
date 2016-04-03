@@ -28,14 +28,11 @@ namespace Glass.Imaging.Recognition.Tests
             var zoneConfiguration = new ZoneConfiguration {Bounds = bounds, TextualDataFilter = filter, Id = "", Symbology = symbology};
 
 
-            var scores = from text in Engine.Recognize(bitmap, zoneConfiguration)
-                let filteredText = filter.Filter(text)
-                let score = filter.Evaluator.GetScore(text)
-                select new {FilteredText = filteredText, Score = score};
+            var recognitions = Engine.Recognize(bitmap, zoneConfiguration);
 
-            var selected = scores.OrderByDescending(arg => arg.Score).First();
+            var selector = new OpticalResultSelector().Select(recognitions, zoneConfiguration);
 
-            return selected.FilteredText;
+            return selector?.Text;
         }
 
         protected void AssertSuccessRate(IEnumerable<TestCase> testCases, ITextualDataFilter stringFilter, double minimumAcceptable, Symbology symbology)

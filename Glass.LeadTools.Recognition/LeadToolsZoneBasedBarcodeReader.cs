@@ -66,7 +66,7 @@
                 BarcodeSymbology.Datamatrix
             };
 
-        public IEnumerable<string> Recognize(BitmapSource bitmap, ZoneConfiguration barcodeConfig)
+        public IEnumerable<RecognitionResult> Recognize(BitmapSource bitmap, ZoneConfiguration config)
         {
             var coreReadOptions = CoreReadOptions;
 
@@ -76,7 +76,8 @@
                                    let filteredImage = Freeze(strategy.BitmapFilter.Apply(bitmap))
                                    select new { ImageType = strategy.ImageType, FilteredImage = filteredImage };
 
-            return unitsOfWork.SelectMany(u => GetText(leadRect, coreReadOptions, u.FilteredImage, u.ImageType));            
+            var selectMany = unitsOfWork.SelectMany(u => GetText(leadRect, coreReadOptions, u.FilteredImage, u.ImageType));
+            return selectMany.Select(s => new RecognitionResult(s, 1));            
         }
 
         private IEnumerable<string> GetText(LogicalRectangle leadRect, BarcodeReadOptions[] coreReadOptions, ImageSource image, BarcodeImageType imageType)

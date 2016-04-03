@@ -58,6 +58,7 @@
     <Compile Include="IBitmapFilter.cs" />
     <Compile Include="IImageToTextConverter.cs" />
     <Compile Include="ImageTarget.cs" />
+    <Compile Include="OpticalResultSelector.cs" />
     <Compile Include="PostProcessing\FilterType.cs" />
     <Compile Include="PostProcessing\IOcrPostProcessor.cs" />
     <Compile Include="PostProcessing\RecognitionConfiguration.cs" />

@@ -238,7 +238,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="LeadToolsBarcodeEngineTests.cs" />
-    <Compile Include="LeadToolsEngineTests.cs" />
+    <Compile Include="LeadToolsOcrEngineTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

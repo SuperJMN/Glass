@@ -36,7 +36,7 @@
 
         public IEnumerable<IBitmapBatchGenerator> BitmapGenerators { get; set; }
 
-        public IEnumerable<string> Recognize(BitmapSource bitmap, ZoneConfiguration barcodeConfig)
+        public IEnumerable<RecognitionResult> Recognize(BitmapSource bitmap, ZoneConfiguration config)
         {
             bitmap = new DeskewFilter().Apply(bitmap);
 
@@ -45,13 +45,16 @@
                 var finalBitmap = IsSourceScalingEnabledForOcr ? new TransformedBitmap(inputBitmap, new ScaleTransform(SourceScaleForOcr, SourceScaleForOcr)) : inputBitmap;
                 var bytes = ConvertToTiffByteArray(finalBitmap);
 
-                SetVariablesAccordingToConfig(engine, barcodeConfig);
+                SetVariablesAccordingToConfig(engine, config);
 
                 using (var img = Pix.LoadTiffFromMemory(bytes))
                 {
                     using (var page = engine.Process(img, PageSegMode.SingleBlock))
                     {
-                        yield return page.GetText();
+                        var text = config.TextualDataFilter.Filter(page.GetText());
+
+                        var confidence = page.GetMeanConfidence();
+                        yield return new RecognitionResult(text, confidence);
                     }
                 }
 

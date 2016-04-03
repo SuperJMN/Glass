@@ -30,30 +30,17 @@
 
                 var zoneBitmap = ImagingContext.BitmapOperations.Crop(bitmap, zoneConfiguration.Bounds);
                 zoneBitmap.Freeze();
-                string text;
 
                 if (applicableEngines.Any())
                 {
-                    var textsFromEngines = from engine in applicableEngines
+                    var resultsFromAllEngines = from engine in applicableEngines
                         select engine.Recognize(zoneBitmap, zoneConfiguration);
 
-                    var texts = textsFromEngines.SelectMany(t => t);
-                    var textualDataFilter = zoneConfiguration.TextualDataFilter;
-                    var filteredTexts = texts.Select(s => textualDataFilter.Filter(s));
+                    var flatResults = resultsFromAllEngines.SelectMany(t => t);
 
-                    var scores = from t in filteredTexts
-                                 let score = textualDataFilter.Evaluator.GetScore(t)
-                        orderby score descending
-                        select new {Text = t, Score = score};
-
-                    text = scores.FirstOrDefault()?.Text;                    
+                    var result = new OpticalResultSelector().Select(flatResults, zoneConfiguration);
+                    yield return new RecognizedZone(zoneBitmap, zoneConfiguration, result.Text);
                 }
-                else
-                {
-                    text = null;
-                }
-
-                yield return new RecognizedZone(zoneBitmap, zoneConfiguration, text);
             }
         }
 

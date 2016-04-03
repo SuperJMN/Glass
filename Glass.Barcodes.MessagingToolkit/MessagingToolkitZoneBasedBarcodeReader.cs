@@ -12,7 +12,7 @@
     {
         private readonly BarcodeDecoder barcodeReader = new BarcodeDecoder();
 
-        public IEnumerable<string> Recognize(BitmapSource bitmap, ZoneConfiguration barcodeConfig)
+        public IEnumerable<RecognitionResult> Recognize(BitmapSource bitmap, ZoneConfiguration config)
         {
             var writeableBitmap = new WriteableBitmap(bitmap);
             string text;
@@ -26,7 +26,7 @@
                 yield break;
             }
 
-            yield return text;
+            yield return new RecognitionResult(text, 1D);
         }
 
         public IEnumerable<ImageTarget> ImageTargets => new Collection<ImageTarget> { new ImageTarget { Symbology = Symbology.Barcode, FilterTypes = FilterType.All } };

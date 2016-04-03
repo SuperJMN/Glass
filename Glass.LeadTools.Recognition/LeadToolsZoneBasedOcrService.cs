@@ -46,19 +46,20 @@
             }
         }
 
-        public IEnumerable<string> Recognize(BitmapSource bitmap, ZoneConfiguration barcodeConfig)
+        public IEnumerable<RecognitionResult> Recognize(BitmapSource bitmap, ZoneConfiguration config)
         {
             var rasterImage = GetImageToOcr(bitmap).ToRasterImage();
             using (var page = OcrEngine.CreatePage(rasterImage, OcrImageSharingMode.AutoDispose))
             {               
-                var ocrZone = CreateOcrZoneForField(barcodeConfig);
+                var ocrZone = CreateOcrZoneForField(config);
                 page.Zones.Add(ocrZone);
                 page.Recognize(null);
                 var text = page.GetText(0);
 
                 var confidence = GetConfidence(page);
-                
-                yield return text;
+
+                var filteredText = config.TextualDataFilter.Filter(text);
+                yield return new RecognitionResult(filteredText, confidence);
             }
         }
 
