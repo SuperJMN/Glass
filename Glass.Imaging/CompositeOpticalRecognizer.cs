@@ -39,7 +39,7 @@
                     var flatResults = resultsFromAllEngines.SelectMany(t => t);
 
                     var result = new OpticalResultSelector().Select(flatResults, zoneConfiguration);
-                    yield return new RecognizedZone(zoneBitmap, zoneConfiguration, result.Text);
+                    yield return new RecognizedZone(zoneBitmap, zoneConfiguration, result?.Text);
                 }
             }
         }
