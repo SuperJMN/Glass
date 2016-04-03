@@ -22,15 +22,20 @@ namespace Glass.Imaging.Recognition.Tests
 
         protected abstract IImageToTextConverter Engine { get; }
 
-        private string ExtractFirstFiltered(BitmapSource bitmap, ITextualDataFilter filter, Symbology symbology)
+        private string ExtractBestTextCandidate(BitmapSource bitmap, ITextualDataFilter filter, Symbology symbology)
         {
             var bounds = new Rect(0, 0, bitmap.Width, bitmap.Height);
             var zoneConfiguration = new ZoneConfiguration {Bounds = bounds, TextualDataFilter = filter, Id = "", Symbology = symbology};
 
-            var text = Engine.Recognize(bitmap, zoneConfiguration).FirstOrDefault();
-            var filtered = zoneConfiguration.TextualDataFilter.Filter(text);
 
-            return filtered;
+            var scores = from text in Engine.Recognize(bitmap, zoneConfiguration)
+                let filteredText = filter.Filter(text)
+                let score = filter.Evaluator.GetScore(text)
+                select new {FilteredText = filteredText, Score = score};
+
+            var selected = scores.OrderByDescending(arg => arg.Score).First();
+
+            return selected.FilteredText;
         }
 
         protected void AssertSuccessRate(IEnumerable<TestCase> testCases, ITextualDataFilter stringFilter, double minimumAcceptable, Symbology symbology)
@@ -38,7 +43,7 @@ namespace Glass.Imaging.Recognition.Tests
             var cases = testCases as IList<TestCase> ?? testCases.ToList();
 
             var testExecutions = (from c in cases
-                let result = ExtractFirstFiltered(c.Bitmap, stringFilter, symbology)
+                let result = ExtractBestTextCandidate(c.Bitmap, stringFilter, symbology)
                 select new {Result = result, Expected = c.Expected, Success = result == c.Expected}).ToList();
 
             foreach (var testExecution in testExecutions)

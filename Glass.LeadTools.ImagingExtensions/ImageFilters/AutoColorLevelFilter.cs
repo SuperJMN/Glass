@@ -4,7 +4,7 @@ namespace Glass.LeadTools.ImagingExtensions.ImageFilters
     using Imaging;
     using Leadtools.ImageProcessing.Color;
 
-    public class AutoColorLevelFilter : IImageFilter
+    public class AutoColorLevelFilter : IBitmapFilter
     {
         public BitmapSource Apply(BitmapSource image)
         {

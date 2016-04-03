@@ -5,18 +5,18 @@ namespace Glass.LeadTools.ImagingExtensions.ImageFilters
     using Imaging;
     using Leadtools.ImageProcessing.Color;
 
-    public class HistogramContrastImageFilter : IImageFilter
+    internal class AutoColorBitmapFilter : IBitmapFilter
     {
         public BitmapSource Apply(BitmapSource image)
         {
-            var raster = image.ToRasterImage();
-            new HistogramContrastCommand() { Contrast = 1000 }.Run(raster);
-            return raster.ToBitmapSource();
+            var rasterImage = image.ToRasterImage();
+            new AutoColorLevelCommand().Run(rasterImage);
+            return rasterImage.ToBitmapSource();
         }
 
         public override string ToString()
         {
-            return "IncreaseContrastImageFilter";
+            return "AutoColorBitmapFilter";
         }
     }
 }

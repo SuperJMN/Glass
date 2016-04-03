@@ -3,11 +3,13 @@
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.IO;
+    using System.Linq;
     using System.Windows.Media;
     using System.Windows.Media.Imaging;
     using global::Tesseract;
     using Imaging;
     using Imaging.Filters;
+    using Imaging.Generators;
     using Imaging.PostProcessing;
     using Imaging.ZoneConfigurations;
 
@@ -17,26 +19,31 @@
         public double SourceScaleForOcr { get; set; } = 0.3;
         public bool IsSourceScalingEnabledForOcr { get; set; } = false;
 
-        public IEnumerable<IImageFilter> ImageFilters { get; set; }
+        public IEnumerable<IBitmapFilter> ImageFilters { get; set; }
 
         public TesseractOcrOcrService()
         {
-            ImageFilters = new List<IImageFilter>
+            ImageFilters = new List<IBitmapFilter>
             {
-                new AutoContrastFilterFree(),
+                new OtsuThresholdFilterFree(),
+                new ThresholdFilter(80),
             };
+
+            BitmapGenerators = new List<IBitmapBatchGenerator> { new OtsuGenerator() };
 
             engine = new TesseractEngine(@"./tessdata", "spa", EngineMode.Default);
         }
 
+        public IEnumerable<IBitmapBatchGenerator> BitmapGenerators { get; set; }
+
         public IEnumerable<string> Recognize(BitmapSource bitmap, ZoneConfiguration barcodeConfig)
         {
-            var finalBitmap = IsSourceScalingEnabledForOcr ? new TransformedBitmap(bitmap, new ScaleTransform(SourceScaleForOcr, SourceScaleForOcr)) : bitmap;
+            bitmap = new DeskewFilter().Apply(bitmap);
 
-            foreach (var filter in ImageFilters)
+            foreach (var inputBitmap in BitmapGenerators.SelectMany(generator => generator.Generate(bitmap)))
             {
-                var inputBitmap = filter.Apply(finalBitmap);
-                var bytes = ConvertToTiffByteArray(inputBitmap);
+                var finalBitmap = IsSourceScalingEnabledForOcr ? new TransformedBitmap(inputBitmap, new ScaleTransform(SourceScaleForOcr, SourceScaleForOcr)) : inputBitmap;
+                var bytes = ConvertToTiffByteArray(finalBitmap);
 
                 SetVariablesAccordingToConfig(engine, barcodeConfig);
 

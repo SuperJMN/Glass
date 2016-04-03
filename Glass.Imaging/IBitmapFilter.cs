@@ -2,7 +2,7 @@ namespace Glass.Imaging
 {
     using System.Windows.Media.Imaging;
 
-    public interface IImageFilter
+    public interface IBitmapFilter
     {
         BitmapSource Apply(BitmapSource image);
     }

@@ -5,7 +5,7 @@ namespace Glass.LeadTools.ImagingExtensions.ImageFilters
     using Imaging;
     using Leadtools.ImageProcessing.Core;
 
-    public class DeskewImageFilter : IImageFilter
+    public class DeskewBitmapFilter : IBitmapFilter
     {
         public BitmapSource Apply(BitmapSource image)
         {
@@ -18,7 +18,7 @@ namespace Glass.LeadTools.ImagingExtensions.ImageFilters
 
         public override string ToString()
         {
-            return "DeskewImageFilter";
+            return "DeskewBitmapFilter";
         }
     }
 }

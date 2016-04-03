@@ -5,12 +5,12 @@ namespace Glass.LeadTools.ImagingExtensions.ImageFilters
     using Imaging;
     using Leadtools.ImageProcessing.Color;
 
-    public class AutoContrastImageFilter : IImageFilter
+    public class HistogramContrastBitmapFilter : IBitmapFilter
     {
         public BitmapSource Apply(BitmapSource image)
         {
             var raster = image.ToRasterImage();
-            new AutoColorLevelCommand { Type = AutoColorLevelCommandType.Contrast}.Run(raster);
+            new HistogramContrastCommand() { Contrast = 1000 }.Run(raster);
             return raster.ToBitmapSource();
         }
 

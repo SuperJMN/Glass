@@ -6,7 +6,7 @@
 
     public class BarcodeStrategy
     {
-        public IImageFilter ImageFilter { get; set; }
+        public IBitmapFilter BitmapFilter { get; set; }
         public BarcodeImageType ImageType { get; set; } 
     }
 }

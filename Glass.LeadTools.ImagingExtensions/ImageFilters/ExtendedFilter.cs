@@ -6,7 +6,7 @@ namespace Glass.LeadTools.ImagingExtensions.ImageFilters
     using Leadtools.ImageProcessing.Color;
     using Leadtools.ImageProcessing.Core;
 
-    public class ExtendedFilter : IImageFilter
+    public class ExtendedFilter : IBitmapFilter
     {
         public BitmapSource Apply(BitmapSource image)
         {
@@ -22,7 +22,7 @@ namespace Glass.LeadTools.ImagingExtensions.ImageFilters
 
         public override string ToString()
         {
-            return "AutoBinarizeImageFilter";
+            return "AutoBinarizeBitmapFilter";
         }
     }
 }

@@ -19,27 +19,27 @@
         {
             new BarcodeStrategy
             {
-                ImageFilter = new NoProcessImageFilter(),
+                BitmapFilter = new NoProcessBitmapFilter(),
                 ImageType = BarcodeImageType.ScannedDocument
             },
             new BarcodeStrategy
             {
-                ImageFilter = new HistogramContrastImageFilter(),
+                BitmapFilter = new HistogramContrastBitmapFilter(),
                 ImageType = BarcodeImageType.Picture
             },
             new BarcodeStrategy
             {
-                ImageFilter = new HistogramContrastImageFilter(),
+                BitmapFilter = new HistogramContrastBitmapFilter(),
                 ImageType = BarcodeImageType.ScannedDocument
             },
             new BarcodeStrategy
             {
-                ImageFilter = new ExtendedFilter(),
+                BitmapFilter = new ExtendedFilter(),
                 ImageType = BarcodeImageType.ScannedDocument
             },
             new BarcodeStrategy
             {
-                ImageFilter = new AutoContrastImageFilter(),
+                BitmapFilter = new AutoContrastBitmapFilter(),
                 ImageType = BarcodeImageType.ScannedDocument
             }
         };
@@ -73,7 +73,7 @@
             var leadRect = new LogicalRectangle(0, 0, bitmap.PixelWidth, bitmap.PixelHeight, LogicalUnit.Pixel);
 
             var unitsOfWork = from strategy in BarcodeStrategies
-                                   let filteredImage = Freeze(strategy.ImageFilter.Apply(bitmap))
+                                   let filteredImage = Freeze(strategy.BitmapFilter.Apply(bitmap))
                                    select new { ImageType = strategy.ImageType, FilteredImage = filteredImage };
 
             return unitsOfWork.SelectMany(u => GetText(leadRect, coreReadOptions, u.FilteredImage, u.ImageType));            

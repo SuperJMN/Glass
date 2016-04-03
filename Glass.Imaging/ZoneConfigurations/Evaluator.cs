@@ -20,7 +20,7 @@ namespace Glass.Imaging.ZoneConfigurations
 
         public virtual double GetScore(string s)
         {
-            if (s == null)
+            if (string.IsNullOrEmpty(s))
             {
                 return double.MinValue;
             }

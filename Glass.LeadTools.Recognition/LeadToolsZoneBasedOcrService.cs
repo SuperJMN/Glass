@@ -73,7 +73,7 @@
 
         private static BitmapSource OptimizeImageForOcr(BitmapSource bitmap)
         {
-            return new AutoContrastImageFilter().Apply(bitmap);
+            return new AutoContrastBitmapFilter().Apply(bitmap);
         }
 
         private BitmapSource GetImageToOcr(BitmapSource image)
