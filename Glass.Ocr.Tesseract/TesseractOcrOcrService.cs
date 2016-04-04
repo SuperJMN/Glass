@@ -21,6 +21,9 @@
             engine = new TesseractEngine(@"./tessdata", "spa", EngineMode.Default);
         }
 
+        public override double SourceScaleForOcr => 0.3;
+        public override bool IsSourceScalingEnabledForOcr => true;
+
         public override IEnumerable<IBitmapBatchGenerator> BitmapGenerators { get; } = new Collection<IBitmapBatchGenerator>
         {
             new ThresholdGenerator(),
@@ -28,12 +31,11 @@
 
         public override IEnumerable<RecognitionResult> Recognize(BitmapSource bitmap, ZoneConfiguration config)
         {
-            bitmap = new DeskewFilter().Apply(bitmap);
+            bitmap = ScaleIfEnabled(bitmap);
 
             foreach (var inputBitmap in BitmapGenerators.SelectMany(generator => generator.Generate(bitmap)))
             {
-                var finalBitmap = IsSourceScalingEnabledForOcr ? new TransformedBitmap(inputBitmap, new ScaleTransform(SourceScaleForOcr, SourceScaleForOcr)) : inputBitmap;
-                var bytes = ConvertToTiffByteArray(finalBitmap);
+                var bytes = ConvertToTiffByteArray(inputBitmap);
 
                 SetVariablesAccordingToConfig(engine, config);
 

@@ -26,6 +26,9 @@
             licenseApplier.ApplyLicense();
         }
 
+        public override double SourceScaleForOcr => 0.3;
+        public override bool IsSourceScalingEnabledForOcr => true;
+
         public override IEnumerable<IBitmapBatchGenerator> BitmapGenerators { get; } = new Collection<IBitmapBatchGenerator>
         {
             new AutoColorLevelFilterGenerator(),
@@ -60,14 +63,6 @@
             var scaled = bitmaps.Select(ScaleIfEnabled);
             var recognitions = scaled.SelectMany(bmp => RecognizeCore(config, bmp));
             return recognitions;
-        }
-
-        private BitmapSource ScaleIfEnabled(BitmapSource bmp)
-        {
-            var scale = SourceScaleForOcr;
-            var isScalingEnabled = IsSourceScalingEnabledForOcr;
-
-            return isScalingEnabled ? new TransformedBitmap(bmp, new ScaleTransform(scale, scale)) : bmp;
         }
 
         private IEnumerable<RecognitionResult> RecognizeCore(ZoneConfiguration config, ImageSource bmp)
