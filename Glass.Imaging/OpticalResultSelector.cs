@@ -3,13 +3,14 @@
     using System.Collections.Generic;
     using System.Linq;
 
-    public class OpticalResultSelector
+    public static class OpticalResultSelector
     {
-        public RecognitionResult Select(IEnumerable<RecognitionResult> recognitions, ZoneConfiguration zoneConfiguration)
+        public static RecognitionResult ChooseBest(IEnumerable<RecognitionResult> recognitions, ZoneConfiguration zoneConfiguration)
         {
             var scores = from r in recognitions
-                let score = zoneConfiguration.TextualDataFilter.Filter(r.Text)
-                select new { Score = score, Result = r };
+                let score = zoneConfiguration.TextualDataFilter.Evaluator.GetScore(r.Text)
+                let globalScore = score
+                select new { Score = globalScore, Result = r };
 
 
             return scores.OrderByDescending(result => result.Score)

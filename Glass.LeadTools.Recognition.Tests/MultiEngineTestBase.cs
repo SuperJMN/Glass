@@ -42,7 +42,7 @@ namespace Glass.Imaging.Recognition.Tests
             var recognizedPage = sut.Recognize(bitmap, RecognitionConfiguration.FromSingleImage(bitmap, filter, symbology));
 
             var uniqueZone = recognizedPage.RecognizedZones.First();
-            return uniqueZone.RecognizedText;
+            return uniqueZone.RecognitionResult.Text;
         }
     }
 }

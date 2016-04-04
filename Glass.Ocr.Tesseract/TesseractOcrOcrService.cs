@@ -45,7 +45,7 @@
                     {
                         var text = config.TextualDataFilter.Filter(page.GetText());
 
-                        var confidence = page.GetMeanConfidence();
+                        var confidence = page.GetMeanConfidence() * 0.9;
                         yield return new RecognitionResult(text, confidence);
                     }
                 }

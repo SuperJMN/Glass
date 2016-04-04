@@ -18,7 +18,6 @@
         public RecognizedPage Recognize(BitmapSource image, RecognitionConfiguration configuration)
         {
             var results = GetRecognizedZones(image, configuration).ToList();
-            PostProcess(results);
             return new RecognizedPage(image, results);
         }
 
@@ -38,8 +37,8 @@
 
                     var flatResults = resultsFromAllEngines.SelectMany(t => t);
 
-                    var result = new OpticalResultSelector().Select(flatResults, zoneConfiguration);
-                    yield return new RecognizedZone(zoneBitmap, zoneConfiguration, result?.Text);
+                    var result = OpticalResultSelector.ChooseBest(flatResults, zoneConfiguration);
+                    yield return new RecognizedZone(zoneBitmap, zoneConfiguration, result);
                 }
             }
         }
@@ -47,15 +46,6 @@
         private static bool IsValidTarget(ZoneConfiguration configuration, IImageToTextConverter engine)
         {
             return engine.ImageTargets.Any(target => target.Symbology == configuration.Symbology && target.FilterTypes.HasFlag(configuration.TextualDataFilter.FilterType));
-        }
-
-        private static void PostProcess(IEnumerable<RecognizedZone> recognizedZones)
-        {
-            foreach (var recognizedZone in recognizedZones)
-            {
-                var processed = recognizedZone.ZoneConfig.TextualDataFilter.Filter(recognizedZone.RecognizedText);
-                recognizedZone.RecognizedText = processed;
-            }
         }
     }
 }

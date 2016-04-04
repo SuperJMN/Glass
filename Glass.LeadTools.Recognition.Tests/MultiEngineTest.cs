@@ -1,37 +1,47 @@
 namespace Glass.Imaging.Recognition.Tests
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Windows;
     using System.Windows.Media.Imaging;
+    using Barcodes.MessagingToolkit;
     using Core;
     using FullFx;
+    using LeadTools.Recognition;
+    using PostProcessing;
+    using Tesseract;
     using Xunit;
     using Xunit.Abstractions;
     using ZoneConfigurations;
 
-    public abstract class EngineTestBase
+    public class MultiEngineTest
     {
         private readonly ITestOutputHelper output;
+        private readonly ILeadToolsLicenseApplier licenseApplier = new LeadToolsLicenseApplier();
+        private IZoneBasedRecognitionService opticalRecognizer;
 
-        protected EngineTestBase(ITestOutputHelper output)
+        protected MultiEngineTest(ITestOutputHelper output)
         {
             this.output = output;
             ImagingContext.BitmapOperations = new BitmapOperations();
         }
 
-        protected abstract IImageToTextConverter Engine { get; }
+        private IZoneBasedRecognitionService Engine
+        {
+            get
+            {
+                var ocrEngines = new List<IImageToTextConverter> { new TesseractOcrOcrService(), new LeadToolsZoneBasedOcrService(licenseApplier) };
+                var barcodeEngines = new List<IImageToTextConverter> { new MessagingToolkitZoneBasedBarcodeReader(), new LeadToolsZoneBasedBarcodeReader(licenseApplier) };
+                return opticalRecognizer ?? (opticalRecognizer = new CompositeOpticalRecognizer(ocrEngines.Concat(barcodeEngines)));  }
+        }
 
         private string ExtractBestTextCandidate(BitmapSource bitmap, ITextualDataFilter filter, Symbology symbology)
         {
-            var bounds = new Rect(0, 0, bitmap.Width, bitmap.Height);
-            var zoneConfiguration = new ZoneConfiguration {Bounds = bounds, TextualDataFilter = filter, Id = "", Symbology = symbology};
+            var page = Engine.Recognize(bitmap, RecognitionConfiguration.FromSingleImage(bitmap, filter, symbology));
+            var zone = page.RecognizedZones.First();
 
-            var recognitions = Engine.Recognize(bitmap, zoneConfiguration);
-
-            var selector = OpticalResultSelector.ChooseBest(recognitions, zoneConfiguration);
-
-            return selector?.Text;
+            return zone.RecognitionResult.Text;
         }
 
         protected void AssertSuccessRate(IEnumerable<TestCase> testCases, ITextualDataFilter stringFilter, double minimum, Symbology symbology)
@@ -56,11 +66,5 @@ namespace Glass.Imaging.Recognition.Tests
             output.WriteLine($"{isSuccess}: Expected: {testCase.Expected} Result: {result}");
             return result;
         }
-    }
-
-    public class TestCase
-    {
-        public BitmapSource Bitmap { get; set; }
-        public string Expected { get; set; }
     }
 }

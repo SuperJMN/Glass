@@ -23,7 +23,7 @@
             }
             catch
             {
-                yield break;
+                text = null;
             }
 
             yield return new RecognitionResult(text, 1D);

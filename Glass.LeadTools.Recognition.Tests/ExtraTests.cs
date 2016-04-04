@@ -28,27 +28,13 @@
             var bmp = GetEmptyBitmap();
             var recognizedPage = sut.Recognize(bmp, RecognitionConfiguration.FromSingleImage(bmp, numericStringFilter, Symbology.Barcode));
 
-            Assert.Null(recognizedPage.RecognizedZones.First().RecognizedText);
+            var recognitionResult = recognizedPage.RecognizedZones.First().RecognitionResult;
+            Assert.Null(recognitionResult.Text);
         }
 
         private static WriteableBitmap GetEmptyBitmap()
         {
             return new WriteableBitmap(10, 10, 96, 96, PixelFormats.Bgr24, new BitmapPalette(new List<Color> { Color.FromRgb(0, 0, 0) }));
-        }
-
-        [Theory(Skip = "Sólo para lote")]
-        [ClassData(typeof(BulkBarcodeTestFilesProvider))]
-        public void BulkUniqueBarcode(BitmapSource image)
-        {
-            var sut = GetSut();
-            var numericStringFilter = new NumericStringFilter { MinLength = 6, MaxLength = 6 };
-            var recognizedPage = sut.Recognize(
-                image,
-                RecognitionConfiguration.FromSingleImage(image, numericStringFilter, Symbology.Barcode));
-
-            var uniqueZone = recognizedPage.RecognizedZones.First();
-            output.WriteLine(uniqueZone.RecognizedText);
-            Assert.Equal(6, uniqueZone.RecognizedText.Length);
-        }    
+        }      
     }
 }
