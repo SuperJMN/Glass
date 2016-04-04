@@ -233,6 +233,7 @@
     <Compile Include="..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="AutoColorLevelFilterGenerator.cs" />
     <Compile Include="BarcodeStrategy.cs" />
     <Compile Include="LeadToolsZoneBasedBarcodeReader.cs" />
     <Compile Include="LeadToolsZoneBasedOcrService.cs" />

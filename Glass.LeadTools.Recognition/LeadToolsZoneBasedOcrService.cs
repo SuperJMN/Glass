@@ -7,13 +7,9 @@
     using System.Windows.Media;
     using System.Windows.Media.Imaging;
     using Imaging;
-    using Imaging.Core;
-    using Imaging.Generators;
     using Imaging.PostProcessing;
     using Imaging.ZoneConfigurations;
     using ImagingExtensions;
-    using ImagingExtensions.ImageFilters;
-    using Leadtools;
     using Leadtools.Codecs;
     using Leadtools.Forms;
     using Leadtools.Forms.Ocr;
@@ -32,7 +28,7 @@
 
         private IEnumerable<IBitmapBatchGenerator> BitmapBatchGenerator { get; } = new List<IBitmapBatchGenerator>
         {
-            new AutoShitGenerator(),
+            new AutoColorLevelFilterGenerator(),
         };
 
         public double SourceScaleForOcr { get; set; } = 0.3;
@@ -53,6 +49,15 @@
         }
 
         public IEnumerable<RecognitionResult> Recognize(BitmapSource bitmap, ZoneConfiguration config)
+        {
+            bitmap = ScaleIfEnabled(bitmap);
+
+            var bitmaps = BitmapBatchGenerator.SelectMany(g => g.Generate(bitmap));
+            var recognitions = bitmaps.SelectMany(bmp => RecognizeCore(config, bmp));
+            return recognitions;
+        }
+
+        public IEnumerable<RecognitionResult> RecognizeScaleEachVariation(BitmapSource bitmap, ZoneConfiguration config)
         {
             var bitmaps = BitmapBatchGenerator.SelectMany(g => g.Generate(bitmap));
             var scaled = bitmaps.Select(ScaleIfEnabled);
@@ -157,14 +162,6 @@
                 default:
                     throw new ArgumentOutOfRangeException(nameof(fieldType), fieldType, "El tipo de zona de OCR no se puede asociar a un tipo de OcrZoneType");
             }
-        }
-    }
-
-    public class AutoShitGenerator : IBitmapBatchGenerator
-    {
-        public IEnumerable<BitmapSource> Generate(BitmapSource image)
-        {
-            yield return new AutoContrastBitmapFilter().Apply(image);
         }
     }
 }

@@ -27,7 +27,6 @@ namespace Glass.Imaging.Recognition.Tests
             var bounds = new Rect(0, 0, bitmap.Width, bitmap.Height);
             var zoneConfiguration = new ZoneConfiguration {Bounds = bounds, TextualDataFilter = filter, Id = "", Symbology = symbology};
 
-
             var recognitions = Engine.Recognize(bitmap, zoneConfiguration);
 
             var selector = new OpticalResultSelector().Select(recognitions, zoneConfiguration);
@@ -44,18 +43,18 @@ namespace Glass.Imaging.Recognition.Tests
                 select new {Result = result, Expected = c.Expected, Success = result == c.Expected}).ToList();
 
             var success = testExecutions.Count(testCase => testCase.Expected == testCase.Result);
-            var total = testExecutions.Count();
+            var total = testExecutions.Count;
 
             var d = (double) success/total;
             output.WriteLine($"Success Ratio: {d}");
             Assert.True(d >= minimum);
         }
 
-        private string OutputResult(string extractBestTextCandidate, TestCase testCase)
+        private string OutputResult(string result, TestCase testCase)
         {
-            var isSuccess = testCase.Expected==extractBestTextCandidate ? "OK" : "FAILED";
-            output.WriteLine($"{isSuccess}: Expected: {testCase.Expected} Result: {extractBestTextCandidate}");
-            return extractBestTextCandidate;
+            var isSuccess = testCase.Expected==result ? "OK" : "FAILED";
+            output.WriteLine($"{isSuccess}: Expected: {testCase.Expected} Result: {result}");
+            return result;
         }
     }
 
