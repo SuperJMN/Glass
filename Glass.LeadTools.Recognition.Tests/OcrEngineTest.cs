@@ -1,6 +1,5 @@
 namespace Glass.Imaging.Recognition.Tests
 {
-    using System.Linq;
     using DataProviders.Text;
     using Xunit;
     using Xunit.Abstractions;

@@ -15,7 +15,7 @@
     using Leadtools.Forms.Ocr;
     using Leadtools.Forms.Ocr.Advantage;
 
-    public class LeadToolsZoneBasedOcrService : IImageToTextConverter
+    public class LeadToolsZoneBasedOcrService : OcrService
     {
         private const string OcrEngineFolder = @"OcrAdvantageRuntime";
 
@@ -26,13 +26,10 @@
             licenseApplier.ApplyLicense();
         }
 
-        private IEnumerable<IBitmapBatchGenerator> BitmapBatchGenerator { get; } = new List<IBitmapBatchGenerator>
+        public override IEnumerable<IBitmapBatchGenerator> BitmapGenerators { get; } = new Collection<IBitmapBatchGenerator>
         {
             new AutoColorLevelFilterGenerator(),
         };
-
-        public double SourceScaleForOcr { get; set; } = 0.3;
-        public bool IsSourceScalingEnabledForOcr { get; set; } = true;
 
         private OcrEngine OcrEngine
         {
@@ -48,18 +45,18 @@
             }
         }
 
-        public IEnumerable<RecognitionResult> Recognize(BitmapSource bitmap, ZoneConfiguration config)
+        public override IEnumerable<RecognitionResult> Recognize(BitmapSource bitmap, ZoneConfiguration config)
         {
             bitmap = ScaleIfEnabled(bitmap);
 
-            var bitmaps = BitmapBatchGenerator.SelectMany(g => g.Generate(bitmap));
+            var bitmaps = BitmapGenerators.SelectMany(g => g.Generate(bitmap));
             var recognitions = bitmaps.SelectMany(bmp => RecognizeCore(config, bmp));
             return recognitions;
         }
 
         public IEnumerable<RecognitionResult> RecognizeScaleEachVariation(BitmapSource bitmap, ZoneConfiguration config)
         {
-            var bitmaps = BitmapBatchGenerator.SelectMany(g => g.Generate(bitmap));
+            var bitmaps = BitmapGenerators.SelectMany(g => g.Generate(bitmap));
             var scaled = bitmaps.Select(ScaleIfEnabled);
             var recognitions = scaled.SelectMany(bmp => RecognizeCore(config, bmp));
             return recognitions;
@@ -98,7 +95,7 @@
                 .Average(character => character.Confidence) / 100D;
         }
 
-        public IEnumerable<ImageTarget> ImageTargets => new Collection<ImageTarget> { new ImageTarget { Symbology = Symbology.Text, FilterTypes = FilterType.All } };
+        public override IEnumerable<ImageTarget> ImageTargets => new Collection<ImageTarget> { new ImageTarget { Symbology = Symbology.Text, FilterTypes = FilterType.All } };
 
         private OcrZone CreateOcrZoneForField(ZoneConfiguration zoneConfiguration)
         {

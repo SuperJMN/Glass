@@ -1,4 +1,4 @@
-﻿namespace Glass.Ocr.Tesseract
+﻿namespace Glass.Imaging.Recognition.Tesseract
 {
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
@@ -6,32 +6,27 @@
     using System.Linq;
     using System.Windows.Media;
     using System.Windows.Media.Imaging;
+    using Filters;
     using global::Tesseract;
-    using Imaging;
-    using Imaging.Filters;
-    using Imaging.Generators;
-    using Imaging.PostProcessing;
-    using Imaging.ZoneConfigurations;
+    using Generators;
+    using PostProcessing;
+    using ZoneConfigurations;
 
-    public class TesseractOcrOcrService : IImageToTextConverter
+    public class TesseractOcrOcrService : OcrService
     {
         private readonly TesseractEngine engine;
-        public double SourceScaleForOcr { get; set; } = 0.3;
-        public bool IsSourceScalingEnabledForOcr { get; set; } = false;
-
+     
         public TesseractOcrOcrService()
-        {       
-            BitmapGenerators = new List<IBitmapBatchGenerator>
-            {
-                new ThresholdGenerator(),
-            };
-
+        {   
             engine = new TesseractEngine(@"./tessdata", "spa", EngineMode.Default);
         }
 
-        public IEnumerable<IBitmapBatchGenerator> BitmapGenerators { get; set; }
+        public override IEnumerable<IBitmapBatchGenerator> BitmapGenerators { get; } = new Collection<IBitmapBatchGenerator>
+        {
+            new ThresholdGenerator(),
+        };
 
-        public IEnumerable<RecognitionResult> Recognize(BitmapSource bitmap, ZoneConfiguration config)
+        public override IEnumerable<RecognitionResult> Recognize(BitmapSource bitmap, ZoneConfiguration config)
         {
             bitmap = new DeskewFilter().Apply(bitmap);
 
@@ -56,13 +51,7 @@
             }
         }
 
-        private static bool IsAlpha(ZoneConfiguration barcodeConfig)
-        {
-            return barcodeConfig.TextualDataFilter.FilterType == FilterType.Alpha ||
-                   barcodeConfig.TextualDataFilter.FilterType == FilterType.AlphaOnly;
-        }
-
-        private void SetVariablesAccordingToConfig(TesseractEngine engine, ZoneConfiguration barcodeConfig)
+        private static void SetVariablesAccordingToConfig(TesseractEngine engine, ZoneConfiguration barcodeConfig)
         {
             if (barcodeConfig.TextualDataFilter.FilterType == FilterType.Alpha)
             {
@@ -85,7 +74,7 @@
             }
         }
 
-        public IEnumerable<ImageTarget> ImageTargets => new Collection<ImageTarget> { new ImageTarget { Symbology = Symbology.Text, FilterTypes = FilterType.All } };
+        public override IEnumerable<ImageTarget> ImageTargets => new Collection<ImageTarget> { new ImageTarget { Symbology = Symbology.Text, FilterTypes = FilterType.All } };
 
         private static byte[] ConvertToTiffByteArray(BitmapSource bitmap)
         {

@@ -7,8 +7,8 @@
     <ProjectGuid>{9A0D9305-8B20-41E6-97C7-CF1B8070F6C9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Glass.Ocr.Tesseract</RootNamespace>
-    <AssemblyName>Glass.Ocr.Tesseract</AssemblyName>
+    <RootNamespace>Glass.Imaging.Recognition.Tesseract</RootNamespace>
+    <AssemblyName>Glass.Imaging.Recognition.Tesseract</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -52,7 +52,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Glass.Ocr.Tesseract.nuspec">
+    <None Include="Glass.Imaging.Recognition.Tesseract.nuspec">
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />

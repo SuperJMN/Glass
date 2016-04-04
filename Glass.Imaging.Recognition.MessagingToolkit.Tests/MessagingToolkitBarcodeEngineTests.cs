@@ -1,7 +1,8 @@
-﻿namespace Glass.Imaging.Recognition.Tests
+﻿namespace Glass.Imaging.Recognition.MessagingToolkit.Tests
 {
     using Barcodes.MessagingToolkit;
     using Imaging;
+    using Recognition.Tests;
     using Xunit.Abstractions;
 
     public class MessagingToolkitBarcodeEngineTests : BarcodeEngineTest

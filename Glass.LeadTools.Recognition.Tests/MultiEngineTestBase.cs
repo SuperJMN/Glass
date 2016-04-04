@@ -11,7 +11,7 @@ namespace Glass.Imaging.Recognition.Tests
     using PostProcessing;
     using ZoneConfigurations;
     using LeadTools.Recognition;
-    using Ocr.Tesseract;
+    using Tesseract;
 
     public abstract class MultiEngineTestBase
     {

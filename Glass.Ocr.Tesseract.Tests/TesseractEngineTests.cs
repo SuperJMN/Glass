@@ -1,10 +1,10 @@
-﻿namespace Glass.Imaging.Recognition.Tests
+﻿namespace Glass.Imaging.Recognition.Tesseract.Tests
 {
-    using Imaging;
-    using Ocr.Tesseract;
+    using Recognition.Tests;
     using Xunit.Abstractions;
 
-    class TesseractEngineTests : OcrEngineTest
+    // ReSharper disable once UnusedMember.Global
+    public class TesseractEngineTests : OcrEngineTest
     {
         protected override IImageToTextConverter Engine { get; } = new TesseractOcrOcrService();
 
@@ -13,6 +13,6 @@
         }
 
         protected override double AlphaNumericSuccessRate => 0.3;
-        protected override double NumericSuccessRate => 0.16;
+        protected override double NumericSuccessRate => 0.59;
     }
 }
