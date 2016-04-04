@@ -49,9 +49,11 @@
     <Compile Include="Core\StringExtensions.cs" />
     <Compile Include="Core\TaggedImage.cs" />
     <Compile Include="Core\Transform.cs" />
+    <Compile Include="Filters\ContrastStrechFilter.cs" />
     <Compile Include="Filters\DeskewFilter.cs" />
     <Compile Include="Filters\OtsuThresholdFilterFree.cs" />
     <Compile Include="Filters\ThresholdFilter.cs" />
+    <Compile Include="Generators\AutoContrastGenerator.cs" />
     <Compile Include="Generators\EnumerableExtensions.cs" />
     <Compile Include="Generators\OtsuGenerator.cs" />
     <Compile Include="IBitmapBatchGenerator.cs" />

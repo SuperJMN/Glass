@@ -19,17 +19,12 @@
         public double SourceScaleForOcr { get; set; } = 0.3;
         public bool IsSourceScalingEnabledForOcr { get; set; } = false;
 
-        public IEnumerable<IBitmapFilter> ImageFilters { get; set; }
-
         public TesseractOcrOcrService()
-        {
-            ImageFilters = new List<IBitmapFilter>
+        {       
+            BitmapGenerators = new List<IBitmapBatchGenerator>
             {
-                new OtsuThresholdFilterFree(),
-                new ThresholdFilter(80),
+                new ContrastStrechGeneractor(),
             };
-
-            BitmapGenerators = new List<IBitmapBatchGenerator> { new OtsuGenerator() };
 
             engine = new TesseractEngine(@"./tessdata", "spa", EngineMode.Default);
         }
