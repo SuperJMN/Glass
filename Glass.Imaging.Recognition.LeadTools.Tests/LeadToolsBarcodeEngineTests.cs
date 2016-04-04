@@ -13,7 +13,7 @@
         {
         }
 
-        protected override double AlphanumericSuccessRate => 0;
+        protected override double AlphanumericSuccessRate => 0.1;
         protected override double NumericSuccessRate => 0.8;
     }
 }

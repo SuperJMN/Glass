@@ -23,7 +23,7 @@
         {       
             BitmapGenerators = new List<IBitmapBatchGenerator>
             {
-                new ContrastStrechGeneractor(),
+                new ThresholdGenerator(),
             };
 
             engine = new TesseractEngine(@"./tessdata", "spa", EngineMode.Default);

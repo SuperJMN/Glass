@@ -760,6 +760,16 @@
     <None Include="Images\Barcodes\Alphanumeric\MULTIPLES-409.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Images\Barcodes\Alphanumeric\CAPITULO2-8120.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\Texts\Alphanumeric\CAPITULO2-8120.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <Content Include="Images\Texts\Alphanumeric\MULTIPLES-402.jpg" />
+    <Content Include="Images\Texts\Alphanumeric\MULTIPLES-404.jpg" />
+    <Content Include="Images\Texts\Alphanumeric\MULTIPLES-408.jpg" />
+    <Content Include="Images\Texts\Alphanumeric\MULTIPLES-409.jpg" />
     <Content Include="x64\liblept172.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
