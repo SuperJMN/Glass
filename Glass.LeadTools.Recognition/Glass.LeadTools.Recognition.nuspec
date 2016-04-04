@@ -14,8 +14,7 @@
         <iconUrl>http://aventuraspuntonet.files.wordpress.com/2013/03/glass.png?w=128</iconUrl>
 
         <dependencies>
-            <dependency id="MessagingToolkit.Barcode" version="1.7.0.2" />
-            <dependency id="Glass.Imaging" version="$version$" />
+          <package id="AForge" version="2.2.5" targetFramework="net461" />
         </dependencies>
         
     </metadata>
