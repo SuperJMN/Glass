@@ -8,10 +8,12 @@
     using System.Windows.Media.Imaging;
     using Imaging;
     using Imaging.Core;
+    using Imaging.Generators;
     using Imaging.PostProcessing;
     using Imaging.ZoneConfigurations;
     using ImagingExtensions;
     using ImagingExtensions.ImageFilters;
+    using Leadtools;
     using Leadtools.Codecs;
     using Leadtools.Forms;
     using Leadtools.Forms.Ocr;
@@ -21,13 +23,17 @@
     {
         private const string OcrEngineFolder = @"OcrAdvantageRuntime";
 
-        private readonly RasterCodecs codecs = new RasterCodecs();
         private OcrEngine engine;
 
         public LeadToolsZoneBasedOcrService(ILeadToolsLicenseApplier licenseApplier)
         {
             licenseApplier.ApplyLicense();
         }
+
+        private IEnumerable<IBitmapBatchGenerator> BitmapBatchGenerator { get; } = new List<IBitmapBatchGenerator>
+        {
+            new AutoShitGenerator(),
+        };
 
         public double SourceScaleForOcr { get; set; } = 0.3;
         public bool IsSourceScalingEnabledForOcr { get; set; } = true;
@@ -39,7 +45,7 @@
                 if (engine == null)
                 {
                     engine = (OcrEngine)OcrEngineManager.CreateEngine(OcrEngineType.Advantage, false);
-                    engine.Startup(codecs, null, null, OcrEngineFolder);                    
+                    engine.Startup(new RasterCodecs(), null, null, OcrEngineFolder);
                 }
 
                 return engine;
@@ -48,9 +54,24 @@
 
         public IEnumerable<RecognitionResult> Recognize(BitmapSource bitmap, ZoneConfiguration config)
         {
-            var rasterImage = GetImageToOcr(bitmap).ToRasterImage();
-            using (var page = OcrEngine.CreatePage(rasterImage, OcrImageSharingMode.AutoDispose))
-            {               
+            var bitmaps = BitmapBatchGenerator.SelectMany(g => g.Generate(bitmap));
+            var scaled = bitmaps.Select(ScaleIfEnabled);
+            var recognitions = scaled.SelectMany(bmp => RecognizeCore(config, bmp));
+            return recognitions;
+        }
+
+        private BitmapSource ScaleIfEnabled(BitmapSource bmp)
+        {
+            var scale = SourceScaleForOcr;
+            var isScalingEnabled = IsSourceScalingEnabledForOcr;
+
+            return isScalingEnabled ? new TransformedBitmap(bmp, new ScaleTransform(scale, scale)) : bmp;
+        }
+
+        private IEnumerable<RecognitionResult> RecognizeCore(ZoneConfiguration config, ImageSource bmp)
+        {
+            using (var page = OcrEngine.CreatePage(bmp.ToRasterImage(), OcrImageSharingMode.AutoDispose))
+            {
                 var ocrZone = CreateOcrZoneForField(config);
                 page.Zones.Add(ocrZone);
                 page.Recognize(null);
@@ -63,45 +84,30 @@
             }
         }
 
-        private double GetConfidence(IOcrPage page)
+        private static double GetConfidence(IOcrPage page)
         {
             var recognizedCharacters = page.GetRecognizedCharacters();
             var findZoneCharacters = recognizedCharacters.FindZoneCharacters(0);
-            return findZoneCharacters.Average(character => character.Confidence) / 100D;
+            return findZoneCharacters
+                .DefaultIfEmpty()
+                .Average(character => character.Confidence) / 100D;
         }
 
         public IEnumerable<ImageTarget> ImageTargets => new Collection<ImageTarget> { new ImageTarget { Symbology = Symbology.Text, FilterTypes = FilterType.All } };
 
-        private static BitmapSource OptimizeImageForOcr(BitmapSource bitmap)
-        {
-            return new AutoContrastBitmapFilter().Apply(bitmap);
-        }
-
-        private BitmapSource GetImageToOcr(BitmapSource image)
-        {
-            var scale = SourceScaleForOcr;
-            var isScalingEnabled = IsSourceScalingEnabledForOcr;
-
-            var finalBitmap = isScalingEnabled ? new TransformedBitmap(image, new ScaleTransform(scale, scale)) : image;
-
-            return OptimizeImageForOcr(finalBitmap);
-        }
-
         private OcrZone CreateOcrZoneForField(ZoneConfiguration zoneConfiguration)
         {
-            var zoneConfig = zoneConfiguration;
-
-            var bounds = zoneConfig.Bounds;
+            var bounds = zoneConfiguration.Bounds;
             bounds.Scale(SourceScaleForOcr, SourceScaleForOcr);
             var leadRectRect = bounds.ToLeadRectRect();
-            
+
             var readZone = new OcrZone
             {
                 Bounds = new LogicalRectangle(leadRectRect),
                 Name = zoneConfiguration.Id,
-                CharacterFilters = GetCharacterFilters(zoneConfig),
-                Language = GetLanguage(zoneConfig),
-                ZoneType = GetZoneType(zoneConfig),
+                CharacterFilters = GetCharacterFilters(zoneConfiguration),
+                Language = GetLanguage(zoneConfiguration),
+                ZoneType = GetZoneType(zoneConfiguration),
                 IsEngineZone = false
             };
 
@@ -151,6 +157,14 @@
                 default:
                     throw new ArgumentOutOfRangeException(nameof(fieldType), fieldType, "El tipo de zona de OCR no se puede asociar a un tipo de OcrZoneType");
             }
+        }
+    }
+
+    public class AutoShitGenerator : IBitmapBatchGenerator
+    {
+        public IEnumerable<BitmapSource> Generate(BitmapSource image)
+        {
+            yield return new AutoContrastBitmapFilter().Apply(image);
         }
     }
 }

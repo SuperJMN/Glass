@@ -53,7 +53,7 @@
     <Compile Include="Filters\DeskewFilter.cs" />
     <Compile Include="Filters\OtsuThresholdFilterFree.cs" />
     <Compile Include="Filters\ThresholdFilter.cs" />
-    <Compile Include="Generators\AutoContrastGenerator.cs" />
+    <Compile Include="Generators\ContrastCorrectionGeneractor.cs" />
     <Compile Include="Generators\EnumerableExtensions.cs" />
     <Compile Include="Generators\OtsuGenerator.cs" />
     <Compile Include="IBitmapBatchGenerator.cs" />

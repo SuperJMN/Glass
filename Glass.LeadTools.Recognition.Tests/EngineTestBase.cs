@@ -35,26 +35,27 @@ namespace Glass.Imaging.Recognition.Tests
             return selector?.Text;
         }
 
-        protected void AssertSuccessRate(IEnumerable<TestCase> testCases, ITextualDataFilter stringFilter, double minimumAcceptable, Symbology symbology)
+        protected void AssertSuccessRate(IEnumerable<TestCase> testCases, ITextualDataFilter stringFilter, double minimum, Symbology symbology)
         {
             var cases = testCases as IList<TestCase> ?? testCases.ToList();
 
             var testExecutions = (from c in cases
-                let result = ExtractBestTextCandidate(c.Bitmap, stringFilter, symbology)
+                let result = OutputResult(ExtractBestTextCandidate(c.Bitmap, stringFilter, symbology), c)
                 select new {Result = result, Expected = c.Expected, Success = result == c.Expected}).ToList();
-
-            foreach (var testExecution in testExecutions)
-            {
-                var isSuccess = testExecution.Success ? "OK" : "FAILED";
-                output.WriteLine($"{isSuccess}: Expected: {testExecution.Expected} Result: {testExecution.Result}");
-            }
 
             var success = testExecutions.Count(testCase => testCase.Expected == testCase.Result);
             var total = testExecutions.Count();
 
             var d = (double) success/total;
             output.WriteLine($"Success Ratio: {d}");
-            Assert.True(d >= minimumAcceptable);
+            Assert.True(d >= minimum);
+        }
+
+        private string OutputResult(string extractBestTextCandidate, TestCase testCase)
+        {
+            var isSuccess = testCase.Expected==extractBestTextCandidate ? "OK" : "FAILED";
+            output.WriteLine($"{isSuccess}: Expected: {testCase.Expected} Result: {extractBestTextCandidate}");
+            return extractBestTextCandidate;
         }
     }
 
