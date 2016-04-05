@@ -37,7 +37,7 @@ namespace Glass.Imaging.Recognition.Tests
         }
 
         [Fact]
-        public void QRCode()
+        public void QrCode()
         {
             var bitmap = new BitmapImage(new Uri("Images\\QRCode.png", UriKind.Relative));
             var result = Engine.Recognize(bitmap,
