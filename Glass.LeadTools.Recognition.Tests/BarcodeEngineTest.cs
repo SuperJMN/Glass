@@ -40,8 +40,11 @@ namespace Glass.Imaging.Recognition.Tests
         public void QrCode()
         {
             var bitmap = new BitmapImage(new Uri("Images\\QRCode.png", UriKind.Relative));
-            var result = Engine.Recognize(bitmap,
-                ZoneConfiguration.FromSingleImage(bitmap, new AlphanumericStringFilter(), Symbology.Barcode));
+            var alphanumericStringFilter = new AlphanumericStringFilter();
+            var symbology = Symbology.Barcode;
+
+            var result = ExtractBestTextCandidate(bitmap, alphanumericStringFilter, symbology);
+            Engine.Recognize(bitmap, ZoneConfiguration.FromSingleImage(bitmap, alphanumericStringFilter, symbology));
 
             Assert.NotNull(result);
         }

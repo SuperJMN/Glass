@@ -22,7 +22,7 @@ namespace Glass.Imaging.Recognition.Tests
 
         protected abstract IImageToTextConverter Engine { get; }
 
-        private string ExtractBestTextCandidate(BitmapSource bitmap, ITextualDataFilter filter, Symbology symbology)
+        protected string ExtractBestTextCandidate(BitmapSource bitmap, ITextualDataFilter filter, Symbology symbology)
         {
             var bounds = new Rect(0, 0, bitmap.Width, bitmap.Height);
             var zoneConfiguration = new ZoneConfiguration {Bounds = bounds, TextualDataFilter = filter, Id = "", Symbology = symbology};
