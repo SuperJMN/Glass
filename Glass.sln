@@ -21,9 +21,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Glass.Imaging.FullFx", "Gla
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Glass.Barcodes.MessagingToolkit", "Glass.Barcodes.MessagingToolkit\Glass.Barcodes.MessagingToolkit.csproj", "{A4380789-8C29-4E64-B42D-5872908C446C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Glass.Ocr.Tesseract", "Glass.Ocr.Tesseract\Glass.Ocr.Tesseract.csproj", "{9A0D9305-8B20-41E6-97C7-CF1B8070F6C9}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Glass.Imaging", "Glass.Imaging\Glass.Imaging.csproj", "{056E7401-E413-4E50-9009-7FE1C69DEE4F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Glass.Imaging.Recognition.Tesseract", "Glass.Ocr.Tesseract\Glass.Imaging.Recognition.Tesseract.csproj", "{9A0D9305-8B20-41E6-97C7-CF1B8070F6C9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -67,14 +67,14 @@ Global
 		{A4380789-8C29-4E64-B42D-5872908C446C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A4380789-8C29-4E64-B42D-5872908C446C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A4380789-8C29-4E64-B42D-5872908C446C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9A0D9305-8B20-41E6-97C7-CF1B8070F6C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9A0D9305-8B20-41E6-97C7-CF1B8070F6C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9A0D9305-8B20-41E6-97C7-CF1B8070F6C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9A0D9305-8B20-41E6-97C7-CF1B8070F6C9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{056E7401-E413-4E50-9009-7FE1C69DEE4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{056E7401-E413-4E50-9009-7FE1C69DEE4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{056E7401-E413-4E50-9009-7FE1C69DEE4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{056E7401-E413-4E50-9009-7FE1C69DEE4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A0D9305-8B20-41E6-97C7-CF1B8070F6C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A0D9305-8B20-41E6-97C7-CF1B8070F6C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A0D9305-8B20-41E6-97C7-CF1B8070F6C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A0D9305-8B20-41E6-97C7-CF1B8070F6C9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
