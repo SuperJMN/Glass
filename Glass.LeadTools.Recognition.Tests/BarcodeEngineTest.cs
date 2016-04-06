@@ -1,3 +1,6 @@
+using System;
+using System.Windows.Media.Imaging;
+
 namespace Glass.Imaging.Recognition.Tests
 {
     using DataProviders.Barcode;
@@ -31,6 +34,19 @@ namespace Glass.Imaging.Recognition.Tests
         public void Numeric()
         {
             AssertSuccessRate(new NumericBarcodeTestCases(), new NumericStringFilter {MinLength = 6, MaxLength = 6}, NumericSuccessRate, Symbology.Barcode);
+        }
+
+        [Fact]
+        public void QrCode()
+        {
+            var bitmap = new BitmapImage(new Uri("Images\\QRCode.png", UriKind.Relative));
+            var alphanumericStringFilter = new AlphanumericStringFilter();
+            var symbology = Symbology.Barcode;
+
+            var result = ExtractBestTextCandidate(bitmap, alphanumericStringFilter, symbology);
+            Engine.Recognize(bitmap, ZoneConfiguration.FromSingleImage(bitmap, alphanumericStringFilter, symbology));
+
+            Assert.NotNull(result);
         }
     }
 }
