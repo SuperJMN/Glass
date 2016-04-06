@@ -1,6 +1,5 @@
 namespace Glass.Imaging.Core
 {
-    using System.Windows.Media;
     using System.Windows.Media.Imaging;
 
     public class RecognizedZone
@@ -8,9 +7,7 @@ namespace Glass.Imaging.Core
         public RecognizedZone(BitmapSource bitmap, ZoneConfiguration zoneConfiguration, RecognitionResult recognitionResult)
         {
             ZoneConfig = zoneConfiguration;
-            var bitmapSource = ImagingContext.BitmapOperations.Crop(bitmap, zoneConfiguration.Bounds);
-            bitmapSource.Freeze();
-            Bitmap = bitmapSource;
+            Bitmap = bitmap;
             RecognitionResult = recognitionResult;
         }
 
