@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Glass.Imaging", "Glass.Imag
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Glass.Imaging.Recognition.Tesseract", "Glass.Ocr.Tesseract\Glass.Imaging.Recognition.Tesseract.csproj", "{9A0D9305-8B20-41E6-97C7-CF1B8070F6C9}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{3B7E222F-339F-4650-9E27-2C7878815BED}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -78,5 +80,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A7FC6BC9-D691-413A-B839-9D1EC30AE7E1} = {3B7E222F-339F-4650-9E27-2C7878815BED}
 	EndGlobalSection
 EndGlobal

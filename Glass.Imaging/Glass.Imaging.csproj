@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{65101C83-A00B-4D3E-9EC0-06BA7F35B746}</ProjectGuid>
+    <ProjectGuid>{056E7401-E413-4E50-9009-7FE1C69DEE4F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Glass.Imaging</RootNamespace>
