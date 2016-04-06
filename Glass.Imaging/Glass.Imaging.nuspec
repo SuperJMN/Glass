@@ -15,7 +15,6 @@
 
     <dependencies>
       <dependency id="MessagingToolkit.Barcode" version="1.7.0.2" />
-      <dependency id="Glass.Imaging" version="$version$" />
     </dependencies>
     
   </metadata>
