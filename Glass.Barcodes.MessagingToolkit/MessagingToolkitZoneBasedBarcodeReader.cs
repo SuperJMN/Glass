@@ -14,7 +14,7 @@
 
         public IEnumerable<RecognitionResult> Recognize(BitmapSource bitmap, ZoneConfiguration config)
         {
-            var writeableBitmap = new WriteableBitmap(bitmap);
+            var writeableBitmap = new WriteableBitmap(bitmap.Clone());
             string text;
             try
             {

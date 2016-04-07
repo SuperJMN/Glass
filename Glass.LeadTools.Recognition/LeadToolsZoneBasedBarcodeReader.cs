@@ -85,7 +85,9 @@
             var engine = new BarcodeEngine();
             engine.Reader.ImageType = imageType;
             var barcodeDatas = engine.Reader.ReadBarcodes(image.ToRasterImage(), leadRect, 10, BarcodeSymbologies.ToArray(), coreReadOptions);
-            var textForStrategy = barcodeDatas.Where(data => data.Value != null).Select(data => data.Value);
+            var textForStrategy = barcodeDatas
+                .Select(data => data.Value)
+                .DefaultIfEmpty();
             return textForStrategy;
         }
 

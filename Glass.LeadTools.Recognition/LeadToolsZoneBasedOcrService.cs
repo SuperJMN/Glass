@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
+    using System.Windows;
     using System.Windows.Media;
     using System.Windows.Media.Imaging;
     using Imaging;
@@ -65,11 +66,11 @@
             return recognitions;
         }
 
-        private IEnumerable<RecognitionResult> RecognizeCore(ZoneConfiguration config, ImageSource bmp)
+        private IEnumerable<RecognitionResult> RecognizeCore(ZoneConfiguration config, BitmapSource bmp)
         {
             using (var page = OcrEngine.CreatePage(bmp.ToRasterImage(), OcrImageSharingMode.AutoDispose))
             {
-                var ocrZone = CreateOcrZoneForField(config);
+                var ocrZone = CreateOcrZoneForField(bmp, config);
                 page.Zones.Add(ocrZone);
                 page.Recognize(null);
                 var text = page.GetText(0);
@@ -92,15 +93,13 @@
 
         public override IEnumerable<ImageTarget> ImageTargets => new Collection<ImageTarget> { new ImageTarget { Symbology = Symbology.Text, FilterTypes = FilterType.All } };
 
-        private OcrZone CreateOcrZoneForField(ZoneConfiguration zoneConfiguration)
+        private OcrZone CreateOcrZoneForField(BitmapSource bitmap, ZoneConfiguration zoneConfiguration)
         {
-            var bounds = zoneConfiguration.Bounds;
-            bounds.Scale(SourceScaleForOcr, SourceScaleForOcr);
-            var leadRectRect = bounds.ToLeadRectRect();
+            var leadRect = new Rect(0, 0, bitmap.PixelWidth, bitmap.PixelHeight).ToLeadRectRect();
 
             var readZone = new OcrZone
             {
-                Bounds = new LogicalRectangle(leadRectRect),
+                Bounds = new LogicalRectangle(leadRect),
                 Name = zoneConfiguration.Id,
                 CharacterFilters = GetCharacterFilters(zoneConfiguration),
                 Language = GetLanguage(zoneConfiguration),
