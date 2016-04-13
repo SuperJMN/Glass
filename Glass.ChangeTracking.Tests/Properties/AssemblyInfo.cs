@@ -1,14 +1,15 @@
 ﻿using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Glass.Imaging.Tests")]
+[assembly: AssemblyTitle("Glass.ChangeTracking.Tests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Glass.Imaging.Tests")]
+[assembly: AssemblyProduct("Glass.ChangeTracking.Tests")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -19,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("a7fc6bc9-d691-413a-b839-9d1ec30ae7e1")]
+[assembly: Guid("ab770e77-f6cc-457f-bdcc-4a8cecdbdbee")]
 
 // Version information for an assembly consists of the following four values:
 //
