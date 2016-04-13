@@ -1,8 +1,8 @@
-﻿using System;
-using System.Runtime.CompilerServices;
-
-namespace Glass
+﻿namespace Glass.Core
 {
+    using System;
+    using System.Runtime.CompilerServices;
+
     public static class Guard
     {
         public static void ThrowIfNull(object argumentValue, string argumentName, [CallerMemberName] string methodName = null)

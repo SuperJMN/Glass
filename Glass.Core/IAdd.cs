@@ -1,4 +1,4 @@
-﻿namespace Glass
+﻿namespace Glass.Core
 {
     public interface IAdd<in T>
     {

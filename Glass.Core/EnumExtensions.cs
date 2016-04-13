@@ -1,7 +1,6 @@
-﻿namespace Glass
+﻿namespace Glass.Core
 {
     using System;
-    using System.Reflection;
 
     public static class EnumExtensions
     {

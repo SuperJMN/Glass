@@ -8,8 +8,8 @@
     <ProjectGuid>{B719FF91-BC7A-4145-8597-811D504FCFEF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Glass</RootNamespace>
-    <AssemblyName>Glass</AssemblyName>
+    <RootNamespace>Glass.Core</RootNamespace>
+    <AssemblyName>Glass.Core</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>

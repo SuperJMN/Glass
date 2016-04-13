@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using Core;
 
     public class Node : IDependency<Node>
     {
