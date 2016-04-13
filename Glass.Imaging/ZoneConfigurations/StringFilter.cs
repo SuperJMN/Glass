@@ -1,7 +1,6 @@
 namespace Glass.Imaging.ZoneConfigurations
 {
     using System.Linq;
-    using System.Text.RegularExpressions;
     using Core;
     using PostProcessing;
 
@@ -14,16 +13,22 @@ namespace Glass.Imaging.ZoneConfigurations
         public abstract FilterType FilterType { get; }
         public abstract IEvaluator Evaluator { get; }
 
-        public string Filter(string input)
+        public string GetBestMatchFromRaw(string input)
         {
             if (input == null)
             {
                 return null;
             }
 
+            return ProcessFromRaw(input);
+        }
+
+        private string ProcessFromRaw(string input)
+        {
             string str = input;
             str = Chunkify(str);
-            return GetBestMatchFromChunkifiedString(str);
+            var bestMatch = GetBestMatchFromChunkifiedString(str);
+            return bestMatch.Contains("<NOISE>") ? null : bestMatch;
         }
 
         private string GetBestMatchFromChunkifiedString(string str)

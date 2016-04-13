@@ -77,7 +77,7 @@
 
                 var confidence = GetConfidence(page);
 
-                var filteredText = config.TextualDataFilter.Filter(text);
+                var filteredText = config.TextualDataFilter.GetBestMatchFromRaw(text);
                 yield return new RecognitionResult(filteredText, confidence);
             }
         }

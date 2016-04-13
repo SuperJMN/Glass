@@ -43,7 +43,7 @@
                 {
                     using (var page = engine.Process(img, PageSegMode.SingleBlock))
                     {
-                        var text = config.TextualDataFilter.Filter(page.GetText());
+                        var text = config.TextualDataFilter.GetBestMatchFromRaw(page.GetText());
 
                         var confidence = page.GetMeanConfidence() * 0.9;
                         yield return new RecognitionResult(text, confidence);

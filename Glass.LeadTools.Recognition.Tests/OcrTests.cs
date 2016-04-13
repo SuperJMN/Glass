@@ -14,7 +14,7 @@ namespace Glass.Imaging.Recognition.Tests
         {
         }
 
-        private double AlphanumericSuccessRate => 0.333;
+        private double AlphanumericSuccessRate => 0;
 
         private double NumericSuccessRate => 0.944;
 
