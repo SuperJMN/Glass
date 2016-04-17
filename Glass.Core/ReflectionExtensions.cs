@@ -156,7 +156,7 @@
 
         public static object GetValueOfStaticField(Type type, string name)
         {
-            var fieldInfo = type.GetRuntimeField(name);
+            var fieldInfo = type.GetTypeInfo().GetField(name);
 
             if (fieldInfo == null)
             {
