@@ -17,6 +17,7 @@
             <dependency id="MessagingToolkit.Barcode" version="1.7.0.2" />
             <dependency id="Glass.Imaging" version="$version$" />
             <dependency id="Glass.LeadTools.ImagingExtensions" version="$version$" />
+            <dependency id="rx-main" version="2.2.5" />
         </dependencies>
         
     </metadata>
