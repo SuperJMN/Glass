@@ -19,7 +19,7 @@
             this.output = output;
         }
 
-        [Fact(Skip = "Slow")]
+        [Fact]
         public void Batch()
         {
             foreach (var bitmap in Directory.EnumerateFiles("Batch").Select(GetBitmap))

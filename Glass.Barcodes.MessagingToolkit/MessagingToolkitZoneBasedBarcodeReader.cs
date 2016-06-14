@@ -1,4 +1,6 @@
-﻿namespace Glass.Barcodes.MessagingToolkit
+﻿using MessagingToolkit.Barcode.Common;
+
+namespace Glass.Barcodes.MessagingToolkit
 {
     using System;
     using System.Collections.Generic;
@@ -18,10 +20,9 @@
 
         public IEnumerable<RecognitionResult> Recognize(BitmapSource bitmap, ZoneConfiguration config)
         {
-            var writeableBitmap = new WriteableBitmap(bitmap.Clone());
-            writeableBitmap.Freeze();
+            var binaryBitmap  = new BinaryBitmap(new HybridBinarizer(new BitmapSourceLuminanceSource(bitmap)));
 
-            var recognizer = Task.Run(() => barcodeReader.Decode(writeableBitmap, new Dictionary<DecodeOptions, object>()))
+            var recognizer = Task.Run(() => barcodeReader.Decode(binaryBitmap, new Dictionary<DecodeOptions, object>()))
                 .ToObservable();
 
             var result = recognizer

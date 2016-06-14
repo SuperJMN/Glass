@@ -830,10 +830,10 @@
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\xunit.runner.visualstudio.2.1.0\build\net20\xunit.runner.visualstudio.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\xunit.runner.visualstudio.2.1.0\build\net20\xunit.runner.visualstudio.props'))" />
     <Error Condition="!Exists('..\packages\LeadTools.Ocr.AdvantageEngine-x86.19.0.1\build\LeadTools.Ocr.AdvantageEngine-x86.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\LeadTools.Ocr.AdvantageEngine-x86.19.0.1\build\LeadTools.Ocr.AdvantageEngine-x86.targets'))" />
     <Error Condition="!Exists('..\packages\Glass.Ocr.Tesseract.English.1.0.1\build\Glass.Ocr.Tesseract.English.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Glass.Ocr.Tesseract.English.1.0.1\build\Glass.Ocr.Tesseract.English.targets'))" />
     <Error Condition="!Exists('..\packages\Glass.Ocr.Tesseract.Spanish.1.0.1\build\Glass.Ocr.Tesseract.Spanish.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Glass.Ocr.Tesseract.Spanish.1.0.1\build\Glass.Ocr.Tesseract.Spanish.targets'))" />
+    <Error Condition="!Exists('..\packages\xunit.runner.visualstudio.2.1.0\build\net20\xunit.runner.visualstudio.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\xunit.runner.visualstudio.2.1.0\build\net20\xunit.runner.visualstudio.props'))" />
   </Target>
   <Import Project="..\packages\LeadTools.Ocr.AdvantageEngine-x86.19.0.1\build\LeadTools.Ocr.AdvantageEngine-x86.targets" Condition="Exists('..\packages\LeadTools.Ocr.AdvantageEngine-x86.19.0.1\build\LeadTools.Ocr.AdvantageEngine-x86.targets')" />
   <Import Project="..\packages\Glass.Ocr.Tesseract.English.1.0.1\build\Glass.Ocr.Tesseract.English.targets" Condition="Exists('..\packages\Glass.Ocr.Tesseract.English.1.0.1\build\Glass.Ocr.Tesseract.English.targets')" />

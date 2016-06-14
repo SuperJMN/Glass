@@ -73,7 +73,7 @@
       <Name>Glass.Imaging</Name>
     </ProjectReference>
     <ProjectReference Include="..\Glass.LeadTools.Recognition.Tests\Glass.Imaging.Recognition.Tests.csproj">
-      <Project>{D017BD3C-FC45-478D-927F-3C025BB480B0}</Project>
+      <Project>{d017bd3c-fc45-478d-927f-3c025bb480b0}</Project>
       <Name>Glass.Imaging.Recognition.Tests</Name>
     </ProjectReference>
   </ItemGroup>
