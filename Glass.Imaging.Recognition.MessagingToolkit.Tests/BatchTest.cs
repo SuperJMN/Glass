@@ -19,7 +19,7 @@
             this.output = output;
         }
 
-        [Fact]
+        [Fact(Skip = "Not set")]
         public void Batch()
         {
             foreach (var bitmap in Directory.EnumerateFiles("Batch").Select(GetBitmap))

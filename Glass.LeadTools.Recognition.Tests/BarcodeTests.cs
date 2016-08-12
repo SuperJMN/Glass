@@ -32,5 +32,11 @@ namespace Glass.Imaging.Recognition.Tests
         {
             AssertSuccessRate(new NumericBarcodeTestCases(), new NumericStringFilter { MinLength = 6, MaxLength = 6 }, NumericSuccessRate, Symbology.Barcode);
         }
+
+        [Fact]
+        public void SpecificNumerics()
+        {
+            AssertSuccessRate(new SpecificBarcodeTestCases(), new NumericStringFilter { MinLength = 2, MaxLength = 2 }, 1D, Symbology.Barcode);
+        }
     }
 }

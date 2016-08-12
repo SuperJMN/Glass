@@ -32,6 +32,7 @@ namespace Glass.Basics
             }
 
             //use recursion to proceed with next level
+            // ReSharper disable once TailRecursiveCall
             return TryFindParent<T>(parentObject);
         }
 

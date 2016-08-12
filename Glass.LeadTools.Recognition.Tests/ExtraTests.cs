@@ -4,10 +4,9 @@
     using System.Linq;
     using System.Windows.Media;
     using System.Windows.Media.Imaging;
-    using DataProviders;
-    using Imaging.PostProcessing;
-    using Imaging.ZoneConfigurations;
-    using Imaging.ZoneConfigurations.Numeric;
+    using PostProcessing;
+    using ZoneConfigurations;
+    using ZoneConfigurations.Numeric;
     using Xunit;
     using Xunit.Abstractions;
 
@@ -34,7 +33,7 @@
 
         private static WriteableBitmap GetEmptyBitmap()
         {
-            return new WriteableBitmap(10, 10, 96, 96, PixelFormats.Bgr24, new BitmapPalette(new List<Color> { Color.FromRgb(0, 0, 0) }));
+            return new WriteableBitmap(100, 100, 96, 96, PixelFormats.Bgr32, new BitmapPalette(new List<Color> { Color.FromRgb(0, 0, 0) }));
         }      
     }
 }

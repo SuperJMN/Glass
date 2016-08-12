@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Glass.Basics", "Glass.Basics\Glass.Basics.csproj", "{76C3D50B-CA51-480F-8FCD-40F0EA98F4C6}"
 EndProject
@@ -26,8 +26,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Glass.Imaging.Recognition.Tesseract", "Glass.Ocr.Tesseract\Glass.Imaging.Recognition.Tesseract.csproj", "{9A0D9305-8B20-41E6-97C7-CF1B8070F6C9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Glass.Barcodes.MessagingToolkit", "Glass.Barcodes.MessagingToolkit\Glass.Barcodes.MessagingToolkit.csproj", "{A4380789-8C29-4E64-B42D-5872908C446C}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{17A2B060-30CC-4DC0-92B1-68826521F380}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Glass.Imaging.Recognition.LeadTools.Tests", "Glass.Imaging.Recognition.LeadTools.Tests\Glass.Imaging.Recognition.LeadTools.Tests.csproj", "{FCAFD8C1-4896-4017-8C82-4DE13CB9BAEA}"
 EndProject
@@ -166,12 +164,5 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{A7FC6BC9-D691-413A-B839-9D1EC30AE7E1} = {17A2B060-30CC-4DC0-92B1-68826521F380}
-		{D017BD3C-FC45-478D-927F-3C025BB480B0} = {17A2B060-30CC-4DC0-92B1-68826521F380}
-		{FCAFD8C1-4896-4017-8C82-4DE13CB9BAEA} = {17A2B060-30CC-4DC0-92B1-68826521F380}
-		{3343FCCB-A648-4B61-9E34-AED4D0220A72} = {17A2B060-30CC-4DC0-92B1-68826521F380}
-		{62CD9CD8-F9EF-4999-B724-4FE0805AD5D1} = {17A2B060-30CC-4DC0-92B1-68826521F380}
 	EndGlobalSection
 EndGlobal
