@@ -38,7 +38,9 @@
         }
 
         [Theory]
-        [InlineData("61703", @"Images\Texts\61703.jpg", 6, 6, Symbology.Text, "Numeric")]
+        [InlineData("61703", @"Images\Texts\Numeric\Specific\61703.jpg", 6, 6, Symbology.Text, "Numeric")]
+        [InlineData("61703", @"Images\Texts\Numeric\Specific\Bitmap.bmp", 6, 6, Symbology.Text, "Numeric")]
+        [InlineData("61969", @"Images\Texts\Numeric\Specific\Bitmap2.bmp", 6, 6, Symbology.Text, "Numeric")]
         public void SpecificTest(string result, string pathToImage, int min, int max, Symbology symbology, string filterType)
         {
             StringFilter filter = GetFilter(filterType, min, max);
