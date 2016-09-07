@@ -31,9 +31,9 @@ namespace Glass.Imaging.Recognition.Tests
 
         }
 
-        protected static BitmapSource LoadImage(string s)
+        protected static BitmapSource LoadImage(string path)
         {
-            return new BitmapImage(new Uri(s, UriKind.Relative));
+            return new BitmapImage(new Uri(path, UriKind.Relative));
         }
 
         public string Extract(BitmapSource bitmap, ITextualDataFilter filter, Symbology symbology)
