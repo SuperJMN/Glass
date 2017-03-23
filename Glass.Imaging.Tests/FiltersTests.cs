@@ -28,11 +28,12 @@
         [InlineData(" 123456 ", 0, int.MaxValue, "123456")]
         [InlineData(" 12345556 \r\n  2121", 4, 5, "2121")]
         [InlineData("18 8\r\n1101118110 988 5085\r\n11", 4, 5, "5085")]
+        [InlineData("<NOISE>", 4, 5, null)]
         [InlineData(null, 0, int.MaxValue, null)]
         public void NumericTest(string str, int min, int max, string expected)
         {
             var sut = new NumericStringFilter { MinLength = min, MaxLength = max };
-            var actual = sut.Filter(str);
+            var actual = sut.GetBestMatchFromRaw(str);
             Assert.Equal(expected, actual);
         }
 
@@ -44,7 +45,7 @@
         public void AlphanumericTest(string str, int min, int max, string expected, string regex)
         {
             var sut = new AlphanumericStringFilter { MinLength = min, MaxLength = max, Regex = regex };
-            var actual = sut.Filter(str);
+            var actual = sut.GetBestMatchFromRaw(str);
             Assert.Equal(expected, actual);
         }
 
@@ -59,7 +60,7 @@
         public void AlphaTest(string str, int min, int max, string expected, string regex = null)
         {
             var sut = new AlphaOnlyStringFilter { MinLength = min, MaxLength = max, Regex = regex };
-            var actual = sut.Filter(str);
+            var actual = sut.GetBestMatchFromRaw(str);
             Assert.Equal(expected, actual);
         }
 
@@ -68,7 +69,7 @@
         public void IntervalTest(string str, string expected)
         {
             var sut = new NumericStringFilter { Minimum = 1000, Maximum = 3000 };
-            var actual = sut.Filter(str);
+            var actual = sut.GetBestMatchFromRaw(str);
             Assert.Equal(expected, actual);
         }
     }

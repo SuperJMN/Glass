@@ -7,7 +7,7 @@ namespace Glass.Imaging.Core
         public RecognizedZone(IImage bitmap, ZoneConfiguration zoneConfiguration, RecognitionResult recognitionResult)
         {
             ZoneConfig = zoneConfiguration;
-            Bitmap = ImagingContext.BitmapOperations.Crop(bitmap, zoneConfiguration.Bounds);
+            Bitmap = bitmap;
             RecognitionResult = recognitionResult;
         }
 

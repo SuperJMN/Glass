@@ -6,7 +6,7 @@ namespace Glass.Imaging.ZoneConfigurations
     {
         bool IsSingleLine { get; set; }
         string Regex { get; set; }
-        string Filter(string input);
+        string GetBestMatchFromRaw(string input);
         FilterType FilterType { get; }
         IEvaluator Evaluator { get; }
     }
