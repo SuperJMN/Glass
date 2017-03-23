@@ -10,7 +10,7 @@ namespace Glass.LeadTools.ImagingExtensions.ImageFilters
     {
         public IImage Apply(IImage image)
         {
-            var raster = image.FromImageToRasterImage();
+            var raster = image.ToBgr().ToBitmapSource().ToRasterImage();
             new HistogramContrastCommand() { Contrast = 1000 }.Run(raster);
             return raster.ToImage();
         }

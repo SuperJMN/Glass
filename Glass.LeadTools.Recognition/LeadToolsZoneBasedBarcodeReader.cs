@@ -23,26 +23,26 @@
                 BitmapFilter = new NoProcessBitmapFilter(),
                 ImageType = BarcodeImageType.ScannedDocument
             },
-            //new BarcodeStrategy
-            //{
-            //    BitmapFilter = new HistogramContrastBitmapFilter(),
-            //    ImageType = BarcodeImageType.Picture
-            //},
-            //new BarcodeStrategy
-            //{
-            //    BitmapFilter = new HistogramContrastBitmapFilter(),
-            //    ImageType = BarcodeImageType.ScannedDocument
-            //},
-            //new BarcodeStrategy
-            //{
-            //    BitmapFilter = new ExtendedFilter(),
-            //    ImageType = BarcodeImageType.ScannedDocument
-            //},
-            //new BarcodeStrategy
-            //{
-            //    BitmapFilter = new AutoContrastBitmapFilter(),
-            //    ImageType = BarcodeImageType.ScannedDocument
-            //}
+            new BarcodeStrategy
+            {
+                BitmapFilter = new HistogramContrastBitmapFilter(),
+                ImageType = BarcodeImageType.Picture
+            },
+            new BarcodeStrategy
+            {
+                BitmapFilter = new HistogramContrastBitmapFilter(),
+                ImageType = BarcodeImageType.ScannedDocument
+            },
+            new BarcodeStrategy
+            {
+                BitmapFilter = new ExtendedFilter(),
+                ImageType = BarcodeImageType.ScannedDocument
+            },
+            new BarcodeStrategy
+            {
+                BitmapFilter = new AutoContrastBitmapFilter(),
+                ImageType = BarcodeImageType.ScannedDocument
+            }
         };
 
         public LeadToolsZoneBasedBarcodeReader(ILeadToolsLicenseApplier licenseApplier)
@@ -85,7 +85,7 @@
         {
             var engine = new BarcodeEngine();
             engine.Reader.ImageType = imageType;
-            var barcodeDatas = engine.Reader.ReadBarcodes(image.FromImageToRasterImage(), leadRect, 10, BarcodeSymbologies.ToArray(), coreReadOptions);
+            var barcodeDatas = engine.Reader.ReadBarcodes(image.ToBgr().ToBitmapSource().ToRasterImage(), leadRect, 10, BarcodeSymbologies.ToArray(), coreReadOptions);
             var textForStrategy = barcodeDatas.Where(data => data.Value != null).Select(data => data.Value);
             return textForStrategy;
         }

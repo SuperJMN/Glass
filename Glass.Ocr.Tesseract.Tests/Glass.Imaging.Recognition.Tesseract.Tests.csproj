@@ -50,6 +50,18 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DotImaging.GenericImage, Version=4.7.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotImaging.GenericImage.4.8.3\lib\net45\DotImaging.GenericImage.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DotImaging.IO, Version=4.7.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotImaging.IO.4.8.3\lib\net45\DotImaging.IO.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DotImaging.Primitives2D, Version=4.7.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotImaging.Primitives2D.4.8.3\lib\net45\DotImaging.Primitives2D.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -104,8 +116,10 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Glass.Ocr.Tesseract.Spanish.1.0.1\build\Glass.Ocr.Tesseract.Spanish.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Glass.Ocr.Tesseract.Spanish.1.0.1\build\Glass.Ocr.Tesseract.Spanish.targets'))" />
     <Error Condition="!Exists('..\packages\Glass.Ocr.Tesseract.English.1.0.1\build\Glass.Ocr.Tesseract.English.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Glass.Ocr.Tesseract.English.1.0.1\build\Glass.Ocr.Tesseract.English.targets'))" />
+    <Error Condition="!Exists('..\packages\DotImaging.IO.4.8.3\build\DotImaging.IO.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\DotImaging.IO.4.8.3\build\DotImaging.IO.targets'))" />
   </Target>
   <Import Project="..\packages\Glass.Ocr.Tesseract.English.1.0.1\build\Glass.Ocr.Tesseract.English.targets" Condition="Exists('..\packages\Glass.Ocr.Tesseract.English.1.0.1\build\Glass.Ocr.Tesseract.English.targets')" />
+  <Import Project="..\packages\DotImaging.IO.4.8.3\build\DotImaging.IO.targets" Condition="Exists('..\packages\DotImaging.IO.4.8.3\build\DotImaging.IO.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
