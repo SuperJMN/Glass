@@ -2,9 +2,10 @@ namespace Glass.Imaging
 {
     using System.Collections.Generic;
     using System.Windows.Media.Imaging;
+    using DotImaging;
 
     public interface IBitmapBatchGenerator
     {
-        IEnumerable<BitmapSource> Generate(BitmapSource image);
+        IEnumerable<IImage> Generate(IImage image);
     }
 }

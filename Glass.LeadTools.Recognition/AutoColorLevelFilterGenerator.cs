@@ -2,12 +2,13 @@
 {
     using System.Collections.Generic;
     using System.Windows.Media.Imaging;
+    using DotImaging;
     using Imaging;
     using ImagingExtensions.ImageFilters;
 
     public class AutoColorLevelFilterGenerator : IBitmapBatchGenerator
     {
-        public IEnumerable<BitmapSource> Generate(BitmapSource image)
+        public IEnumerable<IImage> Generate(IImage image)
         {
             yield return new AutoColorLevelFilter().Apply(image);
         }

@@ -7,6 +7,7 @@
     using System.IO;
     using System.Windows;
     using System.Windows.Media.Imaging;
+    using DotImaging;
 
     public static class Extensions
     {
@@ -15,31 +16,7 @@
             return new Int32Rect((int)rect.X, (int)rect.Y, (int)rect.Width, (int)rect.Height);
         }
 
-        public static Rect ConvertFrom96pppToBitmapDpi(this Rect rect, double horzDpi, double vertDpi)
-        {
-            const int dpi = 96;
-
-            var x = rect.X * horzDpi / dpi;
-            var y = rect.Y * vertDpi / dpi;
-            var width = rect.Width * horzDpi / dpi;
-            var height = rect.Height * vertDpi / dpi;
-            return new Rect(x, y, width, height);
-        }
-
-        public static Bitmap ToBitmap(this BitmapSource bitmapImage)
-        {
-            using (var outStream = new MemoryStream())
-            {
-                BitmapEncoder enc = new BmpBitmapEncoder();
-                enc.Frames.Add(BitmapFrame.Create(bitmapImage));
-                enc.Save(outStream);
-                Bitmap bitmap = new Bitmap(outStream);
-
-                return new Bitmap(bitmap);
-            }
-        }
-
-        public static BitmapSource ToBitmapImage(this Bitmap bitmap)
+        public static IImage ToBitmapImage(this Bitmap bitmap)
         {
             using (var stream = new MemoryStream())
             {
@@ -54,8 +31,26 @@
                 result.StreamSource = stream;
                 result.EndInit();
                 result.Freeze();
-                return result;
+                Bgra<byte>[,] colorImg = result.ToArray<Bgra<byte>>();
+                return colorImg.Lock();
             }
+        }
+
+        public static BitmapSource ConvertWriteableBitmapToBitmapImage(WriteableBitmap wbm)
+        {
+            BitmapImage bmImage = new BitmapImage();
+            using (MemoryStream stream = new MemoryStream())
+            {
+                PngBitmapEncoder encoder = new PngBitmapEncoder();
+                encoder.Frames.Add(BitmapFrame.Create(wbm));
+                encoder.Save(stream);
+                bmImage.BeginInit();
+                bmImage.CacheOption = BitmapCacheOption.OnLoad;
+                bmImage.StreamSource = stream;
+                bmImage.EndInit();
+                bmImage.Freeze();
+            }
+            return bmImage;
         }
     }
 }

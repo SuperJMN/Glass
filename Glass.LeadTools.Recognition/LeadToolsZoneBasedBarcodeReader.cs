@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Windows.Media;
     using System.Windows.Media.Imaging;
+    using DotImaging;
     using Imaging;
     using Imaging.PostProcessing;
     using Imaging.ZoneConfigurations;
@@ -66,34 +67,29 @@
                 BarcodeSymbology.Datamatrix
             };
 
-        public IEnumerable<RecognitionResult> Recognize(BitmapSource bitmap, ZoneConfiguration config)
+        public IEnumerable<RecognitionResult> Recognize(IImage bitmap, ZoneConfiguration config)
         {
             var coreReadOptions = CoreReadOptions;
 
-            var leadRect = new LogicalRectangle(0, 0, bitmap.PixelWidth, bitmap.PixelHeight, LogicalUnit.Pixel);
+            var leadRect = new LogicalRectangle(0, 0, bitmap.Width, bitmap.Height, LogicalUnit.Pixel);
 
             var unitsOfWork = from strategy in BarcodeStrategies
-                                   let filteredImage = Freeze(strategy.BitmapFilter.Apply(bitmap))
+                                   let filteredImage = strategy.BitmapFilter.Apply(bitmap)
                                    select new { ImageType = strategy.ImageType, FilteredImage = filteredImage };
 
             var selectMany = unitsOfWork.SelectMany(u => GetText(leadRect, coreReadOptions, u.FilteredImage, u.ImageType));
             return selectMany.Select(s => new RecognitionResult(s, 1));            
         }
 
-        private IEnumerable<string> GetText(LogicalRectangle leadRect, BarcodeReadOptions[] coreReadOptions, ImageSource image, BarcodeImageType imageType)
+        private IEnumerable<string> GetText(LogicalRectangle leadRect, BarcodeReadOptions[] coreReadOptions, IImage image, BarcodeImageType imageType)
         {
             var engine = new BarcodeEngine();
             engine.Reader.ImageType = imageType;
-            var barcodeDatas = engine.Reader.ReadBarcodes(image.ToRasterImage(), leadRect, 10, BarcodeSymbologies.ToArray(), coreReadOptions);
+            var barcodeDatas = engine.Reader.ReadBarcodes(image.ToBgr().ToBitmapSource().ToRasterImage(), leadRect, 10, BarcodeSymbologies.ToArray(), coreReadOptions);
             var textForStrategy = barcodeDatas.Where(data => data.Value != null).Select(data => data.Value);
             return textForStrategy;
         }
 
-        private BitmapSource Freeze(BitmapSource apply)
-        {
-            apply.Freeze();
-            return apply;
-        }
 
         public IEnumerable<ImageTarget> ImageTargets => new Collection<ImageTarget> { new ImageTarget { Symbology = Symbology.Barcode, FilterTypes = FilterType.All } };
     }

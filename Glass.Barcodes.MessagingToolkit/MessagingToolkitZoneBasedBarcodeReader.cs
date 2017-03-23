@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Windows.Media.Imaging;
+    using DotImaging;
     using global::MessagingToolkit.Barcode;
     using Imaging;
     using Imaging.PostProcessing;
@@ -12,9 +13,9 @@
     {
         private readonly BarcodeDecoder barcodeReader = new BarcodeDecoder();
 
-        public IEnumerable<RecognitionResult> Recognize(BitmapSource bitmap, ZoneConfiguration config)
+        public IEnumerable<RecognitionResult> Recognize(IImage bitmap, ZoneConfiguration config)
         {
-            var writeableBitmap = new WriteableBitmap(bitmap);
+            var writeableBitmap = new WriteableBitmap(bitmap.ToBgr().ToBitmapSource());
             string text;
             try
             {

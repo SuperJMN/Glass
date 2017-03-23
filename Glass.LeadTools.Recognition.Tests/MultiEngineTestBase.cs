@@ -7,6 +7,7 @@ namespace Glass.Imaging.Recognition.Tests
     using Barcodes.MessagingToolkit;
     using Imaging;
     using Core;
+    using DotImaging;
     using FullFx;
     using PostProcessing;
     using ZoneConfigurations;
@@ -31,12 +32,12 @@ namespace Glass.Imaging.Recognition.Tests
 
         }
 
-        protected static BitmapSource LoadImage(string s)
+        protected static IImage LoadImage(string s)
         {
-            return new BitmapImage(new Uri(s, UriKind.Relative));
+            return s.LoadColor();
         }
 
-        public string Extract(BitmapSource bitmap, ITextualDataFilter filter, Symbology symbology)
+        public string Extract(IImage bitmap, ITextualDataFilter filter, Symbology symbology)
         {
             var sut = GetSut();
             var recognizedPage = sut.Recognize(bitmap, RecognitionConfiguration.FromSingleImage(bitmap, filter, symbology));

@@ -1,8 +1,8 @@
 ﻿namespace Glass.Imaging.Recognition.Tests
 {
-    using Imaging.PostProcessing;
-    using Imaging.ZoneConfigurations;
-    using Imaging.ZoneConfigurations.Numeric;
+    using PostProcessing;
+    using ZoneConfigurations;
+    using ZoneConfigurations.Numeric;
     using JetBrains.dotMemoryUnit;
     using Leadtools;
     using Leadtools.Forms.Ocr.Advantage;

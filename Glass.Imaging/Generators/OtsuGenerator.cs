@@ -3,11 +3,12 @@ namespace Glass.Imaging.Generators
     using System.Collections.Generic;
     using System.Linq;
     using System.Windows.Media.Imaging;
+    using DotImaging;
     using Filters;
 
     public class OtsuGenerator : IBitmapBatchGenerator
     {
-        public IEnumerable<BitmapSource> Generate(BitmapSource image)
+        public IEnumerable<IImage> Generate(IImage image)
         {
             yield return new OtsuThresholdFilterFree().Apply(image);
         }

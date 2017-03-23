@@ -6,6 +6,7 @@
     using System.Linq;
     using System.Windows.Media;
     using System.Windows.Media.Imaging;
+    using DotImaging;
     using Filters;
     using global::Tesseract;
     using Generators;
@@ -29,7 +30,7 @@
             new ThresholdGenerator(),
         };
 
-        public override IEnumerable<RecognitionResult> Recognize(BitmapSource bitmap, ZoneConfiguration config)
+        public override IEnumerable<RecognitionResult> Recognize(IImage bitmap, ZoneConfiguration config)
         {
             bitmap = ScaleIfEnabled(bitmap);
 
@@ -78,12 +79,12 @@
 
         public override IEnumerable<ImageTarget> ImageTargets => new Collection<ImageTarget> { new ImageTarget { Symbology = Symbology.Text, FilterTypes = FilterType.All } };
 
-        private static byte[] ConvertToTiffByteArray(BitmapSource bitmap)
+        private static byte[] ConvertToTiffByteArray(IImage bitmap)
         {
             var encoder = new TiffBitmapEncoder();
             var memoryStream = new MemoryStream();
 
-            encoder.Frames.Add(BitmapFrame.Create(bitmap));
+            encoder.Frames.Add(BitmapFrame.Create(bitmap.ToBgr().ToBitmapSource()));
             encoder.Save(memoryStream);
 
             memoryStream.Seek(0, SeekOrigin.Begin);

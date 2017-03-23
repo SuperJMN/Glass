@@ -6,6 +6,7 @@ namespace Glass.Imaging.Recognition.Tests.DataProviders
     using System.IO;
     using System.Linq;
     using System.Windows.Media.Imaging;
+    using DotImaging;
 
     public abstract class TestCases : IEnumerable<TestCase>
     {
@@ -27,9 +28,9 @@ namespace Glass.Imaging.Recognition.Tests.DataProviders
             }
         }
 
-        private static BitmapSource LoadImage(string s)
+        private static IImage LoadImage(string s)
         {
-            return new BitmapImage(new Uri(s, UriKind.Relative));
+            return s.LoadColor();
         }
 
         public IEnumerator<TestCase> GetEnumerator()

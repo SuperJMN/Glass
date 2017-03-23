@@ -1,16 +1,17 @@
 ﻿namespace Glass.Imaging.Filters
 {
-    using System.Windows.Media.Imaging;
+    using Accord.Extensions.Imaging;
     using AForge.Imaging.Filters;
     using Core;
+    using DotImaging;
 
     public class ContrastStrechFilter : IBitmapFilter
     {
-        public BitmapSource Apply(BitmapSource image)
+        public IImage Apply(IImage image)
         {
             var filter = new ContrastStretch();
-            var bmp = filter.Apply(image.ToBitmap());
-            return bmp.ToBitmapImage();
+            var bmp = filter.Apply(image.ToBgr().Lock().AsAForgeImage());
+            return bmp.AsImage();
         }
     }
 }

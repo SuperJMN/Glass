@@ -1,10 +1,10 @@
 ﻿namespace Glass.Imaging.Core
 {
-    using System.Windows.Media.Imaging;
+    using DotImaging;
     using PostProcessing;
 
     public interface IZoneBasedRecognitionService
     {
-        RecognizedPage Recognize(BitmapSource image, RecognitionConfiguration configuration);        
+        RecognizedPage Recognize(IImage image, RecognitionConfiguration configuration);        
     }    
 }

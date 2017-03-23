@@ -1,14 +1,13 @@
 namespace Glass.LeadTools.ImagingExtensions.ImageFilters
 {
-    using System.Windows.Media;
-    using System.Windows.Media.Imaging;
+    using DotImaging;
     using Imaging;
 
     public class NoProcessBitmapFilter : IBitmapFilter
     {
-        public BitmapSource Apply(BitmapSource image)
+        public IImage Apply(IImage image)
         {
-            return (BitmapSource) image.Clone();
+            return image;
         }
 
         public override string ToString()

@@ -1,9 +1,9 @@
 ﻿namespace Glass.LeadTools.ImagingExtensions
 {
-    using System;
     using System.Windows;
     using System.Windows.Media;
     using System.Windows.Media.Imaging;
+    using DotImaging;
     using Leadtools;
     using Leadtools.Codecs;
     using Leadtools.ImageProcessing;
@@ -63,11 +63,11 @@
             }
         }
 
-        public static BitmapSource ToBitmapSource(this RasterImage rasterImage)
+        public static IImage ToImage(this RasterImage rasterImage)
         {
             var convertToSource = RasterImageConverter.ConvertToSource(rasterImage, ConvertToSourceOptions.None);
             convertToSource.Freeze();
-            return (BitmapSource) convertToSource;
+            return (IImage) convertToSource;
         }
 
         public static RasterImage ToRasterImage(this ImageSource rasterImage)
@@ -79,28 +79,6 @@
         {
             var rasterImage = ToRasterImage(image);
             Codecs.Save(rasterImage, path, RasterImageFormat.Jpeg, 24);
-        }
-
-        public static ImageSource Resize(this ImageSource image, Size maxSize)
-        {
-            var rasterImage = ToRasterImage(image);
-            var currentSize = new Size(rasterImage.ImageSize.Width, rasterImage.ImageSize.Height);
-            var newSize = currentSize.PreserveAspectRatioWithinBounds(maxSize);
-
-            var destImage = new RasterImage(
-                RasterMemoryFlags.Conventional,
-                (int)newSize.Width,
-                (int)newSize.Height,
-                rasterImage.BitsPerPixel,
-                rasterImage.Order,
-                rasterImage.ViewPerspective,
-                rasterImage.GetPalette(),
-                IntPtr.Zero,
-                0);
-
-            var cmd = new ResizeCommand(destImage, RasterSizeFlags.Bicubic);
-            cmd.Run(rasterImage);
-            return ToBitmapSource(destImage);
         }
 
         public static Size PreserveAspectRatioWithinBounds(this Size size, Size bounds)

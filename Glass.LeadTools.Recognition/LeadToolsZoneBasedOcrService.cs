@@ -6,6 +6,7 @@
     using System.Linq;
     using System.Windows.Media;
     using System.Windows.Media.Imaging;
+    using DotImaging;
     using Imaging;
     using Imaging.PostProcessing;
     using Imaging.ZoneConfigurations;
@@ -48,7 +49,7 @@
             }
         }
 
-        public override IEnumerable<RecognitionResult> Recognize(BitmapSource bitmap, ZoneConfiguration config)
+        public override IEnumerable<RecognitionResult> Recognize(IImage bitmap, ZoneConfiguration config)
         {
             bitmap = ScaleIfEnabled(bitmap);
 
@@ -57,7 +58,7 @@
             return recognitions;
         }
 
-        public IEnumerable<RecognitionResult> RecognizeScaleEachVariation(BitmapSource bitmap, ZoneConfiguration config)
+        public IEnumerable<RecognitionResult> RecognizeScaleEachVariation(IImage bitmap, ZoneConfiguration config)
         {
             var bitmaps = BitmapGenerators.SelectMany(g => g.Generate(bitmap));
             var scaled = bitmaps.Select(ScaleIfEnabled);
@@ -65,9 +66,9 @@
             return recognitions;
         }
 
-        private IEnumerable<RecognitionResult> RecognizeCore(ZoneConfiguration config, ImageSource bmp)
+        private IEnumerable<RecognitionResult> RecognizeCore(ZoneConfiguration config, IImage bmp)
         {
-            using (var page = OcrEngine.CreatePage(bmp.ToRasterImage(), OcrImageSharingMode.AutoDispose))
+            using (var page = OcrEngine.CreatePage(bmp.ToBgr().ToBitmapSource().ToRasterImage(), OcrImageSharingMode.AutoDispose))
             {
                 var ocrZone = CreateOcrZoneForField(config);
                 page.Zones.Add(ocrZone);

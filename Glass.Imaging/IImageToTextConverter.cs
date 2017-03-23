@@ -2,10 +2,11 @@
 {
     using System.Collections.Generic;
     using System.Windows.Media.Imaging;
+    using DotImaging;
 
     public interface IImageToTextConverter
     {
-        IEnumerable<RecognitionResult> Recognize(BitmapSource bitmap, ZoneConfiguration config);
+        IEnumerable<RecognitionResult> Recognize(IImage bitmap, ZoneConfiguration config);
         IEnumerable<ImageTarget> ImageTargets { get; }
     }
 }

@@ -1,10 +1,14 @@
 ﻿namespace Glass.Imaging.Recognition.Tests
 {
+    using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Windows.Media;
     using System.Windows.Media.Imaging;
+    using Core;
     using DataProviders;
+    using DotImaging;
     using Imaging.PostProcessing;
     using Imaging.ZoneConfigurations;
     using Imaging.ZoneConfigurations.Numeric;
@@ -32,9 +36,12 @@
             Assert.Null(recognitionResult.Text);
         }
 
-        private static WriteableBitmap GetEmptyBitmap()
+        private static IImage GetEmptyBitmap()
         {
-            return new WriteableBitmap(10, 10, 96, 96, PixelFormats.Bgr24, new BitmapPalette(new List<Color> { Color.FromRgb(0, 0, 0) }));
-        }      
+            var writeableBitmap = new WriteableBitmap(10, 10, 96, 96, PixelFormats.Bgr24, new BitmapPalette(new List<Color> { Color.FromRgb(0, 0, 0) }));
+            var bmpSrc = Extensions.ConvertWriteableBitmapToBitmapImage(writeableBitmap);
+            Bgra<byte>[,] colorImg = bmpSrc.ToArray<Bgra<byte>>();
+            return colorImg.Lock();
+        }
     }
 }

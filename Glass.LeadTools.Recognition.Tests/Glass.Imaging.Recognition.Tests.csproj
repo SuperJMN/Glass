@@ -52,6 +52,22 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DotImaging.BitmapSourceInterop, Version=4.7.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotImaging.BitmapSourceInterop.4.8.3\lib\net45\DotImaging.BitmapSourceInterop.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DotImaging.GenericImage, Version=4.7.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotImaging.GenericImage.4.8.3\lib\net45\DotImaging.GenericImage.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DotImaging.IO, Version=4.7.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotImaging.IO.4.8.3\lib\net45\DotImaging.IO.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DotImaging.Primitives2D, Version=4.7.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotImaging.Primitives2D.4.8.3\lib\net45\DotImaging.Primitives2D.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="dotMemory.Unit, Version=103.0.0.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
       <HintPath>..\packages\JetBrains.dotMemoryUnit.2.1.20150828.125449\lib\dotMemory.Unit.dll</HintPath>
       <Private>True</Private>
@@ -834,10 +850,12 @@
     <Error Condition="!Exists('..\packages\LeadTools.Ocr.AdvantageEngine-x86.19.0.1\build\LeadTools.Ocr.AdvantageEngine-x86.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\LeadTools.Ocr.AdvantageEngine-x86.19.0.1\build\LeadTools.Ocr.AdvantageEngine-x86.targets'))" />
     <Error Condition="!Exists('..\packages\Glass.Ocr.Tesseract.English.1.0.1\build\Glass.Ocr.Tesseract.English.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Glass.Ocr.Tesseract.English.1.0.1\build\Glass.Ocr.Tesseract.English.targets'))" />
     <Error Condition="!Exists('..\packages\Glass.Ocr.Tesseract.Spanish.1.0.1\build\Glass.Ocr.Tesseract.Spanish.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Glass.Ocr.Tesseract.Spanish.1.0.1\build\Glass.Ocr.Tesseract.Spanish.targets'))" />
+    <Error Condition="!Exists('..\packages\DotImaging.IO.4.8.3\build\DotImaging.IO.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\DotImaging.IO.4.8.3\build\DotImaging.IO.targets'))" />
   </Target>
   <Import Project="..\packages\LeadTools.Ocr.AdvantageEngine-x86.19.0.1\build\LeadTools.Ocr.AdvantageEngine-x86.targets" Condition="Exists('..\packages\LeadTools.Ocr.AdvantageEngine-x86.19.0.1\build\LeadTools.Ocr.AdvantageEngine-x86.targets')" />
   <Import Project="..\packages\Glass.Ocr.Tesseract.English.1.0.1\build\Glass.Ocr.Tesseract.English.targets" Condition="Exists('..\packages\Glass.Ocr.Tesseract.English.1.0.1\build\Glass.Ocr.Tesseract.English.targets')" />
   <Import Project="..\packages\Glass.Ocr.Tesseract.Spanish.1.0.1\build\Glass.Ocr.Tesseract.Spanish.targets" Condition="Exists('..\packages\Glass.Ocr.Tesseract.Spanish.1.0.1\build\Glass.Ocr.Tesseract.Spanish.targets')" />
+  <Import Project="..\packages\DotImaging.IO.4.8.3\build\DotImaging.IO.targets" Condition="Exists('..\packages\DotImaging.IO.4.8.3\build\DotImaging.IO.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

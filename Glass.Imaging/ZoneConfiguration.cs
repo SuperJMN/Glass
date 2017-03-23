@@ -3,6 +3,7 @@
 namespace Glass.Imaging
 {
     using System.Windows;
+    using DotImaging;
     using ZoneConfigurations;
 
     public class ZoneConfiguration
@@ -12,7 +13,7 @@ namespace Glass.Imaging
         public ITextualDataFilter TextualDataFilter { get; set; }
         public Symbology Symbology { get; set; }
 
-        public static ZoneConfiguration FromSingleImage(BitmapSource bitmapSource, ITextualDataFilter dataFilter, Symbology symbology)
+        public static ZoneConfiguration FromSingleImage(IImage bitmapSource, ITextualDataFilter dataFilter, Symbology symbology)
         {
 
             var bounds = new Rect(0, 0, bitmapSource.Width, bitmapSource.Height);

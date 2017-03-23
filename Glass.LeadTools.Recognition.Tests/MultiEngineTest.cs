@@ -7,6 +7,7 @@ namespace Glass.Imaging.Recognition.Tests
     using System.Windows.Media.Imaging;
     using Barcodes.MessagingToolkit;
     using Core;
+    using DotImaging;
     using FullFx;
     using LeadTools.Recognition;
     using PostProcessing;
@@ -36,7 +37,7 @@ namespace Glass.Imaging.Recognition.Tests
                 return opticalRecognizer ?? (opticalRecognizer = new CompositeOpticalRecognizer(ocrEngines.Concat(barcodeEngines)));  }
         }
 
-        private string ExtractBestTextCandidate(BitmapSource bitmap, ITextualDataFilter filter, Symbology symbology)
+        private string ExtractBestTextCandidate(IImage bitmap, ITextualDataFilter filter, Symbology symbology)
         {
             var page = Engine.Recognize(bitmap, RecognitionConfiguration.FromSingleImage(bitmap, filter, symbology));
             var zone = page.RecognizedZones.First();

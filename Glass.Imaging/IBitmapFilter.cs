@@ -1,9 +1,10 @@
 namespace Glass.Imaging
 {
     using System.Windows.Media.Imaging;
+    using DotImaging;
 
     public interface IBitmapFilter
     {
-        BitmapSource Apply(BitmapSource image);
+        IImage Apply(IImage image);
     }
 }

@@ -4,6 +4,7 @@ using System.Windows.Media.Imaging;
 namespace Glass.Imaging.Recognition.Tests
 {
     using DataProviders.Barcode;
+    using DotImaging;
     using Xunit;
     using Xunit.Abstractions;
     using ZoneConfigurations;
@@ -39,7 +40,7 @@ namespace Glass.Imaging.Recognition.Tests
         [Fact]
         public void QrCode()
         {
-            var bitmap = new BitmapImage(new Uri("Images\\QRCode.png", UriKind.Relative));
+            var bitmap = "Images\\QRCode.png".LoadColor();
             var alphanumericStringFilter = new AlphanumericStringFilter();
             var symbology = Symbology.Barcode;
 

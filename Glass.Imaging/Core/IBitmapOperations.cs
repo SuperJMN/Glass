@@ -2,10 +2,11 @@ namespace Glass.Imaging.Core
 {
     using System.Windows;
     using System.Windows.Media.Imaging;
+    using DotImaging;
 
     public interface IBitmapOperations
     {
-        BitmapSource Rotate(BitmapSource bitmap, double angle);
-        BitmapSource Crop(BitmapSource bitmap, Rect cropBounds);
+        IImage Rotate(IImage bitmap, double angle);
+        IImage Crop(IImage bitmap, Rect cropBounds);
     }
 }

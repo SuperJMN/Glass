@@ -1,23 +1,25 @@
 ﻿namespace Glass.Imaging
 {
     using System.Collections.Generic;
-    using System.Windows.Media;
-    using System.Windows.Media.Imaging;
+    using Accord.Extensions.Imaging;
+    using DotImaging;
+    using DotImaging.Primitives2D;
 
     public abstract class OcrService : IImageToTextConverter
     {
         public abstract double SourceScaleForOcr { get; }
         public abstract bool IsSourceScalingEnabledForOcr { get; }
         public abstract IEnumerable<IBitmapBatchGenerator> BitmapGenerators { get; }
-        public abstract IEnumerable<RecognitionResult> Recognize(BitmapSource bitmap, ZoneConfiguration config);
+        public abstract IEnumerable<RecognitionResult> Recognize(IImage bitmap, ZoneConfiguration config);
         public abstract IEnumerable<ImageTarget> ImageTargets { get; }
 
-        protected BitmapSource ScaleIfEnabled(BitmapSource bmp)
+        protected IImage ScaleIfEnabled(IImage bmp)
         {
             var scale = SourceScaleForOcr;
             var isScalingEnabled = IsSourceScalingEnabledForOcr;
+            var scaledSize = new Size((int) (bmp.Width * scale), (int) (bmp.Height * scale));
 
-            return isScalingEnabled ? new TransformedBitmap(bmp, new ScaleTransform(scale, scale)) : bmp;
+            return isScalingEnabled ? bmp.ToBgr().Resize(scaledSize, InterpolationMode.Bicubic).Lock() : bmp;
         }
     }
 }

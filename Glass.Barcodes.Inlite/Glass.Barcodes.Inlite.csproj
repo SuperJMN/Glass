@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A4380789-8C29-4E64-B42D-5872908C446C}</ProjectGuid>
+    <ProjectGuid>{B2E2A4BE-BB55-4841-9785-EB0184F5F497}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Glass.Barcodes.MessagingToolkit</RootNamespace>
-    <AssemblyName>Glass.Barcodes.MessagingToolkit</AssemblyName>
+    <RootNamespace>Glass.Barcodes.Inlite</RootNamespace>
+    <AssemblyName>Glass.Barcodes.Inlite</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,8 +30,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DotImaging.BitmapSourceInterop, Version=4.7.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DotImaging.BitmapSourceInterop.4.8.3\lib\net45\DotImaging.BitmapSourceInterop.dll</HintPath>
+    <Reference Include="ClearImageNet.70, Version=7.0.0.0, Culture=neutral, PublicKeyToken=71e5888be264aae0, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Inlite\ClearImage SDK.8_4_5185\ClearImageNet.70.dll</HintPath>
+    </Reference>
+    <Reference Include="DotImaging.BitmapInterop, Version=4.7.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotImaging.BitmapInterop.4.8.3\lib\net45\DotImaging.BitmapInterop.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="DotImaging.GenericImage, Version=4.7.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -42,42 +46,29 @@
       <HintPath>..\packages\DotImaging.Primitives2D.4.8.3\lib\net45\DotImaging.Primitives2D.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="MessagingToolkit.Barcode, Version=1.7.0.1, Culture=neutral, PublicKeyToken=4d44dd7196d3c1ac, processorArchitecture=x86">
-      <HintPath>..\packages\MessagingToolkit.Barcode.1.7.0.2\lib\net40\WPF\x86\MessagingToolkit.Barcode.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\SharedAssemblyInfo.cs">
-      <Link>Properties\SharedAssemblyInfo.cs</Link>
-    </Compile>
-    <Compile Include="MessagingToolkitZoneBasedBarcodeReader.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Glass.Barcodes.MessagingToolkit.nuspec">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="packages.config" />
+    <Compile Include="InliteBarcodeEngine.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Glass.Imaging\Glass.Imaging.csproj">
-      <Project>{056e7401-e413-4e50-9009-7fe1c69dee4f}</Project>
+      <Project>{056E7401-E413-4E50-9009-7FE1C69DEE4F}</Project>
       <Name>Glass.Imaging</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Glass.LeadTools.Recognition\Glass.LeadTools.Recognition.csproj">
-      <Project>{4BDCF46B-29D8-4844-AB49-B17A65FD8C2C}</Project>
-      <Name>Glass.LeadTools.Recognition</Name>
-    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

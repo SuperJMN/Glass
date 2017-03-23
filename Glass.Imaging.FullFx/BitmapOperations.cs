@@ -1,33 +1,41 @@
 namespace Glass.Imaging.FullFx
 {
+    using System.Drawing;
     using System.Windows;
-    using System.Windows.Media;
-    using System.Windows.Media.Imaging;
+    using Accord.Extensions.Imaging;
+    using AForge.Imaging.Filters;
     using Core;
+    using DotImaging;
     using Transform = Core.Transform;
+
+    public static class ConversionExtensions
+    {
+        public static Rectangle ToWindowsRect(this Rect cropBounds)
+        {
+            return new Rectangle((int) cropBounds.Left, (int) cropBounds.Top, (int) cropBounds.Width, (int) cropBounds.Height);
+        }
+    }
 
     public class BitmapOperations : IBitmapOperations
     {
-        public BitmapSource Crop(BitmapSource bitmap, Rect cropBounds)
+        public IImage Crop(IImage bitmap, Rect cropBounds)
         {
-            cropBounds = cropBounds.ConvertFrom96pppToBitmapDpi(bitmap.DpiX, bitmap.DpiY);
-            var cropped = new CroppedBitmap(bitmap, cropBounds.ToInt32Rect());
-            return cropped;
+            var unmanaged = bitmap.ToBgr().Lock().AsAForgeImage();
+            var rectangle = cropBounds.ToWindowsRect();
+            var cropped = new Crop(rectangle).Apply(unmanaged);
+            return cropped.AsImage();
         }
 
-        public BitmapSource Rotate(BitmapSource bitmap, double angle)
+        public IImage Rotate(IImage bitmap, double angle)
         {
-            var copy = new TransformedBitmap(bitmap, new RotateTransform(angle));
-            return copy;
+            var a = bitmap.ToBgr().Lock().AsAForgeImage();
+            return new RotateBicubic(angle).Apply(a).AsImage();
         }
 
-        public BitmapSource Transform(BitmapSource bitmap, Transform transform)
+        public IImage Transform(IImage bitmap, Transform transform)
         {
             var rotated = Rotate(bitmap, transform.Rotation);
-            var cropInPixels = transform.Bounds.ConverToRawPixels(bitmap.DpiX, bitmap.DpiY);
-            return Crop(rotated, cropInPixels);
+            return Crop(rotated, transform.Bounds);
         }
-
-
     }
 }

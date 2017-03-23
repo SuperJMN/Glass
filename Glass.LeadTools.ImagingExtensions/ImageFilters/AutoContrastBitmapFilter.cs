@@ -1,16 +1,17 @@
 namespace Glass.LeadTools.ImagingExtensions.ImageFilters
 {
     using System.Windows.Media.Imaging;
+    using DotImaging;
     using Imaging;
     using Leadtools.ImageProcessing.Color;
 
     public class AutoContrastBitmapFilter : IBitmapFilter
     {
-        public BitmapSource Apply(BitmapSource image)
+        public IImage Apply(IImage image)
         {
-            var raster = image.ToRasterImage();
+            var raster = image.ToBgr().ToBitmapSource().ToRasterImage();
             new AutoColorLevelCommand { Type = AutoColorLevelCommandType.Contrast}.Run(raster);
-            return raster.ToBitmapSource();
+            return raster.ToImage();
         }
 
         public override string ToString()

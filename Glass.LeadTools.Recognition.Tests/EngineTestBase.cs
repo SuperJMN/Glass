@@ -5,6 +5,7 @@ namespace Glass.Imaging.Recognition.Tests
     using System.Windows;
     using System.Windows.Media.Imaging;
     using Core;
+    using DotImaging;
     using FullFx;
     using Xunit;
     using Xunit.Abstractions;
@@ -22,7 +23,7 @@ namespace Glass.Imaging.Recognition.Tests
 
         protected abstract IImageToTextConverter Engine { get; }
 
-        protected string ExtractBestTextCandidate(BitmapSource bitmap, ITextualDataFilter filter, Symbology symbology)
+        protected string ExtractBestTextCandidate(IImage bitmap, ITextualDataFilter filter, Symbology symbology)
         {
             var bounds = new Rect(0, 0, bitmap.Width, bitmap.Height);
             var zoneConfiguration = new ZoneConfiguration {Bounds = bounds, TextualDataFilter = filter, Id = "", Symbology = symbology};
@@ -60,7 +61,7 @@ namespace Glass.Imaging.Recognition.Tests
 
     public class TestCase
     {
-        public BitmapSource Bitmap { get; set; }
+        public IImage Bitmap { get; set; }
         public string Expected { get; set; }
     }
 }
