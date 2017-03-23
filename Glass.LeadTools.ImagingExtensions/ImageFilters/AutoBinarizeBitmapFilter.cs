@@ -8,7 +8,7 @@ namespace Glass.LeadTools.ImagingExtensions.ImageFilters
     {
         public IImage Apply(IImage image)
         {
-            using (var r = image.ToBgr().ToBitmapSource().ToRasterImage())
+            using (var r = image.FromImageToRasterImage())
             {
                 new AutoBinarizeCommand().Run(r);
                 return r.ToImage();

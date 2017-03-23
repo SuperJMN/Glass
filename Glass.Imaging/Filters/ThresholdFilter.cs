@@ -19,7 +19,7 @@
         {
             var grayScale = ToGrayScale(image);
             var filter = new Threshold(factor);
-            var bmp = filter.Apply(grayScale.ToBgr().Lock().AsAForgeImage());
+            var bmp = filter.Apply(grayScale.ToGray().Lock().AsAForgeImage());
             return bmp.AsImage();
         }
     }

@@ -10,7 +10,7 @@ namespace Glass.LeadTools.ImagingExtensions.ImageFilters
     {
         public IImage Apply(IImage image)
         {
-            var rasterImage = image.ToBgr().ToBitmapSource().ToRasterImage();
+            var rasterImage = image.FromImageToRasterImage();
             new AutoColorLevelCommand().Run(rasterImage);
             return rasterImage.ToImage();
         }

@@ -68,7 +68,7 @@
 
         private IEnumerable<RecognitionResult> RecognizeCore(ZoneConfiguration config, IImage bmp)
         {
-            using (var page = OcrEngine.CreatePage(bmp.ToBgr().ToBitmapSource().ToRasterImage(), OcrImageSharingMode.AutoDispose))
+            using (var page = OcrEngine.CreatePage(bmp.FromImageToRasterImage(), OcrImageSharingMode.AutoDispose))
             {
                 var ocrZone = CreateOcrZoneForField(config);
                 page.Zones.Add(ocrZone);

@@ -10,7 +10,7 @@ namespace Glass.LeadTools.ImagingExtensions.ImageFilters
     {
         public IImage Apply(IImage image)
         {
-            using (var r = image.ToBgr().ToBitmapSource().ToRasterImage())
+            using (var r = image.FromImageToRasterImage())
             {
                 new DeskewCommand() { Flags = DeskewCommandFlags.RotateBicubic }.Run(r);
                 return r.ToImage();

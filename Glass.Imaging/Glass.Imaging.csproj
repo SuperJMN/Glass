@@ -135,7 +135,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="DotImaging.IO, Version=4.7.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DotImaging.IO.4.8.2\lib\net45\DotImaging.IO.dll</HintPath>
+      <HintPath>..\packages\DotImaging.IO.4.8.3\lib\net45\DotImaging.IO.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="DotImaging.IO.Web, Version=4.7.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -168,9 +168,9 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Accord.3.0.2\build\Accord.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Accord.3.0.2\build\Accord.targets'))" />
-    <Error Condition="!Exists('..\packages\DotImaging.IO.4.8.2\build\DotImaging.IO.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\DotImaging.IO.4.8.2\build\DotImaging.IO.targets'))" />
+    <Error Condition="!Exists('..\packages\DotImaging.IO.4.8.3\build\DotImaging.IO.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\DotImaging.IO.4.8.3\build\DotImaging.IO.targets'))" />
   </Target>
-  <Import Project="..\packages\DotImaging.IO.4.8.2\build\DotImaging.IO.targets" Condition="Exists('..\packages\DotImaging.IO.4.8.2\build\DotImaging.IO.targets')" />
+  <Import Project="..\packages\DotImaging.IO.4.8.3\build\DotImaging.IO.targets" Condition="Exists('..\packages\DotImaging.IO.4.8.3\build\DotImaging.IO.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

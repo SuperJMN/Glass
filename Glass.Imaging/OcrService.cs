@@ -19,7 +19,9 @@
             var isScalingEnabled = IsSourceScalingEnabledForOcr;
             var scaledSize = new Size((int) (bmp.Width * scale), (int) (bmp.Height * scale));
 
-            return isScalingEnabled ? bmp.ToBgr().Resize(scaledSize, InterpolationMode.Bicubic).Lock() : bmp;
+            var resize = bmp.ToBgr().Resize(scaledSize, InterpolationMode.Bicubic);
+            var scaleIfEnabled = resize.Lock();
+            return isScalingEnabled ? scaleIfEnabled : bmp;
         }
     }
 }

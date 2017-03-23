@@ -3,6 +3,7 @@ namespace Glass.Imaging.FullFx
     using System.Drawing;
     using System.Windows;
     using Accord.Extensions.Imaging;
+    using AForge.Imaging;
     using AForge.Imaging.Filters;
     using Core;
     using DotImaging;
@@ -20,10 +21,16 @@ namespace Glass.Imaging.FullFx
     {
         public IImage Crop(IImage bitmap, Rect cropBounds)
         {
-            var unmanaged = bitmap.ToBgr().Lock().AsAForgeImage();
-            var rectangle = cropBounds.ToWindowsRect();
-            var cropped = new Crop(rectangle).Apply(unmanaged);
-            return cropped.AsImage();
+            
+            using (var image = bitmap.ToBgr().Lock())
+            {
+                using (var unmanaged = image.AsAForgeImage())
+                {
+                    var rectangle = cropBounds.ToWindowsRect();
+                    var cropped = new Crop(rectangle).Apply(unmanaged);
+                    return cropped.AsImage();
+                }                
+            }            
         }
 
         public IImage Rotate(IImage bitmap, double angle)

@@ -27,6 +27,7 @@
             {
                 var applicableEngines = engines.Where(e => IsValidTarget(zoneConfiguration, e)).ToList();
 
+                //var zoneBitmap = ImagingContext.BitmapOperations.Crop(bitmap, zoneConfiguration.Bounds);
                 var zoneBitmap = ImagingContext.BitmapOperations.Crop(bitmap, zoneConfiguration.Bounds);
 
                 if (applicableEngines.Any())

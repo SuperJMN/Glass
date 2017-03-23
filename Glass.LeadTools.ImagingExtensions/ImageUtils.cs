@@ -19,9 +19,7 @@
         {
             Codecs.Options.Jpeg.Save.QualityFactor = 25;
         }
-
-
-
+        
         public static LeadRect ToLeadRectRect(this Rect rectCrop)
         {
             return new LeadRect((int)rectCrop.X, (int)rectCrop.Y, (int)rectCrop.Width, (int)rectCrop.Height);
@@ -65,20 +63,21 @@
 
         public static IImage ToImage(this RasterImage rasterImage)
         {
-            var convertToSource = RasterImageConverter.ConvertToSource(rasterImage, ConvertToSourceOptions.None);
-            convertToSource.Freeze();
-            return (IImage) convertToSource;
+            var convertToSource = (BitmapSource) RasterImageConverter.ConvertToSource(rasterImage, ConvertToSourceOptions.None);
+            return convertToSource.ToArray<Bgr<byte>>().Lock();
+        }
+
+
+        public static RasterImage FromImageToRasterImage(this IImage image)
+        {
+            var imageSource = image.ToBgr().ToBitmapSource();
+            imageSource.Freeze();
+            return RasterImageConverter.ConvertFromSource(imageSource, ConvertFromSourceOptions.None);
         }
 
         public static RasterImage ToRasterImage(this ImageSource rasterImage)
         {
             return RasterImageConverter.ConvertFromSource(rasterImage, ConvertFromSourceOptions.None);
-        }
-
-        public static void SaveAsJpeg(this ImageSource image, string path)
-        {
-            var rasterImage = ToRasterImage(image);
-            Codecs.Save(rasterImage, path, RasterImageFormat.Jpeg, 24);
         }
 
         public static Size PreserveAspectRatioWithinBounds(this Size size, Size bounds)
