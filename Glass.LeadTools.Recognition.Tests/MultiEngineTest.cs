@@ -57,7 +57,7 @@ namespace Glass.Imaging.Recognition.Tests
             var total = testExecutions.Count;
 
             var d = (double) success/total;
-            output.WriteLine($"Success Ratio: {d}");
+            output.WriteLine($"Success Ratio: {d}. Expected: {minimum}");
             Assert.True(d >= minimum);
         }
 
