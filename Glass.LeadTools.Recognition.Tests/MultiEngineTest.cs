@@ -36,7 +36,7 @@ namespace Glass.Imaging.Recognition.Tests
                 var ocrEngines = new List<IImageToTextConverter> { new LeadToolsZoneBasedOcrService(licenseApplier) };
                 var barcodeEngines = new List<IImageToTextConverter>
                 {
-                    new InliteBarcodeEngine(),
+                    new ClearImageBarcodeEngine(),
                     new MessagingToolkitZoneBasedBarcodeReader(),
                     new LeadToolsZoneBasedBarcodeReader(licenseApplier)
                 };

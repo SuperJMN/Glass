@@ -7,7 +7,7 @@
 
     public class Inlite : BarcodeEngineTest
     {
-        protected override IImageToTextConverter Engine { get; } = new InliteBarcodeEngine();
+        protected override IImageToTextConverter Engine { get; } = new ClearImageBarcodeEngine();
 
         public Inlite(ITestOutputHelper output) : base(output)
         {
