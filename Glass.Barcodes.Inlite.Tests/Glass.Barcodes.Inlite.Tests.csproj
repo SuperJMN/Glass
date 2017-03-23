@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{62CD9CD8-F9EF-4999-B724-4FE0805AD5D1}</ProjectGuid>
+    <ProjectGuid>{9A473918-99C7-41E3-B4E7-69D5C20BE445}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Glass.Imaging.Recognition.MessagingToolkit.Tests</RootNamespace>
-    <AssemblyName>Glass.Imaging.Recognition.MessagingToolkit.Tests</AssemblyName>
+    <RootNamespace>Glass.Barcodes.Inlite.Tests</RootNamespace>
+    <AssemblyName>Glass.Barcodes.Inlite.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -47,38 +47,33 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
     <Reference Include="xunit.abstractions, Version=2.0.0.0, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
-      <HintPath>..\packages\xunit.abstractions.2.0.0\lib\net35\xunit.abstractions.dll</HintPath>
+      <HintPath>..\packages\xunit.abstractions.2.0.1\lib\net35\xunit.abstractions.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="xunit.assert, Version=2.1.0.3179, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
-      <HintPath>..\packages\xunit.assert.2.1.0\lib\dotnet\xunit.assert.dll</HintPath>
+    <Reference Include="xunit.assert, Version=2.2.0.3545, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <HintPath>..\packages\xunit.assert.2.2.0\lib\netstandard1.1\xunit.assert.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="xunit.core, Version=2.1.0.3179, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
-      <HintPath>..\packages\xunit.extensibility.core.2.1.0\lib\dotnet\xunit.core.dll</HintPath>
+    <Reference Include="xunit.core, Version=2.2.0.3545, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <HintPath>..\packages\xunit.extensibility.core.2.2.0\lib\netstandard1.1\xunit.core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="xunit.execution.desktop, Version=2.1.0.3179, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
-      <HintPath>..\packages\xunit.extensibility.execution.2.1.0\lib\net45\xunit.execution.desktop.dll</HintPath>
+    <Reference Include="xunit.execution.desktop, Version=2.2.0.3545, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <HintPath>..\packages\xunit.extensibility.execution.2.2.0\lib\net452\xunit.execution.desktop.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="InliteEngineTests.cs" />
-    <Compile Include="MessagingToolkitBarcodeEngineTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Glass.Barcodes.Inlite\Glass.Barcodes.Inlite.csproj">
-      <Project>{B2E2A4BE-BB55-4841-9785-EB0184F5F497}</Project>
+      <Project>{b2e2a4be-bb55-4841-9785-eb0184f5f497}</Project>
       <Name>Glass.Barcodes.Inlite</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Glass.Barcodes.MessagingToolkit\Glass.Barcodes.MessagingToolkit.csproj">
-      <Project>{A4380789-8C29-4E64-B42D-5872908C446C}</Project>
-      <Name>Glass.Barcodes.MessagingToolkit</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Glass.Imaging\Glass.Imaging.csproj">
-      <Project>{65101C83-A00B-4D3E-9EC0-06BA7F35B746}</Project>
+      <Project>{056E7401-E413-4E50-9009-7FE1C69DEE4F}</Project>
       <Name>Glass.Imaging</Name>
     </ProjectReference>
     <ProjectReference Include="..\Glass.LeadTools.Recognition.Tests\Glass.Imaging.Recognition.Tests.csproj">
@@ -91,13 +86,11 @@
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\packages\Accord.3.0.2\build\Accord.targets" Condition="Exists('..\packages\Accord.3.0.2\build\Accord.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Accord.3.0.2\build\Accord.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Accord.3.0.2\build\Accord.targets'))" />
-    <Error Condition="!Exists('..\packages\DotImaging.IO.4.8.3\build\DotImaging.IO.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\DotImaging.IO.4.8.3\build\DotImaging.IO.targets'))" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
   </Target>
-  <Import Project="..\packages\DotImaging.IO.4.8.3\build\DotImaging.IO.targets" Condition="Exists('..\packages\DotImaging.IO.4.8.3\build\DotImaging.IO.targets')" />
+  <Target Name="AfterBuild">
+  </Target>
+  -->
 </Project>

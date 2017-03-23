@@ -285,6 +285,10 @@
     <Compile Include="DataProviders\Barcode\AlphanumericBarcodeTestCases.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Glass.Barcodes.Inlite\Glass.Barcodes.Inlite.csproj">
+      <Project>{B2E2A4BE-BB55-4841-9785-EB0184F5F497}</Project>
+      <Name>Glass.Barcodes.Inlite</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Glass.Barcodes.MessagingToolkit\Glass.Barcodes.MessagingToolkit.csproj">
       <Project>{A4380789-8C29-4E64-B42D-5872908C446C}</Project>
       <Name>Glass.Barcodes.MessagingToolkit</Name>
@@ -308,10 +312,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="Images\Barcodes\Numeric\803304.jpg" />
-    <None Include="Images\Barcodes\Numeric\804733.jpg" />
-    <None Include="Images\Barcodes\Numeric\830292.jpg" />
-    <None Include="Images\Barcodes\Numeric\832148.jpg" />
+    <None Include="Images\Barcodes\Numeric\803304.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\Barcodes\Numeric\804733.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\Barcodes\Numeric\830292.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\Barcodes\Numeric\832148.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="LeadToolsLicense\License.lic">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -786,6 +798,24 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Images\QRCode.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\Barcodes\Numeric\2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\Barcodes\Numeric\3.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\Barcodes\Numeric\6.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\Barcodes\Numeric\11.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\Barcodes\Numeric\36.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\Barcodes\Numeric\46.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <Content Include="Images\Texts\Alphanumeric\MULTIPLES-402.jpg" />

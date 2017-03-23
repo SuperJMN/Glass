@@ -43,6 +43,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Recognition", "Recognition"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Engines", "Engines", "{87E52FF6-0BBF-4991-9921-EDBF9EE93E6A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Glass.Barcodes.Inlite.Tests", "Glass.Barcodes.Inlite.Tests\Glass.Barcodes.Inlite.Tests.csproj", "{9A473918-99C7-41E3-B4E7-69D5C20BE445}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -179,6 +181,14 @@ Global
 		{B2E2A4BE-BB55-4841-9785-EB0184F5F497}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B2E2A4BE-BB55-4841-9785-EB0184F5F497}.Release|x86.ActiveCfg = Release|Any CPU
 		{B2E2A4BE-BB55-4841-9785-EB0184F5F497}.Release|x86.Build.0 = Release|Any CPU
+		{9A473918-99C7-41E3-B4E7-69D5C20BE445}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A473918-99C7-41E3-B4E7-69D5C20BE445}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A473918-99C7-41E3-B4E7-69D5C20BE445}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9A473918-99C7-41E3-B4E7-69D5C20BE445}.Debug|x86.Build.0 = Debug|Any CPU
+		{9A473918-99C7-41E3-B4E7-69D5C20BE445}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A473918-99C7-41E3-B4E7-69D5C20BE445}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A473918-99C7-41E3-B4E7-69D5C20BE445}.Release|x86.ActiveCfg = Release|Any CPU
+		{9A473918-99C7-41E3-B4E7-69D5C20BE445}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -198,5 +208,6 @@ Global
 		{B2E2A4BE-BB55-4841-9785-EB0184F5F497} = {A6AF6B54-DCF6-465A-9B96-3C4D6F8F8F55}
 		{F1CC4B67-6AC3-442D-AE80-689B7BE4F6AB} = {A6AF6B54-DCF6-465A-9B96-3C4D6F8F8F55}
 		{87E52FF6-0BBF-4991-9921-EDBF9EE93E6A} = {17A2B060-30CC-4DC0-92B1-68826521F380}
+		{9A473918-99C7-41E3-B4E7-69D5C20BE445} = {87E52FF6-0BBF-4991-9921-EDBF9EE93E6A}
 	EndGlobalSection
 EndGlobal

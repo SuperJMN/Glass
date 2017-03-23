@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Glass.Barcodes.Inlite
 {
     using System.Collections.ObjectModel;
-    using System.Windows.Media.Imaging;
     using DotImaging;
     using global::Inlite.ClearImageNet;
     using Imaging;
@@ -16,17 +12,25 @@ namespace Glass.Barcodes.Inlite
 
     public class InliteBarcodeEngine : IImageToTextConverter
     {
-        BarcodeReader barcodeReader = new BarcodeReader();
+        private readonly BarcodeReader barcodeReader = new BarcodeReader()
+        {
+            Code39 = true,
+            Code128 = true,
+            Code39basic = true,
+            Codabar = true,
+            Ean8 = true,
+            Vertical = true,
+            Matrix2of5 = true,
+        };
 
         public IEnumerable<RecognitionResult> Recognize(IImage bitmap, ZoneConfiguration config)
-        {
-            var writeableBitmap = new WriteableBitmap(bitmap);
+        {            
             string text;
             try
             {
-                //var bit = new 
-                //var result = barcodeReader.Read(new BitmapImage(), new Dictionary<DecodeOptions, object>());
-                //text = result.Text;
+                var bmp = bitmap.ToGray().ToBitmap();
+                var barcodes = barcodeReader.Read(bmp);
+                text = barcodes.FirstOrDefault()?.Text;
             }
             catch
             {

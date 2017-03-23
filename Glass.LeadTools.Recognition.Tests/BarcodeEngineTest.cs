@@ -1,6 +1,3 @@
-using System;
-using System.Windows.Media.Imaging;
-
 namespace Glass.Imaging.Recognition.Tests
 {
     using DataProviders.Barcode;

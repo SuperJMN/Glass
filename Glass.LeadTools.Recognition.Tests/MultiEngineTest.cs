@@ -5,6 +5,7 @@ namespace Glass.Imaging.Recognition.Tests
     using System.Linq;
     using System.Windows;
     using System.Windows.Media.Imaging;
+    using Barcodes.Inlite;
     using Barcodes.MessagingToolkit;
     using Core;
     using DotImaging;
@@ -33,7 +34,13 @@ namespace Glass.Imaging.Recognition.Tests
             get
             {
                 var ocrEngines = new List<IImageToTextConverter> { new LeadToolsZoneBasedOcrService(licenseApplier) };
-                var barcodeEngines = new List<IImageToTextConverter> { new MessagingToolkitZoneBasedBarcodeReader(), new LeadToolsZoneBasedBarcodeReader(licenseApplier) };
+                var barcodeEngines = new List<IImageToTextConverter>
+                {
+                    new InliteBarcodeEngine(),
+                    new MessagingToolkitZoneBasedBarcodeReader(),
+                    new LeadToolsZoneBasedBarcodeReader(licenseApplier)
+                };
+
                 return opticalRecognizer ?? (opticalRecognizer = new CompositeOpticalRecognizer(ocrEngines.Concat(barcodeEngines)));  }
         }
 
