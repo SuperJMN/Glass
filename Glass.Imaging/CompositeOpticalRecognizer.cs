@@ -28,13 +28,15 @@
                 var applicableEngines = engines.Where(e => IsValidTarget(zoneConfiguration, e)).ToList();
 
                 var zoneBitmap = ImagingContext.BitmapOperations.Crop(bitmap, zoneConfiguration.Bounds);
+                //var zoneBitmap = bitmap;
+
 
                 if (applicableEngines.Any())
                 {
                     var resultsFromAllEngines = from engine in applicableEngines
                         select engine.Recognize(zoneBitmap, zoneConfiguration);
 
-                    var flatResults = resultsFromAllEngines.SelectMany(t => t);
+                    var flatResults = resultsFromAllEngines.SelectMany(t => t).ToList();
 
                     var result = OpticalResultSelector.ChooseBest(flatResults, zoneConfiguration);
                     yield return new RecognizedZone(zoneBitmap, zoneConfiguration, result);

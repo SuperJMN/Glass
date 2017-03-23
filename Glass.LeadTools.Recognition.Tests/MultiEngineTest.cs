@@ -32,7 +32,7 @@ namespace Glass.Imaging.Recognition.Tests
         {
             get
             {
-                var ocrEngines = new List<IImageToTextConverter> { new TesseractOcrOcrService(), new LeadToolsZoneBasedOcrService(licenseApplier) };
+                var ocrEngines = new List<IImageToTextConverter> { new TesseractOcrOcrService(),  };
                 var barcodeEngines = new List<IImageToTextConverter> { new MessagingToolkitZoneBasedBarcodeReader(), new LeadToolsZoneBasedBarcodeReader(licenseApplier) };
                 return opticalRecognizer ?? (opticalRecognizer = new CompositeOpticalRecognizer(ocrEngines.Concat(barcodeEngines)));  }
         }

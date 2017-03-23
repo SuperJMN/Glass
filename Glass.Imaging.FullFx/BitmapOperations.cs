@@ -13,7 +13,7 @@ namespace Glass.Imaging.FullFx
     {
         public static Rectangle ToWindowsRect(this Rect cropBounds)
         {
-            return new Rectangle((int) cropBounds.Left, (int) cropBounds.Top, (int) cropBounds.Width, (int) cropBounds.Height);
+            return new Rectangle((int)cropBounds.Left, (int)cropBounds.Top, (int)cropBounds.Width, (int)cropBounds.Height);
         }
     }
 
@@ -21,16 +21,8 @@ namespace Glass.Imaging.FullFx
     {
         public IImage Crop(IImage bitmap, Rect cropBounds)
         {
-            
-            using (var image = bitmap.ToBgr().Lock())
-            {
-                using (var unmanaged = image.AsAForgeImage())
-                {
-                    var rectangle = cropBounds.ToWindowsRect();
-                    var cropped = new Crop(rectangle).Apply(unmanaged);
-                    return cropped.AsImage();
-                }                
-            }            
+            var rect = new DotImaging.Primitives2D.Rectangle((int) cropBounds.Left, (int) cropBounds.Top, (int) cropBounds.Width, (int) cropBounds.Height);
+            return bitmap.GetSubRect(rect);          
         }
 
         public IImage Rotate(IImage bitmap, double angle)
