@@ -94,9 +94,9 @@
 
         public override IEnumerable<ImageTarget> ImageTargets => new Collection<ImageTarget> { new ImageTarget { Symbology = Symbology.Text, FilterTypes = FilterType.All } };
 
-        private OcrZone CreateOcrZoneForField(BitmapSource bitmap, ZoneConfiguration zoneConfiguration)
+        private OcrZone CreateOcrZoneForField(IImage bitmap, ZoneConfiguration zoneConfiguration)
         {
-            var leadRect = new Rect(0, 0, bitmap.PixelWidth, bitmap.PixelHeight).ToLeadRectRect();
+            var leadRect = new Rect(0, 0, bitmap.Width, bitmap.Height).ToLeadRectRect();
 
             var readZone = new OcrZone
             {

@@ -267,6 +267,7 @@
   <ItemGroup>
     <Compile Include="BarcodeEngineTest.cs" />
     <Compile Include="BarcodeTests.cs" />
+    <Compile Include="DataProviders\Barcode\SpecificBarcodeTestCases.cs" />
     <Compile Include="MultiEngine.cs" />
     <Compile Include="DataProviders\Barcode\NumericBarcodeTestCases.cs" />
     <Compile Include="DataProviders\BulkBarcodeTestFilesProvider.cs" />
@@ -306,6 +307,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="Images\Barcodes\Numeric\803304.jpg" />
     <None Include="Images\Barcodes\Numeric\804733.jpg" />
     <None Include="Images\Barcodes\Numeric\830292.jpg" />

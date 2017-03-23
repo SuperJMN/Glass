@@ -21,7 +21,7 @@ namespace Glass.Barcodes.MessagingToolkit
 
         public IEnumerable<RecognitionResult> Recognize(IImage bitmap, ZoneConfiguration config)
         {
-            var binaryBitmap  = new BinaryBitmap(new HybridBinarizer(new BitmapSourceLuminanceSource(bitmap)));
+            var binaryBitmap  = new BinaryBitmap(new HybridBinarizer(new BitmapSourceLuminanceSource(bitmap.ToGray().ToBitmapSource())));
 
             var recognizer = Task.Run(() => barcodeReader.Decode(binaryBitmap, new Dictionary<DecodeOptions, object>()))
                 .ToObservable();
