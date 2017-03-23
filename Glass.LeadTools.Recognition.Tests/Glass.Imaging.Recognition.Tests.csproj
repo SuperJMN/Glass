@@ -285,9 +285,9 @@
     <Compile Include="DataProviders\Barcode\AlphanumericBarcodeTestCases.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Glass.Barcodes.Inlite\Glass.Barcodes.Inlite.csproj">
+    <ProjectReference Include="..\Glass.Barcodes.Inlite\Glass.Barcodes.ClearImage.csproj">
       <Project>{B2E2A4BE-BB55-4841-9785-EB0184F5F497}</Project>
-      <Name>Glass.Barcodes.Inlite</Name>
+      <Name>Glass.Barcodes.ClearImage</Name>
     </ProjectReference>
     <ProjectReference Include="..\Glass.Barcodes.MessagingToolkit\Glass.Barcodes.MessagingToolkit.csproj">
       <Project>{A4380789-8C29-4E64-B42D-5872908C446C}</Project>
