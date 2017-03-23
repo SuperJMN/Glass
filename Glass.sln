@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Glass.Basics", "Glass.Basics\Glass.Basics.csproj", "{76C3D50B-CA51-480F-8FCD-40F0EA98F4C6}"
 EndProject
@@ -34,6 +34,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Glass.Tests", "Glass.Core.Tests\Glass.Tests.csproj", "{6387E8C7-C9ED-4237-97C9-741A4FC56E59}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Glass.ChangeTracking.Tests", "Glass.ChangeTracking.Tests\Glass.ChangeTracking.Tests.csproj", "{AB770E77-F6CC-457F-BDCC-4A8CECDBDBEE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Glass.Barcodes.ClearImage", "Glass.Barcodes.Inlite\Glass.Barcodes.ClearImage.csproj", "{B2E2A4BE-BB55-4841-9785-EB0184F5F497}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -101,6 +103,10 @@ Global
 		{AB770E77-F6CC-457F-BDCC-4A8CECDBDBEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AB770E77-F6CC-457F-BDCC-4A8CECDBDBEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AB770E77-F6CC-457F-BDCC-4A8CECDBDBEE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2E2A4BE-BB55-4841-9785-EB0184F5F497}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2E2A4BE-BB55-4841-9785-EB0184F5F497}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2E2A4BE-BB55-4841-9785-EB0184F5F497}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2E2A4BE-BB55-4841-9785-EB0184F5F497}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
