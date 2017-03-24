@@ -19,16 +19,11 @@
       <dependency id="DotImaging.GenericImage" version="4.8.3"  />
       <dependency id="DotImaging.Primitives2D" version="4.8.3"  />
     </dependencies>
-
-    <references>
-      <reference file="ClearImageNet.70.dll" />
-      <reference file="Glass.Barcodes.ClearImage.dll" />
-    </references>
-    
+   
   </metadata>
 
   <files>
-    <file src="lib\ClearImageNet.70.dll" target="lib\net461" />
+    <file src="lib\ClearImageNet.70.dll" target="lib\net461" />    
   </files>
 
 </package>
