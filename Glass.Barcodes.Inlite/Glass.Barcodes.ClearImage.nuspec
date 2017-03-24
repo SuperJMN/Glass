@@ -22,9 +22,9 @@
 
     <references>
       <reference file="ClearImageNet.70.dll" />
+      <reference file="Glass.Barcodes.ClearImage.dll" />
     </references>
-
-
+    
   </metadata>
 
   <files>
