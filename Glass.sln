@@ -37,6 +37,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Glass.ChangeTracking.Tests"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Glass.Barcodes.ClearImage", "Glass.Barcodes.Inlite\Glass.Barcodes.ClearImage.csproj", "{B2E2A4BE-BB55-4841-9785-EB0184F5F497}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Glass.Barcodes.ZXing", "Glass.Barcodes.ZXing\Glass.Barcodes.ZXing.csproj", "{576533C0-DD4C-4327-9FE8-E547A05C3BC8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -107,6 +109,10 @@ Global
 		{B2E2A4BE-BB55-4841-9785-EB0184F5F497}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B2E2A4BE-BB55-4841-9785-EB0184F5F497}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B2E2A4BE-BB55-4841-9785-EB0184F5F497}.Release|Any CPU.Build.0 = Release|Any CPU
+		{576533C0-DD4C-4327-9FE8-E547A05C3BC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{576533C0-DD4C-4327-9FE8-E547A05C3BC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{576533C0-DD4C-4327-9FE8-E547A05C3BC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{576533C0-DD4C-4327-9FE8-E547A05C3BC8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

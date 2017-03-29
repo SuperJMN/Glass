@@ -68,7 +68,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Glass.Barcodes.Inlite\Glass.Barcodes.Inlite.csproj">
+    <ProjectReference Include="..\Glass.Barcodes.Inlite\Glass.Barcodes.ClearImage.csproj">
       <Project>{b2e2a4be-bb55-4841-9785-eb0184f5f497}</Project>
       <Name>Glass.Barcodes.Inlite</Name>
     </ProjectReference>

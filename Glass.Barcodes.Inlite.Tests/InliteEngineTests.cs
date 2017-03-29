@@ -6,7 +6,7 @@
 
     public class MessagingToolkitBarcodeEngineTests : BarcodeEngineTest
     {
-        protected override IImageToTextConverter Engine { get; } = new InliteBarcodeEngine();
+        protected override IImageToTextConverter Engine { get; } = new ClearImageBarcodeEngine();
 
         public MessagingToolkitBarcodeEngineTests(ITestOutputHelper output) : base(output)
         {

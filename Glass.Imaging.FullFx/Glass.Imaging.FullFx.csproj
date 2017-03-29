@@ -69,7 +69,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="DotImaging.BitmapInterop, Version=4.7.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DotImaging.BitmapInterop.4.8.2\lib\net45\DotImaging.BitmapInterop.dll</HintPath>
+      <HintPath>..\packages\DotImaging.BitmapInterop.4.8.3\lib\net45\DotImaging.BitmapInterop.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="DotImaging.GenericImage, Version=4.7.0.0, Culture=neutral, processorArchitecture=MSIL">
